@@ -1,8 +1,13 @@
-Node.js面试题
+---
+sidebar_position: 2
+description: Node.js
+---
 
-## Node.js基础
+Node.js 面试题
 
-### Node.js特点
+## Node.js 基础
+
+### Node.js 特点
 
 #### 一、是什么
 
@@ -10,7 +15,7 @@ Node.js面试题
 
 在浏览器外运行 V8 JavaScript 引擎（Google Chrome 的内核），利用事件驱动、非阻塞和异步输入输出模型等技术提高性能
 
-可以理解为 `Node.js` 就是一个服务器端的、非阻塞式I/O的、事件驱动的`JavaScript`运行环境
+可以理解为 `Node.js` 就是一个服务器端的、非阻塞式 I/O 的、事件驱动的`JavaScript`运行环境
 
 ##### 非阻塞异步
 
@@ -26,58 +31,58 @@ Node.js面试题
 
 ![img](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/img/a7729590-c1e8-11eb-ab90-d9ae814b240d.png)
 
-**可扩展性Scalability**
+**可扩展性 Scalability**
 
-Node.js和Java都可以异步执行请求，这使得两个工具构建的应用程序具有高度可伸缩性。这些请求可以并行执行，无需等待前一个请求完成。
+Node.js 和 Java 都可以异步执行请求，这使得两个工具构建的应用程序具有高度可伸缩性。这些请求可以并行执行，无需等待前一个请求完成。
 
-但是，node.js通过添加更多的硬件来显示更好的水平可伸缩性。同时，由于添加处理能力而产生的垂直可扩展性Node.js并不是那么好，因为它的单线程性质，线程只使用单核。对于多核系统，需要使用允许创建使用所有核心的子进程的集群模块（cluster module）。不过，我们应该注意，运行集群可能是一个非常消耗内存的解决方案。
+但是，node.js 通过添加更多的硬件来显示更好的水平可伸缩性。同时，由于添加处理能力而产生的垂直可扩展性 Node.js 并不是那么好，因为它的单线程性质，线程只使用单核。对于多核系统，需要使用允许创建使用所有核心的子进程的集群模块（cluster module）。不过，我们应该注意，运行集群可能是一个非常消耗内存的解决方案。
 
-反过来，Java不会向外扩展或横向扩展。它在一定数量的服务器上运行良好，但在某些时候添加更多服务器不再能提供预期的性能提升。
+反过来，Java 不会向外扩展或横向扩展。它在一定数量的服务器上运行良好，但在某些时候添加更多服务器不再能提供预期的性能提升。
 
 **速度**
 
-有时候，Node.js远超java,在其他情况下，情况则相反。它取决于用来比较速度的度量，不同的度量使得他们的排名也不太一样。
+有时候，Node.js 远超 java,在其他情况下，情况则相反。它取决于用来比较速度的度量，不同的度量使得他们的排名也不太一样。
 
-执行速度与两个工具处理输入/输出（IOs）请求的方式有关。node.js以非阻塞方式处理输入/输出（IOs），这意味着它的单个线程可以同时管理多个输入/输出（IOs）请求。无需等待一个请求完成，即可开始处理其他请求。
+执行速度与两个工具处理输入/输出（IOs）请求的方式有关。node.js 以非阻塞方式处理输入/输出（IOs），这意味着它的单个线程可以同时管理多个输入/输出（IOs）请求。无需等待一个请求完成，即可开始处理其他请求。
 
-Java使用阻塞和非阻塞IO。阻塞IO意味着第一个IO请求阻塞所有其他请求。这大大降低了速度，因为应用程序需要等待线程逐个处理请求。可以通过添加线程来提高速度，但这种选择相当不经济。
+Java 使用阻塞和非阻塞 IO。阻塞 IO 意味着第一个 IO 请求阻塞所有其他请求。这大大降低了速度，因为应用程序需要等待线程逐个处理请求。可以通过添加线程来提高速度，但这种选择相当不经济。
 
-同时，对于Java，采用了非阻塞IO作为标准，而它的流比Node.js中的非阻塞流复杂。
+同时，对于 Java，采用了非阻塞 IO 作为标准，而它的流比 Node.js 中的非阻塞流复杂。
 
-非阻塞IO处理使得node.js成为适合创建涉及大量读写操作的应用程序的工具，如日志记录、数据采集、备份、事务处理和实时应用程序。
+非阻塞 IO 处理使得 node.js 成为适合创建涉及大量读写操作的应用程序的工具，如日志记录、数据采集、备份、事务处理和实时应用程序。
 
 #### 二、优缺点
 
 优点：
 
 - 处理高并发场景性能更佳
-- 适合I/O密集型应用，值的是应用在运行极限时，CPU占用率仍然比较低，大部分时间是在做 I/O硬盘内存读写操作
+- 适合 I/O 密集型应用，值的是应用在运行极限时，CPU 占用率仍然比较低，大部分时间是在做 I/O 硬盘内存读写操作
 
 因为`Nodejs`是单线程，带来的缺点有：
 
-- 不适合CPU密集型应用
-- 只支持单核CPU，不能充分利用CPU
+- 不适合 CPU 密集型应用
+- 只支持单核 CPU，不能充分利用 CPU
 - 可靠性低，一旦代码某个环节崩溃，整个系统都崩溃
 
 #### 三、应用场景
 
 借助`Nodejs`的特点和弊端，其应用场景分类如下：
 
-- 善于`I/O`，不善于计算。因为Nodejs是一个单线程，如果计算（同步）太多，则会阻塞这个线程
-- 大量并发的I/O，应用程序内部并不需要进行非常复杂的处理
+- 善于`I/O`，不善于计算。因为 Nodejs 是一个单线程，如果计算（同步）太多，则会阻塞这个线程
+- 大量并发的 I/O，应用程序内部并不需要进行非常复杂的处理
 - 与 websocket 配合，开发长连接的实时交互应用程序
 
 具体场景可以表现为如下：
 
-- 第一大类：用户表单收集系统、后台管理系统、实时交互系统、考试系统、联网软件、高并发量的web应用程序
-- 第二大类：基于web、canvas等多人联网游戏
-- 第三大类：基于web的多人实时聊天客户端、聊天室、图文直播
+- 第一大类：用户表单收集系统、后台管理系统、实时交互系统、考试系统、联网软件、高并发量的 web 应用程序
+- 第二大类：基于 web、canvas 等多人联网游戏
+- 第三大类：基于 web 的多人实时聊天客户端、聊天室、图文直播
 - 第四大类：单页面浏览器应用程序
-- 第五大类：操作数据库、为前端和移动端提供基于`json`的API
+- 第五大类：操作数据库、为前端和移动端提供基于`json`的 API
 
 其实，`Nodejs`能实现几乎一切的应用，只考虑适不适合使用它
 
-### 进程信息模块process
+### 进程信息模块 process
 
 #### 一、是什么
 
@@ -95,7 +100,7 @@ Java使用阻塞和非阻塞IO。阻塞IO意味着第一个IO请求阻塞所有�
 
 - process.env：环境变量，例如通过 `process.env.NODE_ENV 获取不同环境项目配置信息
 - process.nextTick：这个在谈及 `EventLoop` 时经常为会提到
-- process.pid：获取当前进程id
+- process.pid：获取当前进程 id
 - process.ppid：当前进程对应的父进程
 - process.cwd()：获取当前进程工作目录，
 - process.platform：获取当前进程运行的操作系统平台
@@ -144,11 +149,11 @@ const args = process.argv.slice(2);
 
 ```js
 function foo() {
-    console.error('foo');
+  console.error("foo");
 }
 
 process.nextTick(foo);
-console.error('bar');
+console.error("bar");
 ```
 
 输出结果为`bar`、`foo`
@@ -157,26 +162,26 @@ console.error('bar');
 
 ```js
 setTimeout(foo, 0);
-console.log('bar');
+console.log("bar");
 ```
 
 两者区别在于：
 
-- process.nextTick()会在这一次event loop的call stack清空后（下一次event loop开始前）再调用callback
-- setTimeout()是并不知道什么时候call stack清空的，所以何时调用callback函数是不确定的
+- process.nextTick()会在这一次 event loop 的 call stack 清空后（下一次 event loop 开始前）再调用 callback
+- setTimeout()是并不知道什么时候 call stack 清空的，所以何时调用 callback 函数是不确定的
 
-####  node 的多进程架构
+#### node 的多进程架构
 
 > 面对 node 单线程对多核 CPU 使用不足的情况，Node 提供了 `child_process` 模块，来实现进程的复制，node 的多进程架构是主从模式，如下所示：
 
 ![img](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/imgs113934.png)
 
 ```js
-var fork = require('child_process').fork;
-var cpus = require('os').cpus();
-for(var i = 0; i < cpus.length; i++){
-    fork('./worker.js');
-} 
+var fork = require("child_process").fork;
+var cpus = require("os").cpus();
+for (var i = 0; i < cpus.length; i++) {
+  fork("./worker.js");
+}
 ```
 
 > 在 linux 中，我们通过 `ps aux | grep worker.js` 查看进程
@@ -199,19 +204,17 @@ for(var i = 0; i < cpus.length; i++){
 在创建子进程的时候就让子进程监听 `exit` 事件，如果被杀死就重新 `fork` 一下
 
 ```js
-var createWorker = function(){
-    var worker = fork(__dirname + 'worker.js')
-    worker.on('exit', function(){
-        console.log('Worker' + worker.pid + 'exited');
-        // 如果退出就创建新的worker
-        createWorker()
-    })
-} 
+var createWorker = function () {
+  var worker = fork(__dirname + "worker.js");
+  worker.on("exit", function () {
+    console.log("Worker" + worker.pid + "exited");
+    // 如果退出就创建新的worker
+    createWorker();
+  });
+};
 ```
 
-### 文件系统模块fs
-
-
+### 文件系统模块 fs
 
 **是什么？**
 
@@ -224,7 +227,7 @@ fs（filesystem），该模块提供本地文件的读写能力，基本上是`P
 导入模块如下：
 
 ```js
-const fs = require('fs');
+const fs = require("fs");
 ```
 
 这个模块对所有文件系统操作提供异步（不具有`sync` 后缀）和同步（具有 `sync` 后缀）两种操作方式，而供开发者选择
@@ -241,7 +244,7 @@ const fs = require('fs');
 
 ![img](https://static.vue-js.com/4f4d41a0-c46b-11eb-ab90-d9ae814b240d.png)
 
-针对文件所有者、文件所属组、其他用户进行权限分配，其中类型又分成读、写和执行，具备权限位4、2、1，不具备权限为0
+针对文件所有者、文件所属组、其他用户进行权限分配，其中类型又分成读、写和执行，具备权限位 4、2、1，不具备权限为 0
 
 如在`linux`查看文件权限位：
 
@@ -290,9 +293,9 @@ drwxr-xr-x 1 PandaShen 197121 0 Jun 28 14:41 core
 const fs = require("fs");
 
 fs.readFile("1.txt", "utf8", (err, data) => {
-   if(!err){
-       console.log(data); // Hello
-   }
+  if (!err) {
+    console.log(data); // Hello
+  }
 });
 ```
 
@@ -315,8 +318,6 @@ console.log(buf); // <Buffer 48 65 6c 6c 6f>
 console.log(data); // Hello
 ```
 
-
-
 #### 写入文件
 
 ##### writeFile
@@ -328,12 +329,12 @@ console.log(data); // Hello
 ```js
 const fs = require("fs");
 
-fs.writeFile("2.txt", "Hello world", err => {
-    if (!err) {
-        fs.readFile("2.txt", "utf8", (err, data) => {
-            console.log(data); // Hello world
-        });
-    }
+fs.writeFile("2.txt", "Hello world", (err) => {
+  if (!err) {
+    fs.readFile("2.txt", "utf8", (err, data) => {
+      console.log(data); // Hello world
+    });
+  }
 });
 ```
 
@@ -378,12 +379,12 @@ let data = fs.readFileSync("3.txt", "utf8");
 ```js
 const fs = require("fs");
 
-fs.appendFile("3.txt", " world", err => {
-    if (!err) {
-        fs.readFile("3.txt", "utf8", (err, data) => {
-            console.log(data); // Hello world
-        });
-    }
+fs.appendFile("3.txt", " world", (err) => {
+  if (!err) {
+    fs.readFile("3.txt", "utf8", (err, data) => {
+      console.log(data); // Hello world
+    });
+  }
 });
 ```
 
@@ -410,9 +411,9 @@ console.log(data); // Hello world
 const fs = require("fs");
 
 fs.copyFile("3.txt", "4.txt", () => {
-    fs.readFile("4.txt", "utf8", (err, data) => {
-        console.log(data); // Hello world
-    });
+  fs.readFile("4.txt", "utf8", (err, data) => {
+    console.log(data); // Hello world
+  });
 });
 ```
 
@@ -424,7 +425,7 @@ fs.copyFile("3.txt", "4.txt", () => {
 
 ```js
 // 假设已经有了 a 文件夹和 a 下的 b 文件夹
-fs.mkdirSync("a/b/c")
+fs.mkdirSync("a/b/c");
 ```
 
 ##### mkdir
@@ -432,8 +433,8 @@ fs.mkdirSync("a/b/c")
 异步创建，第二个参数为回调函数
 
 ```js
-fs.mkdir("a/b/c", err => {
-    if (!err) console.log("创建成功");
+fs.mkdir("a/b/c", (err) => {
+  if (!err) console.log("创建成功");
 });
 ```
 
@@ -441,9 +442,7 @@ fs.mkdir("a/b/c", err => {
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642771449309-72b0609f-6d69-4bdb-9fb1-c8c2e1df0b9b.png)
 
-
-
-### 路径模块path
+### 路径模块 path
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642771985339-76551412-137d-46ec-b3a7-8329bd708472.png)
 
@@ -465,15 +464,11 @@ fs.mkdir("a/b/c", err => {
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642773006127-0536479a-afcf-467a-94a8-68db9e732c66.png)
 
-
-
-
-
-### http模块
+### http 模块
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642863290838-b32f749f-84d4-47fb-bd5e-827a375968ea.png)
 
-#### 创建web服务器步骤
+#### 创建 web 服务器步骤
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642863705127-a5d02c97-a504-4dd4-97fe-291210afcc70.png)
 
@@ -485,11 +480,11 @@ fs.mkdir("a/b/c", err => {
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642863761275-cebcbb0f-bd2b-4156-b647-c7c8309f20aa.png)
 
-#### req请求对象
+#### req 请求对象
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642863785275-027e3bb0-3948-4fa3-a666-e50465d31acd.png)
 
-#### res响应对象
+#### res 响应对象
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642863812528-2dcb5ab0-d594-4a18-a435-9b7df9da2c5a.png)
 
@@ -497,17 +492,15 @@ fs.mkdir("a/b/c", err => {
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642863832699-b95df7d5-5ae1-4ba6-93de-b3a3fa3a1462.png)
 
-#### 根据不同url响应不同的html内容(核心)
+#### 根据不同 url 响应不同的 html 内容(核心)
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642863992611-1a48ff59-376b-428d-ab37-312674e643cb.png)
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642864044462-801084a2-7a56-49f0-8c8f-e329b622bc92.png)
 
-
-
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642868962004-f7960f12-7a17-44e9-a12b-a7cac51afc6d.png)
 
-###  Node.js中的 Stream
+### Node.js 中的 Stream
 
 #### 一、是什么
 
@@ -519,7 +512,7 @@ fs.mkdir("a/b/c", err => {
 
 流可以分成三部分：`source`、`dest`、`pipe`
 
-在`source`和`dest`之间有一个连接的管道`pipe`,它的基本语法是`source.pipe(dest)`，`source`和`dest`就是通过pipe连接，让数据从`source`流向了`dest`，如下图所示：
+在`source`和`dest`之间有一个连接的管道`pipe`,它的基本语法是`source.pipe(dest)`，`source`和`dest`就是通过 pipe 连接，让数据从`source`流向了`dest`，如下图所示：
 
 ![img](https://static.vue-js.com/aec05670-c76f-11eb-ab90-d9ae814b240d.png)
 
@@ -528,7 +521,7 @@ fs.mkdir("a/b/c", err => {
 在`NodeJS`，几乎所有的地方都使用到了流的概念，分成四个种类：
 
 - 可写流：可写入数据的流。例如 fs.createWriteStream() 可以使用流将数据写入文件
-- 可读流： 可读取数据的流。例如fs.createReadStream() 可以从文件读取内容
+- 可读流： 可读取数据的流。例如 fs.createReadStream() 可以从文件读取内容
 - 双工流： 既可读又可写的流。例如 net.Socket
 - 转换流： 可以在数据写入和读取时修改或转换数据的流。例如，在文件压缩操作中，可以向文件写入压缩数据，并从文件中读取解压数据
 
@@ -547,7 +540,7 @@ fs.mkdir("a/b/c", err => {
 基本代码如下：
 
 ```js
-const { Duplex } = require('stream');
+const { Duplex } = require("stream");
 
 const myDuplex = new Duplex({
   read(size) {
@@ -555,7 +548,7 @@ const myDuplex = new Duplex({
   },
   write(chunk, encoding, callback) {
     // ...
-  }
+  },
 });
 ```
 
@@ -568,12 +561,12 @@ const myDuplex = new Duplex({
 基本代码如下所示：
 
 ```js
-const { Transform } = require('stream');
+const { Transform } = require("stream");
 
 const myTransform = new Transform({
   transform(chunk, encoding, callback) {
     // ...
-  }
+  },
 });
 ```
 
@@ -585,22 +578,23 @@ const myTransform = new Transform({
 
 常见的场景有：
 
-- get请求返回文件给客户端
+- get 请求返回文件给客户端
 - 文件操作
 - 一些打包工具的底层操作
 
-##### get请求返回文件给客户端
+##### get 请求返回文件给客户端
 
 使用`stream`流返回文件，`res`也是一个`stream`对象，通过`pipe`管道将文件数据返回
 
 ```js
 const server = http.createServer(function (req, res) {
-    const method = req.method; // 获取请求方法
-    if (method === 'GET') { // get 请求
-        const fileName = path.resolve(__dirname, 'data.txt');
-        let stream = fs.createReadStream(fileName);
-        stream.pipe(res); // 将 res 作为 stream 的 dest
-    }
+  const method = req.method; // 获取请求方法
+  if (method === "GET") {
+    // get 请求
+    const fileName = path.resolve(__dirname, "data.txt");
+    let stream = fs.createReadStream(fileName);
+    stream.pipe(res); // 将 res 作为 stream 的 dest
+  }
 });
 server.listen(8000);
 ```
@@ -610,35 +604,33 @@ server.listen(8000);
 创建一个可读数据流`readStream`，一个可写数据流`writeStream`，通过`pipe`管道把数据流转过去
 
 ```js
-const fs = require('fs')
-const path = require('path')
+const fs = require("fs");
+const path = require("path");
 
 // 两个文件名
-const fileName1 = path.resolve(__dirname, 'data.txt')
-const fileName2 = path.resolve(__dirname, 'data-bak.txt')
+const fileName1 = path.resolve(__dirname, "data.txt");
+const fileName2 = path.resolve(__dirname, "data-bak.txt");
 // 读取文件的 stream 对象
-const readStream = fs.createReadStream(fileName1)
+const readStream = fs.createReadStream(fileName1);
 // 写入文件的 stream 对象
-const writeStream = fs.createWriteStream(fileName2)
+const writeStream = fs.createWriteStream(fileName2);
 // 通过 pipe执行拷贝，数据流转
-readStream.pipe(writeStream)
+readStream.pipe(writeStream);
 // 数据读取完成监听，即拷贝完成
-readStream.on('end', function () {
-    console.log('拷贝完成')
-})
+readStream.on("end", function () {
+  console.log("拷贝完成");
+});
 ```
 
 ##### 一些打包工具的底层操作
 
 目前一些比较火的前端打包构建工具，都是通过`node.js`编写的，打包和构建的过程肯定是文件频繁操作的过程，离不来`stream`，如`gulp`
 
-
-
 ### Node.js 中的 Buffer
 
 #### 一、是什么
 
-在`Node`应用中，需要处理网络协议、操作数据库、处理图片、接收上传文件等，在网络流和文件的操作中，要处理大量二进制数据，而`Buffer`就是在内存中开辟一片区域（初次初始化为8KB），用来存放二进制数据
+在`Node`应用中，需要处理网络协议、操作数据库、处理图片、接收上传文件等，在网络流和文件的操作中，要处理大量二进制数据，而`Buffer`就是在内存中开辟一片区域（初次初始化为 8KB），用来存放二进制数据
 
 在上述操作中都会存在数据流动，每个数据流动的过程中，都会有一个最小或最大数据量
 
@@ -648,12 +640,12 @@ readStream.on('end', function () {
 
 简单来讲，`Nodejs`不能控制数据传输的速度和到达时间，只能决定何时发送数据，如果还没到发送时间，则将数据放在`Buffer`中，即在`RAM`中，直至将它们发送完毕
 
-上面讲到了`Buffer`是用来存储二进制数据，其的形式可以理解成一个数组，数组中的每一项，都可以保存8位二进制：`00000000`，也就是一个字节
+上面讲到了`Buffer`是用来存储二进制数据，其的形式可以理解成一个数组，数组中的每一项，都可以保存 8 位二进制：`00000000`，也就是一个字节
 
 例如：
 
 ```js
-const buffer = Buffer.from("why")
+const buffer = Buffer.from("why");
 ```
 
 1
@@ -674,8 +666,8 @@ const buffer = Buffer.from("why")
 ##### Buffer.from()
 
 ```js
-const b1 = Buffer.from('10');
-const b2 = Buffer.from('10', 'utf8');
+const b1 = Buffer.from("10");
+const b2 = Buffer.from("10", "utf8");
 const b3 = Buffer.from([10]);
 const b4 = Buffer.from(b3);
 
@@ -705,31 +697,31 @@ console.log(str);
 如果编码与解码不是相同的格式则会出现乱码的情况，如下：
 
 ```js
-const buffer = Buffer.from("你好","utf-8 ");
+const buffer = Buffer.from("你好", "utf-8 ");
 console.log(buffer);
 // <Buffer e4 bd a0 e5 a5 bd>
 const str = buffer.toString("ascii");
-console.log(str); 
+console.log(str);
 // d= e%=
 ```
 
 当设定的范围导致字符串被截断的时候，也会存在乱码情况，如下：
 
 ```js
-const buf = Buffer.from('Node.js 技术栈', 'UTF-8');
+const buf = Buffer.from("Node.js 技术栈", "UTF-8");
 
-console.log(buf)          // <Buffer 4e 6f 64 65 2e 6a 73 20 e6 8a 80 e6 9c af e6 a0 88>
-console.log(buf.length)   // 17
+console.log(buf); // <Buffer 4e 6f 64 65 2e 6a 73 20 e6 8a 80 e6 9c af e6 a0 88>
+console.log(buf.length); // 17
 
-console.log(buf.toString('UTF-8', 0, 9))  // Node.js �
-console.log(buf.toString('UTF-8', 0, 11)) // Node.js 技
+console.log(buf.toString("UTF-8", 0, 9)); // Node.js �
+console.log(buf.toString("UTF-8", 0, 11)); // Node.js 技
 ```
 
 所支持的字符集有如下：
 
 - ascii：仅支持 7 位 ASCII 数据，如果设置去掉高位的话，这种编码是非常快的
 - utf8：多字节编码的 Unicode 字符，许多网页和其他文档格式都使用 UTF-8
-- utf16le：2 或 4 个字节，小字节序编码的 Unicode 字符，支持代理对（U+10000至 U+10FFFF）
+- utf16le：2 或 4 个字节，小字节序编码的 Unicode 字符，支持代理对（U+10000 至 U+10FFFF）
 - ucs2，utf16le 的别名
 - base64：Base64 编码
 - latin：一种把 Buffer 编码成一字节编码的字符串的方式
@@ -740,19 +732,19 @@ console.log(buf.toString('UTF-8', 0, 11)) // Node.js 技
 
 `Buffer`的应用场景常常与流的概念联系在一起，例如有如下：
 
-- I/O操作
+- I/O 操作
 - 加密解密
 - zlib.js
 
-##### I/O操作
+##### I/O 操作
 
 通过流的形式，将一个文件的内容读取到另外一个文件
 
 ```js
-const fs = require('fs');
+const fs = require("fs");
 
-const inputStream = fs.createReadStream('input.txt'); // 创建可读流
-const outputStream = fs.createWriteStream('output.txt'); // 创建可写流
+const inputStream = fs.createReadStream("input.txt"); // 创建可读流
+const outputStream = fs.createWriteStream("output.txt"); // 创建可写流
 
 inputStream.pipe(outputStream); // 管道读写
 ```
@@ -765,7 +757,7 @@ inputStream.pipe(outputStream); // 管道读写
 
 `zlib.js` 为 `Node.js` 的核心库之一，其利用了缓冲区（`Buffer`）的功能来操作二进制数据流，提供了压缩或解压功能
 
-### Node.js中的EventEmitter
+### Node.js 中的 EventEmitter
 
 #### 一、是什么
 
@@ -786,17 +778,17 @@ inputStream.pipe(outputStream); // 管道读写
 基本代码如下所示：
 
 ```js
-const EventEmitter = require('events')
+const EventEmitter = require("events");
 
 class MyEmitter extends EventEmitter {}
-const myEmitter = new MyEmitter()
+const myEmitter = new MyEmitter();
 
 function callback() {
-    console.log('触发了event事件！')
+  console.log("触发了event事件！");
 }
-myEmitter.on('event', callback)
-myEmitter.emit('event')
-myEmitter.removeListener('event', callback);
+myEmitter.on("event", callback);
+myEmitter.emit("event");
+myEmitter.removeListener("event", callback);
 ```
 
 通过实例对象的`on`方法注册一个名为`event`的事件，通过`emit`方法触发该事件，而`removeListener`用于取消事件的监听
@@ -816,9 +808,9 @@ myEmitter.removeListener('event', callback);
 
 ```js
 class EventEmitter {
-    constructor() {
-        this.events = {};
-    }
+  constructor() {
+    this.events = {};
+  }
 }
 ```
 
@@ -906,63 +898,63 @@ once(type, handler) {
 
 ```js
 class EventEmitter {
-    constructor() {
-        this.events = {};
-    }
+  constructor() {
+    this.events = {};
+  }
 
-    on(type, handler) {
-        if (!this.events[type]) {
-            this.events[type] = [];
-        }
-        this.events[type].push(handler);
+  on(type, handler) {
+    if (!this.events[type]) {
+      this.events[type] = [];
     }
+    this.events[type].push(handler);
+  }
 
-    addListener(type,handler){
-        this.on(type,handler)
-    }
+  addListener(type, handler) {
+    this.on(type, handler);
+  }
 
-    prependListener(type, handler) {
-        if (!this.events[type]) {
-            this.events[type] = [];
-        }
-        this.events[type].unshift(handler);
+  prependListener(type, handler) {
+    if (!this.events[type]) {
+      this.events[type] = [];
     }
+    this.events[type].unshift(handler);
+  }
 
-    removeListener(type, handler) {
-        if (!this.events[type]) {
-            return;
-        }
-        this.events[type] = this.events[type].filter(item => item !== handler);
+  removeListener(type, handler) {
+    if (!this.events[type]) {
+      return;
     }
+    this.events[type] = this.events[type].filter((item) => item !== handler);
+  }
 
-    off(type,handler){
-        this.removeListener(type,handler)
-    }
+  off(type, handler) {
+    this.removeListener(type, handler);
+  }
 
-    emit(type, ...args) {
-        this.events[type].forEach((item) => {
-            Reflect.apply(item, this, args);
-        });
-    }
+  emit(type, ...args) {
+    this.events[type].forEach((item) => {
+      Reflect.apply(item, this, args);
+    });
+  }
 
-    once(type, handler) {
-        this.on(type, this._onceWrap(type, handler, this));
-    }
+  once(type, handler) {
+    this.on(type, this._onceWrap(type, handler, this));
+  }
 
-    _onceWrap(type, handler, target) {
-        const state = { fired: false, handler, type , target};
-        const wrapFn = this._onceWrapper.bind(state);
-        state.wrapFn = wrapFn;
-        return wrapFn;
-    }
+  _onceWrap(type, handler, target) {
+    const state = { fired: false, handler, type, target };
+    const wrapFn = this._onceWrapper.bind(state);
+    state.wrapFn = wrapFn;
+    return wrapFn;
+  }
 
-    _onceWrapper(...args) {
-        if (!this.fired) {
-            this.fired = true;
-            Reflect.apply(this.handler, this.target, args);
-            this.target.off(this.type, this.wrapFn);
-        }
+  _onceWrapper(...args) {
+    if (!this.fired) {
+      this.fired = true;
+      Reflect.apply(this.handler, this.target, args);
+      this.target.off(this.type, this.wrapFn);
     }
+  }
 }
 ```
 
@@ -972,22 +964,32 @@ class EventEmitter {
 const ee = new EventEmitter();
 
 // 注册所有事件
-ee.once('wakeUp', (name) => { console.log(`${name} 1`); });
-ee.on('eat', (name) => { console.log(`${name} 2`) });
-ee.on('eat', (name) => { console.log(`${name} 3`) });
-const meetingFn = (name) => { console.log(`${name} 4`) };
-ee.on('work', meetingFn);
-ee.on('work', (name) => { console.log(`${name} 5`) });
+ee.once("wakeUp", (name) => {
+  console.log(`${name} 1`);
+});
+ee.on("eat", (name) => {
+  console.log(`${name} 2`);
+});
+ee.on("eat", (name) => {
+  console.log(`${name} 3`);
+});
+const meetingFn = (name) => {
+  console.log(`${name} 4`);
+};
+ee.on("work", meetingFn);
+ee.on("work", (name) => {
+  console.log(`${name} 5`);
+});
 
-ee.emit('wakeUp', 'xx');
-ee.emit('wakeUp', 'xx');         // 第二次没有触发
-ee.emit('eat', 'xx');
-ee.emit('work', 'xx');
-ee.off('work', meetingFn);        // 移除事件
-ee.emit('work', 'xx');           // 再次工作
+ee.emit("wakeUp", "xx");
+ee.emit("wakeUp", "xx"); // 第二次没有触发
+ee.emit("eat", "xx");
+ee.emit("work", "xx");
+ee.off("work", meetingFn); // 移除事件
+ee.emit("work", "xx"); // 再次工作
 ```
 
-### node模块化
+### node 模块化
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/23076793/1642869014410-0b94e93b-dbaf-457d-9b98-dfce73124e8b.png)
 
@@ -1025,14 +1027,14 @@ npm i --save nodemon
 
 熟悉 js 的朋友都知道，js 是单线程的，在 Node 中，采用的是 **多进程单线程** 的模型。由于单线程的限制，在多核服务器上，我们往往需要启动多个进程才能最大化服务器性能。
 
-Node 在 V0.8 版本之后引入了 [cluster模块](https://nodejs.org/dist/latest-v12.x/docs/api/cluster.html)，通过一个主进程 (master) 管理多个子进程 (worker) 的方式实现集群。
+Node 在 V0.8 版本之后引入了 [cluster 模块](https://nodejs.org/dist/latest-v12.x/docs/api/cluster.html)，通过一个主进程 (master) 管理多个子进程 (worker) 的方式实现集群。
 
 以下是官网上的一个简单示例
 
 ```js
-const cluster = require('cluster');
-const http = require('http');
-const numCPUs = require('os').cpus().length;
+const cluster = require("cluster");
+const http = require("http");
+const numCPUs = require("os").cpus().length;
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -1042,16 +1044,18 @@ if (cluster.isMaster) {
     cluster.fork();
   }
 
-  cluster.on('exit', (worker, code, signal) => {
+  cluster.on("exit", (worker, code, signal) => {
     console.log(`worker ${worker.process.pid} died`);
   });
 } else {
   // Workers can share any TCP connection
   // In this case it is an HTTP server
-  http.createServer((req, res) => {
-    res.writeHead(200);
-    res.end('hello world\n');
-  }).listen(8000);
+  http
+    .createServer((req, res) => {
+      res.writeHead(200);
+      res.end("hello world\n");
+    })
+    .listen(8000);
 
   console.log(`Worker ${process.pid} started`);
 }
@@ -1059,14 +1063,13 @@ if (cluster.isMaster) {
 
 ##### 通信
 
-Node中主进程和子进程之间通过**进程间通信** (IPC) 实现进程间的通信，进程间通过 send 方法发送消息，监听 message 事件收取信息，这是 `cluster模块` 通过集成 `EventEmitter` 实现的。还是一个简单的官网的**进程间通信**例子
+Node 中主进程和子进程之间通过**进程间通信** (IPC) 实现进程间的通信，进程间通过 send 方法发送消息，监听 message 事件收取信息，这是 `cluster模块` 通过集成 `EventEmitter` 实现的。还是一个简单的官网的**进程间通信**例子
 
 ```js
-const cluster = require('cluster');
-const http = require('http');
+const cluster = require("cluster");
+const http = require("http");
 
 if (cluster.isMaster) {
-
   // Keep track of http requests
   let numReqs = 0;
   setInterval(() => {
@@ -1075,31 +1078,31 @@ if (cluster.isMaster) {
 
   // Count requests
   function messageHandler(msg) {
-    if (msg.cmd && msg.cmd === 'notifyRequest') {
+    if (msg.cmd && msg.cmd === "notifyRequest") {
       numReqs += 1;
     }
   }
 
   // Start workers and listen for messages containing notifyRequest
-  const numCPUs = require('os').cpus().length;
+  const numCPUs = require("os").cpus().length;
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork();
   }
 
   for (const id in cluster.workers) {
-    cluster.workers[id].on('message', messageHandler);
+    cluster.workers[id].on("message", messageHandler);
   }
-
 } else {
-
   // Worker processes have a http server.
-  http.Server((req, res) => {
-    res.writeHead(200);
-    res.end('hello world\n');
+  http
+    .Server((req, res) => {
+      res.writeHead(200);
+      res.end("hello world\n");
 
-    // Notify master about the request
-    process.send({ cmd: 'notifyRequest' });
-  }).listen(8000);
+      // Notify master about the request
+      process.send({ cmd: "notifyRequest" });
+    })
+    .listen(8000);
 }
 ```
 
@@ -1107,14 +1110,14 @@ if (cluster.isMaster) {
 
 了解 `cluster` 的话会知道，子进程是通过 `cluster.fork()` 创建的。在 linux 中，系统原生提供了 `fork` 方法，那么为什么 Node 选择自己实现 `cluster模块` ，而不是直接使用系统原生的方法？主要的原因是以下两点：
 
-1. fork的进程监听同一端口会导致端口占用错误
-2. fork的进程之间没有负载均衡，容易导致**惊群现象**
+1. fork 的进程监听同一端口会导致端口占用错误
+2. fork 的进程之间没有负载均衡，容易导致**惊群现象**
 
 在 `cluster模块` 中，针对第一个问题，通过判断当前进程是否为 `master进程`，若是，则监听端口，若不是则表示为 fork 的 `worker进程`，不监听端口。
 
 针对第二个问题，`cluster模块` 内置了负载均衡功能，`master进程` 负责监听端口接收请求，然后通过调度算法（默认为 [Round-Robin](https://en.wikipedia.org/wiki/Round-robin_scheduling)，可以通过环境变量 `NODE_CLUSTER_SCHED_POLICY` 修改调度算法）分配给对应的 `worker进程`。
 
-#### pm2的实现
+#### pm2 的实现
 
 [pm2](https://github.com/Unitech/pm2) 基于 `cluster模块` 进行了封装，它能自动监控进程状态、重启进程、停止不稳定进程、日志存储等。利用 `pm2` 时，可以在不修改代码的情况下实现负载均衡集群。
 
@@ -1124,9 +1127,9 @@ if (cluster.isMaster) {
 
 这篇文章我们要关注的是 `pm2` 的 `Satan进程`、`God Deamon守护进程` 以及 两者之间的 `进程间远程调用RPC`。
 
-> 撒旦（Satan），主要指《圣经》中的堕天使（也称堕天使撒旦），被看作与上帝的力量相对的邪恶、黑暗之源，是God的对立面。
+> 撒旦（Satan），主要指《圣经》中的堕天使（也称堕天使撒旦），被看作与上帝的力量相对的邪恶、黑暗之源，是 God 的对立面。
 
-其中 Satan.js 提供程序的退出、杀死等方法，God.js 负责维持进程的正常运行，God进程启动后一直运行，相当于 cluster 中的 Master进程，维持 worker 进程的正常运行。
+其中 Satan.js 提供程序的退出、杀死等方法，God.js 负责维持进程的正常运行，God 进程启动后一直运行，相当于 cluster 中的 Master 进程，维持 worker 进程的正常运行。
 
 `RPC` 是指远程过程调用协议，具体释义就不细讲了，感兴趣的自行查阅。在 `pm2` 中用于同一机器上的不同进程之间的方法调用。
 
@@ -1144,17 +1147,17 @@ if (cluster.isMaster) {
 
 [一杯茶的时间，上手 Express 框架开发](https://juejin.cn/post/6844904023380721678)
 
-express是基于nodejs的web开发框架。优点是易上手、高性能、扩展性强。
+express 是基于 nodejs 的 web 开发框架。优点是易上手、高性能、扩展性强。
 
-- **易上手**：nodejs最初就是为了开发高性能web服务器而被设计出来的，然而相对底层的API会让不少新手望而却步。express对web开发相关的模块进行了适度的封装，屏蔽了大量复杂繁琐的技术细节，让开发者只需要专注于业务逻辑的开发，极大的降低了入门和学习的成本。
-- **高性能**：express仅在web应用相关的nodejs模块上进行了适度的封装和扩展，较大程度避免了过度封装导致的性能损耗。
-- **扩展性强**：基于中间件的开发模式，使得express应用的扩展、模块拆分非常简单，既灵活，扩展性又强。
+- **易上手**：nodejs 最初就是为了开发高性能 web 服务器而被设计出来的，然而相对底层的 API 会让不少新手望而却步。express 对 web 开发相关的模块进行了适度的封装，屏蔽了大量复杂繁琐的技术细节，让开发者只需要专注于业务逻辑的开发，极大的降低了入门和学习的成本。
+- **高性能**：express 仅在 web 应用相关的 nodejs 模块上进行了适度的封装和扩展，较大程度避免了过度封装导致的性能损耗。
+- **扩展性强**：基于中间件的开发模式，使得 express 应用的扩展、模块拆分非常简单，既灵活，扩展性又强。
 
 ### 项目目录结构
 
-看下demo应用的目录结构。大部分时候，我们的应用目录结构跟这个保持一致就可以了。也可以根据需要自行调整，express并没有对目录结构进行限制。
+看下 demo 应用的目录结构。大部分时候，我们的应用目录结构跟这个保持一致就可以了。也可以根据需要自行调整，express 并没有对目录结构进行限制。
 
-从目录结构可以大致看出，express应用的核心概念主要包括：`路由`、`中间件`、`模板引擎`。
+从目录结构可以大致看出，express 应用的核心概念主要包括：`路由`、`中间件`、`模板引擎`。
 
 ```bash
   express-demo tree -L 1
@@ -1172,21 +1175,21 @@ express是基于nodejs的web开发框架。优点是易上手、高性能、扩�
 
 ### 核心概念简介
 
-上面提到，express主要包含三个核心概念：路由、中间件、模板引擎。
+上面提到，express 主要包含三个核心概念：路由、中间件、模板引擎。
 
-> 注意，笔者这里用的是`核心概念`这样的字眼，而不是`核心模块`，为什么呢？这是因为，虽然express的中间件有它的定义规范，但是express的内核源码中，其实是没有所谓的*中间件*这样的模块的。
+> 注意，笔者这里用的是`核心概念`这样的字眼，而不是`核心模块`，为什么呢？这是因为，虽然 express 的中间件有它的定义规范，但是 express 的内核源码中，其实是没有所谓的*中间件*这样的模块的。
 
 言归正传，三者简要的来说就是。
 
-- `中间件`：可以毫不夸张的说，在express应用中，一切皆中间件。各种应用逻辑，如cookie解析、会话处理、日志记录、权限校验等，都是通过中间件来完成的。
-- `路由`：地球人都知道，负责寻址的。比如用户发送了个http请求，该定位到哪个资源，就是路由说了算。
+- `中间件`：可以毫不夸张的说，在 express 应用中，一切皆中间件。各种应用逻辑，如 cookie 解析、会话处理、日志记录、权限校验等，都是通过中间件来完成的。
+- `路由`：地球人都知道，负责寻址的。比如用户发送了个 http 请求，该定位到哪个资源，就是路由说了算。
 - `模板引擎`：负责视图动态渲染。下面会介绍相关配置，以及如何开发自己的模板引擎。
 
 ### 核心概念：路由
 
 #### 路由分类
 
-粗略来说，express主要支持四种类型的路由，下面会分别举例进行说明
+粗略来说，express 主要支持四种类型的路由，下面会分别举例进行说明
 
 1. 字符串类型
 2. 字符串模式类型
@@ -1196,27 +1199,27 @@ express是基于nodejs的web开发框架。优点是易上手、高性能、扩�
 分别举例如下，细节可参考[官方文档](https://link.juejin.cn?target=http%3A%2F%2Fexpressjs.com%2Fen%2Fguide%2Frouting.html)。
 
 ```javascript
-var express = require('express');
+var express = require("express");
 var app = express();
 
 // 路由：字符串类型
-app.get('/book', function(req, res, next){
-	res.send('book');
+app.get("/book", function (req, res, next) {
+  res.send("book");
 });
 
 // 路由：字符串模式
-app.get('/user/*man', function(req, res, next){
-	res.send('user');  // 比如： /user/man, /user/woman
+app.get("/user/*man", function (req, res, next) {
+  res.send("user"); // 比如： /user/man, /user/woman
 });
 
 // 路由：正则表达式
-app.get(/animals?$/, function(req, res, next){
-	res.send('animal');  // 比如： /animal, /animals
+app.get(/animals?$/, function (req, res, next) {
+  res.send("animal"); // 比如： /animal, /animals
 });
 
 // 路由：命名参数
-app.get('/employee/:uid/:age', function(req, res, next){
-	res.json(req.params);  // 比如：/111/30，返回 {"uid": 111, "age": 30}
+app.get("/employee/:uid/:age", function (req, res, next) {
+  res.json(req.params); // 比如：/111/30，返回 {"uid": 111, "age": 30}
 });
 
 app.listen(3000);
@@ -1272,7 +1275,7 @@ app.listen(3000);
 
 ### 核心概念：中间件
 
-一般学习js的时候，我们都会听到一句话：一切皆对象。而在学习express的过程中，很深的一个感受就是：一切皆中间件。比如常见的请求参数解析、cookie解析、gzip等，都可以通过中间件来完成。
+一般学习 js 的时候，我们都会听到一句话：一切皆对象。而在学习 express 的过程中，很深的一个感受就是：一切皆中间件。比如常见的请求参数解析、cookie 解析、gzip 等，都可以通过中间件来完成。
 
 #### 工作机制
 
@@ -1282,35 +1285,35 @@ app.listen(3000);
 
 首先，我们自己编写一个极简的中间件。虽然没什么实用价值，但中间件就长这样子。
 
-- `参数`：三个参数，熟悉`http.createServer()`的同学应该比较眼熟，其实就是req（客户端请求实例）、res（服务端返回实例），只不过进行了扩展，添加了一些使用方法。
-- `next`：回调方法，当next()被调用时，就进入下一个中间件。
+- `参数`：三个参数，熟悉`http.createServer()`的同学应该比较眼熟，其实就是 req（客户端请求实例）、res（服务端返回实例），只不过进行了扩展，添加了一些使用方法。
+- `next`：回调方法，当 next()被调用时，就进入下一个中间件。
 
 ```javascript
-function logger(req, res, next){
-	console.log('here comes request');
-	next();
+function logger(req, res, next) {
+  console.log("here comes request");
+  next();
 }
 ```
 
 来看下实际例子：
 
 ```javascript
-var express = require('express');
+var express = require("express");
 var app = express();
 
-app.use(function(req, res, next) {
-	console.log('1');
-	next();
+app.use(function (req, res, next) {
+  console.log("1");
+  next();
 });
 
-app.use(function(req, res, next) {
-	console.log('2');
-	next();
+app.use(function (req, res, next) {
+  console.log("2");
+  next();
 });
 
-app.use(function(req, res, next) {
-	console.log('3');
-	res.send('hello');
+app.use(function (req, res, next) {
+  console.log("3");
+  res.send("hello");
 });
 
 app.listen(3000);
@@ -1319,13 +1322,11 @@ app.listen(3000);
 请求 [http://127.0.0.1:3000，看下控制台输出，以及浏览器返回内容。](https://link.juejin.cn?target=http%3A%2F%2F127.0.0.1%3A3000%EF%BC%8C%E7%9C%8B%E4%B8%8B%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%94%E5%9B%9E%E5%86%85%E5%AE%B9%E3%80%82)
 
 ```powershell
-  middleware git:(master)  node chains.js 
+  middleware git:(master)  node chains.js
 1
 2
 3
 ```
-
-
 
 #### 应用级中间件 vs 路由级中间件
 
@@ -1342,32 +1343,32 @@ app.listen(3000);
 - 路由级中间件：`router.use()`、`router.METHODS()`接口中使用的中间件。
 
 ```js
-var express = require('express');
+var express = require("express");
 var app = express();
 var user = express.Router();
 
 // 应用级
-app.use(function(req, res, next){
-	console.log('收到请求，地址为：' + req.url);
-	next();
+app.use(function (req, res, next) {
+  console.log("收到请求，地址为：" + req.url);
+  next();
 });
 
 // 应用级
-app.get('/profile', function(req, res, next){
-	res.send('profile');
+app.get("/profile", function (req, res, next) {
+  res.send("profile");
 });
 
 // 路由级
-user.use('/list', function(req, res, next){
-	res.send('/user/list');
+user.use("/list", function (req, res, next) {
+  res.send("/user/list");
 });
 
 // 路由级
-user.get('/detail', function(req, res, next){
-	res.send('/user/detail');
+user.get("/detail", function (req, res, next) {
+  res.send("/user/detail");
 });
 
-app.use('/user', user);
+app.use("/user", user);
 
 app.listen(3000);
 ```
@@ -1377,9 +1378,9 @@ app.listen(3000);
 上面也提到了，中间件的开发是是分分钟的事情，不赘述。
 
 ```javascript
-function logger(req, res, next){
-	doSomeBusinessLogic(); // 业务逻辑处理，比如权限校验、数据库操作、设置cookie等
-	next();  // 如果需要进入下一个中间件进行处理，则调用next();
+function logger(req, res, next) {
+  doSomeBusinessLogic(); // 业务逻辑处理，比如权限校验、数据库操作、设置cookie等
+  next(); // 如果需要进入下一个中间件进行处理，则调用next();
 }
 ```
 
@@ -1396,7 +1397,7 @@ function logger(req, res, next){
 
 ### 核心概念：模板引擎
 
-模板引擎大家不陌生了，关于express模板引擎的介绍可以参考[官方文档](https://link.juejin.cn?target=http%3A%2F%2Fexpressjs.com%2Fen%2Fguide%2Fusing-template-engines.html)。
+模板引擎大家不陌生了，关于 express 模板引擎的介绍可以参考[官方文档](https://link.juejin.cn?target=http%3A%2F%2Fexpressjs.com%2Fen%2Fguide%2Fusing-template-engines.html)。
 
 下面主要讲下使用配置、选型等方面的内容。
 
@@ -1418,8 +1419,8 @@ function logger(req, res, next){
 
 ```javascript
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "jade");
 ```
 
 有两个关于模版引擎的配置：
@@ -1442,7 +1443,7 @@ app.set('view engine', 'jade');
 
 对比了下，`jade`、`nunjunks`都满足要求。个人更习惯`nunjunks`的风格，于是敲定。那么，怎么样使用呢？
 
-#### 支持nunjucks
+#### 支持 nunjucks
 
 首先，安装依赖
 
@@ -1490,9 +1491,8 @@ app.set('view engine', 'html');
 看下`views/index.html`
 
 ```html
-{% extends "layout.html" %}
-{% block title %}首页{% endblock %}
-{% block appTitle %}首页{% endblock %}
+{% extends "layout.html" %} {% block title %}首页{% endblock %} {% block
+appTitle %}首页{% endblock %}
 ```
 
 #### 开发模板引擎
@@ -1506,38 +1506,36 @@ app.set('view engine', 'html');
 // filepath: 模板文件的路径
 // options：渲染模板所用的参数
 // callback：渲染完成回调
-app.engine(engineExt, function(filepath, options, callback){
-
-	// 参数一：渲染过程的错误，如成功，则为null
-	// 参数二：渲染出来的字符串
-	return callback(null, 'Hello World');
+app.engine(engineExt, function (filepath, options, callback) {
+  // 参数一：渲染过程的错误，如成功，则为null
+  // 参数二：渲染出来的字符串
+  return callback(null, "Hello World");
 });
 ```
 
 比如下面例子，注册模板引擎 + 修改配置一起，于是就可以愉快的使用后缀为`tmpl`的模板引擎了。
 
 ```javascript
-app.engine('tmpl', function(filepath, options, callback){
-
-	// 参数一：渲染过程的错误，如成功，则为null
-	// 参数二：渲染出来的字符串
-	return callback(null, 'Hello World');
+app.engine("tmpl", function (filepath, options, callback) {
+  // 参数一：渲染过程的错误，如成功，则为null
+  // 参数二：渲染出来的字符串
+  return callback(null, "Hello World");
 });
-app.set('views', './views');
-app.set('view engine', 'tmpl');
+app.set("views", "./views");
+app.set("view engine", "tmpl");
 ```
 
 #### 相关链接
 
 模板引擎对比：[点击这里](https://link.juejin.cn?target=https%3A%2F%2Fstrongloop.com%2Fstrongblog%2Fcompare-javascript-templates-jade-mustache-dust%2F%3F_ga%3D1.71974803.1255580072.1458718985)
 
-express模版引擎介绍：[点击这里](https://link.juejin.cn?target=http%3A%2F%2Fexpressjs.com%2Fen%2Fguide%2Fusing-template-engines.html)
+express 模版引擎介绍：[点击这里](https://link.juejin.cn?target=http%3A%2F%2Fexpressjs.com%2Fen%2Fguide%2Fusing-template-engines.html)
 
 开发模版引擎：[点击这里](https://link.juejin.cn?target=http%3A%2F%2Fexpressjs.com%2Fen%2Fadvanced%2Fdeveloping-template-engines.html)
 
 ### 更多内容
 
-前面讲了一些express的入门基础，感兴趣的同学可以查看官方文档。篇幅所限，有些内容在后续文章展开，比如下面列出来的内容等。
+前面讲了一些 express 的入门基础，感兴趣的同学可以查看官方文档。篇幅所限，有些内容在后续文章展开，比如下面列出来的内容等。
 
 - 进程管理
 - 会话管理
@@ -1547,60 +1545,67 @@ express模版引擎介绍：[点击这里](https://link.juejin.cn?target=http%3A
 - 错误处理
 - 负载均衡
 - 数据库支持
-- HTTPS支持
+- HTTPS 支持
 - 业务实践
 
-### express源码分析
+### express 源码分析
 
 ```js
-const express = require('./express');
-const res = require('./response');
+const express = require("./express");
+const res = require("./response");
 const app = express();
-app.get('/test1', (req, res, next) => {
-    console.log('one');
+app.get(
+  "/test1",
+  (req, res, next) => {
+    console.log("one");
     next();
-}, (req, res) => {
-    console.log('two');
-    res.end('two');
-})
-app.get('/test2', (req, res, next) => {
-    console.log('three');
+  },
+  (req, res) => {
+    console.log("two");
+    res.end("two");
+  }
+);
+app.get(
+  "/test2",
+  (req, res, next) => {
+    console.log("three");
     next();
-}, (req, res) => {
-    console.log('four');
-    res.end('four');
-})
+  },
+  (req, res) => {
+    console.log("four");
+    res.end("four");
+  }
+);
 app.listen(3000);
-
 ```
 
 #### 构成
 
 **Application**
- 表示一个Express应用，通过express()即可进行创建。
+表示一个 Express 应用，通过 express()即可进行创建。
 
 **Router**
- 路由系统，用于调度整个系统的运行，在上述代码中该路由系统包含app.get('/test1',……)和app.get('/test2',……)两大部分
+路由系统，用于调度整个系统的运行，在上述代码中该路由系统包含 app.get('/test1',……)和 app.get('/test2',……)两大部分
 
 **Layer**
- 代表一层，对于上述代码中app.get('/test1',……)和app.get('/test2',……)都可以成为一个Layer
+代表一层，对于上述代码中 app.get('/test1',……)和 app.get('/test2',……)都可以成为一个 Layer
 
 **Route**
- 一个Layer中会有多个处理函数的情况，这多个处理函数构成了Route，而Route中的每一个函数又成为Route中的Layer。对于上述代码中，app.get('/test1',……)中的两个函数构成一个Route，每个函数又是Route中的Layer。
+一个 Layer 中会有多个处理函数的情况，这多个处理函数构成了 Route，而 Route 中的每一个函数又成为 Route 中的 Layer。对于上述代码中，app.get('/test1',……)中的两个函数构成一个 Route，每个函数又是 Route 中的 Layer。
 
 首先启动服务，然后客户端发起了`http://localhost:3000/test2`的请求，该过程应该如何运行呢？
 
-启动服务时会依次执行程序，将该路由系统中的**路径、请求方法、处理函数**进行存储（这些信息根据一定结构存储在Router、Layer和Route中）
+启动服务时会依次执行程序，将该路由系统中的**路径、请求方法、处理函数**进行存储（这些信息根据一定结构存储在 Router、Layer 和 Route 中）
 
 对相应的地址进行监听，等待请求到达。
 
-请求到达，首先根据请求的path去从上到下进行匹配，路径匹配正确则进入该Layer，否则跳出该Layer。
+请求到达，首先根据请求的 path 去从上到下进行匹配，路径匹配正确则进入该 Layer，否则跳出该 Layer。
 
-若匹配到该Layer，则进行请求方式的匹配，若匹配方式匹配正确，则执行该对应Route中的函数。
+若匹配到该 Layer，则进行请求方式的匹配，若匹配方式匹配正确，则执行该对应 Route 中的函数。
 
-首先会进行app实例初始化、然后调用一系列中间件，最后建立监听
+首先会进行 app 实例初始化、然后调用一系列中间件，最后建立监听
 
-主要分为两个阶段：初始化阶段、请求处理阶段，以app.get()为例
+主要分为两个阶段：初始化阶段、请求处理阶段，以 app.get()为例
 
 ![img](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c4b7323996a346cdb506a0ed724c9b45~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
 
@@ -1610,82 +1615,86 @@ app.listen(3000);
 
 ![img](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/284c90293365494ea44e8b213f70278d~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
 
-1. 首先来看一下**app.get()的内容**(源代码中app.get()是通过遍历methods的方式产生)
+1. 首先来看一下**app.get()的内容**(源代码中 app.get()是通过遍历 methods 的方式产生)
 
    ```javascript
-   app.get = function(path){
-       // ……
-       this.lazyrouter();
-   
-       var route = this._router.route(path);
-       route.get.apply(route, slice.call(arguments, 1));
-       return this;
+   app.get = function (path) {
+     // ……
+     this.lazyrouter();
+
+     var route = this._router.route(path);
+     route.get.apply(route, slice.call(arguments, 1));
+     return this;
    };
    ```
 
-2. 在app.lazyrouter()会完成router的实例化过程
+2. 在 app.lazyrouter()会完成 router 的实例化过程
 
    ```javascript
    app.lazyrouter = function lazyrouter() {
      if (!this._router) {
        this._router = new Router({
-         caseSensitive: this.enabled('case sensitive routing'),
-         strict: this.enabled('strict routing')
+         caseSensitive: this.enabled("case sensitive routing"),
+         strict: this.enabled("strict routing"),
        });
-   
+
        // 此处会使用一些中间件
-       this._router.use(query(this.get('query parser fn')));
+       this._router.use(query(this.get("query parser fn")));
        this._router.use(middleware.init(this));
      }
    };
    ```
 
-   注意：该过程中其实是利用了**单例模式**，保证整个过程中获取router实例的唯一性。
+   注意：该过程中其实是利用了**单例模式**，保证整个过程中获取 router 实例的唯一性。
 
-3. 调用**router.route()**方法完成**layer的实例化、处理及保存**，并返回实例化后的route。(注意源码中是proto.route)
+3. 调用**router.route()**方法完成**layer 的实例化、处理及保存**，并返回实例化后的 route。(注意源码中是 proto.route)
 
    ```javascript
    router.prototype.route = function route(path) {
      var route = new Route(path);
-     var layer = new Layer(path, {
-       sensitive: this.caseSensitive,
-       strict: this.strict,
-       end: true
-     }, route.dispatch.bind(route));
-   
-     layer.route = route;// 把route放到layer上
-   
+     var layer = new Layer(
+       path,
+       {
+         sensitive: this.caseSensitive,
+         strict: this.strict,
+         end: true,
+       },
+       route.dispatch.bind(route)
+     );
+
+     layer.route = route; // 把route放到layer上
+
      this.stack.push(layer); // 把layer放到数组中
      return route;
    };
    ```
 
-4. 将该app.get()中的函数存储到route的stack中。(注意源码中也是通过遍历method的方式将get挂载到route的prototype上)
+4. 将该 app.get()中的函数存储到 route 的 stack 中。(注意源码中也是通过遍历 method 的方式将 get 挂载到 route 的 prototype 上)
 
    ```javascript
-   Route.prototype.get = function(){
-       var handles = flatten(slice.call(arguments));
-   
-       for (var i = 0; i < handles.length; i++) {
-         var handle = handles[i];
-         // ……
-         // 给route添加layer，这个层中需要存放方法名和handler
-         var layer = Layer('/', {}, handle);
-         layer.method = method;
-   
-         this.methods[method] = true;
-         this.stack.push(layer);
-       }
-       return this;
-     };
+   Route.prototype.get = function () {
+     var handles = flatten(slice.call(arguments));
+
+     for (var i = 0; i < handles.length; i++) {
+       var handle = handles[i];
+       // ……
+       // 给route添加layer，这个层中需要存放方法名和handler
+       var layer = Layer("/", {}, handle);
+       layer.method = method;
+
+       this.methods[method] = true;
+       this.stack.push(layer);
+     }
+     return this;
+   };
    ```
 
 **注意：上述代码均删除了源码中一些异常判断逻辑，方便读者看清整体框架。**
 
 > 通过上述的分析，可以看出初始化阶段主要做了两件事情：
 >
-> 1. 将路由处理方式（app.get()、app.post()……）、app.use()等划分为路由系统中的一个Layer。
-> 2. 对于每一个层中的处理函数全部存储至Route对象中，一个Route对象与一个Layer相互映射。
+> 1. 将路由处理方式（app.get()、app.post()……）、app.use()等划分为路由系统中的一个 Layer。
+> 2. 对于每一个层中的处理函数全部存储至 Route 对象中，一个 Route 对象与一个 Layer 相互映射。
 
 #### 请求处理阶段
 
@@ -1693,9 +1702,7 @@ app.listen(3000);
 
 ![img](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/125051f73d9248cf8afb2258104ae8a0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
 
-
-
-1. app.listen()使服务进入监听状态（实质上是调用了http模块）
+1. app.listen()使服务进入监听状态（实质上是调用了 http 模块）
 
    ```javascript
    app.listen = function listen() {
@@ -1703,23 +1710,25 @@ app.listen(3000);
      return server.listen.apply(server, arguments);
    };
    ```
-   
-2. 当连接建立会调用app实例，app实例中会立即执行**app.handle()**函数，app.handle()函数会立即调用路由系统的处理函数**router.handle()**
+
+2. 当连接建立会调用 app 实例，app 实例中会立即执行**app.handle()**函数，app.handle()函数会立即调用路由系统的处理函数**router.handle()**
 
    ```javascript
    app.handle = function handle(req, res, callback) {
      var router = this._router;
      // 如果路由系统中处理不了这个请求，就调用done方法
-     var done = callback || finalhandler(req, res, {
-       env: this.get('env'),
-       onerror: logerror.bind(this)
-     });
+     var done =
+       callback ||
+       finalhandler(req, res, {
+         env: this.get("env"),
+         onerror: logerror.bind(this),
+       });
      //……
      router.handle(req, res, done);
    };
    ```
-   
-3. router.handle()主要是根据路径获取是否有匹配的layer，当匹配到之后则调用layer.prototype.handle_request()去执行route中内容的处理
+
+3. router.handle()主要是根据路径获取是否有匹配的 layer，当匹配到之后则调用 layer.prototype.handle_request()去执行 route 中内容的处理
 
    ```javascript
    router.prototype.handle = function handle(req, res, out) {
@@ -1727,57 +1736,57 @@ app.listen(3000);
      var self = this;
      // ……
      var stack = self.stack;
-     
+
      // ……
-   
+
      next();
-   
+
      function next(err) {
        // ……
        // get pathname of request
        var path = getPathname(req);
-   
+
        // find next matching layer
        var layer;
        var match;
        var route;
-   
+
        while (match !== true && idx < stack.length) {
          layer = stack[idx++];
          match = matchLayer(layer, path);
          route = layer.route;
          // ……
        }
-   
+
        // no match
        if (match !== true) {
          return done(layerError);
        }
        // ……
-   
+
        // Capture one-time layer values
        req.params = self.mergeParams
          ? mergeParams(layer.params, parentParams)
          : layer.params;
        var layerPath = layer.path;
-   
+
        // this should be done for the layer
        self.process_params(layer, paramcalled, req, res, function (err) {
          if (err) {
            return next(layerError || err);
          }
-   
+
          if (route) {
            return layer.handle_request(req, res, next);
          }
-   
+
          trim_prefix(layer, layerError, layerPath, path);
        });
      }
-   
+
      function trim_prefix(layer, layerError, layerPath, path) {
        // ……
-   
+
        if (layerError) {
          layer.handle_error(layerError, req, res, next);
        } else {
@@ -1786,18 +1795,18 @@ app.listen(3000);
      }
    };
    ```
-   
-4. layer.handle_request()会调用**route.dispatch()**触发route中内容的执行
+
+4. layer.handle_request()会调用**route.dispatch()**触发 route 中内容的执行
 
    ```javascript
    Layer.prototype.handle_request = function handle(req, res, next) {
      var fn = this.handle;
-   
+
      if (fn.length > 3) {
        // not a standard request handler
        return next();
      }
-   
+
      try {
        fn(req, res, next);
      } catch (err) {
@@ -1805,8 +1814,8 @@ app.listen(3000);
      }
    };
    ```
-   
-5. route中的通过**判断请求的方法和route中layer的方法**是否匹配，匹配的话则执行相应函数，若所有route中的layer都不匹配，则调到外层的layer中继续执行。
+
+5. route 中的通过**判断请求的方法和 route 中 layer 的方法**是否匹配，匹配的话则执行相应函数，若所有 route 中的 layer 都不匹配，则调到外层的 layer 中继续执行。
 
    ```javascript
    Route.prototype.dispatch = function dispatch(req, res, done) {
@@ -1815,24 +1824,24 @@ app.listen(3000);
      if (stack.length === 0) {
        return done();
      }
-   
+
      var method = req.method.toLowerCase();
      // ……
-       
+
      next();
      // 此next方法是用户调用的next，如果调用next会执行内层的next方法，如果没有匹配到会调用外层的next方法
      function next(err) {
        // ……
-   
+
        var layer = stack[idx++];
        if (!layer) {
          return done(err);
        }
-   
+
        if (layer.method && layer.method !== method) {
          return next(err);
        }
-   
+
        // 如果当前route中的layer的方法匹配到了，执行此layer上的handler
        if (err) {
          layer.handle_error(err, req, res, next);
@@ -1845,13 +1854,12 @@ app.listen(3000);
 
 > 通过上述的分析，可以看出初始化阶段主要做了两件事情：
 >
-> 1. 首先判断layer中的path和请求的path是否一致，一致则会进入route进行处理，否则调到下一层layer
-> 2. 在route中会判断route中的layer与请求方法是否一致，一致的话则函数执行，否则不执行，所有route中的layer执行完后跳到下层的layer进行执行。
-
+> 1. 首先判断 layer 中的 path 和请求的 path 是否一致，一致则会进入 route 进行处理，否则调到下一层 layer
+> 2. 在 route 中会判断 route 中的 layer 与请求方法是否一致，一致的话则函数执行，否则不执行，所有 route 中的 layer 执行完后跳到下层的 layer 进行执行。
 
 ## Koa2
 
-### 1.Koa基础
+### 1.Koa 基础
 
 koa 支持 async 和 await 的用法
 
@@ -1864,12 +1872,12 @@ koa 支持 async 和 await 的用法
 所以在使用上我们只需要 new 一个实例即可 其他用法和 Express 基本相似
 
 ```js
-const Koa = require('koa');
+const Koa = require("koa");
 
 const app = new Koa();
 
 app.listen(3000, () => {
-  console.log('server start...');
+  console.log("server start...");
 });
 ```
 
@@ -1884,16 +1892,16 @@ Koa 本身十分纯净 几乎大部分的功能都是通过插件的方式来实
 Koa 将 express 中的 request 和 response 都合成到了上下文对象 context 中 简写为 ctx
 
 ```js
-const Router = require('koa-router');
+const Router = require("koa-router");
 
-const userRouter = new Router({ prefix: '/user' });
+const userRouter = new Router({ prefix: "/user" });
 
-userRouter.get('/home', (ctx, next) => {
-  ctx.body = 'welcome~~';
+userRouter.get("/home", (ctx, next) => {
+  ctx.body = "welcome~~";
 });
 
-userRouter.post('/login', (ctx, next) => {
-  ctx.body = 'login...';
+userRouter.post("/login", (ctx, next) => {
+  ctx.body = "login...";
 });
 
 module.exports = userRouter;
@@ -1902,16 +1910,16 @@ module.exports = userRouter;
 然后在 index 中引入 user.js
 
 ```js
-const Koa = require('koa');
+const Koa = require("koa");
 
-const userRouter = require('./router/user');
+const userRouter = require("./router/user");
 
 const app = new Koa();
 
 app.use(userRouter.routes());
 
 app.listen(3000, () => {
-  console.log('server start...');
+  console.log("server start...");
 });
 ```
 
@@ -1959,27 +1967,27 @@ app.listen(8080, () => {
 
 #### 异步处理
 
-Koa 的中间件支持 async / await 的语法 例如下面这个demo就可以正常拼接ABC输出
+Koa 的中间件支持 async / await 的语法 例如下面这个 demo 就可以正常拼接 ABC 输出
 
 ```js
-const express = require('express');
+const express = require("express");
 
 const app = express();
 
 const middlewareA = (req, res, next) => {
-  req.message = '';
-  req.message += 'A';
+  req.message = "";
+  req.message += "A";
   next();
   res.end(req.message);
 };
 
 const middlewareB = async (req, res, next) => {
-  req.message += await Promise.resolve('B');
+  req.message += await Promise.resolve("B");
   await next();
 };
 
 const middlewareC = (req, res, next) => {
-  req.message += 'C';
+  req.message += "C";
   next();
 };
 
@@ -1988,35 +1996,35 @@ app.use(middlewareB);
 app.use(middlewareC);
 
 app.listen(3000, () => {
-  console.log('server start...');
+  console.log("server start...");
 });
 ```
 
 #### 洋葱模型
 
-洋葱模型其实不是什么高大尚的概念 先来看一个demo
+洋葱模型其实不是什么高大尚的概念 先来看一个 demo
 
 ```js
-const Koa = require('koa');
+const Koa = require("koa");
 
 const app = new Koa();
 
 const middlewareA = (ctx, next) => {
-  console.log('middlewareA');
+  console.log("middlewareA");
   next();
-  console.log('middlewareA');
+  console.log("middlewareA");
 };
 
 const middlewareB = (ctx, next) => {
-  console.log('middlewareB');
+  console.log("middlewareB");
   next();
-  console.log('middlewareB');
+  console.log("middlewareB");
 };
 
 const middlewareC = (ctx, next) => {
-  console.log('middlewareC');
+  console.log("middlewareC");
   next();
-  console.log('middlewareC');
+  console.log("middlewareC");
 };
 
 app.use(middlewareA);
@@ -2024,19 +2032,19 @@ app.use(middlewareB);
 app.use(middlewareC);
 
 app.listen(3000, () => {
-  console.log('server start');
+  console.log("server start");
 });
 ```
 
 访问 3000 端口 我们可以看到 控制台输出
 
 ```js
-middlewareA
-middlewareB
-middlewareC
-middlewareC
-middlewareB
-middlewareA
+middlewareA;
+middlewareB;
+middlewareC;
+middlewareC;
+middlewareB;
+middlewareA;
 ```
 
 通过下图我们不难发现 所有中间件都会被 request 访问两次 就像剥洋葱一样 这就是洋葱模型
@@ -2045,9 +2053,7 @@ middlewareA
 
 注意 `Express` 同样也是洋葱模型
 
-
-
-### 2.Koa的中间件使用和原理
+### 2.Koa 的中间件使用和原理
 
 [【Node】深入浅出 Koa 的洋葱模型](https://juejin.cn/post/7012031464237694983)
 
@@ -2061,7 +2067,7 @@ middlewareA
 
 在这些中间件函数中，我们可以执行业务逻辑代码，修改请求和响应对象、返回响应数据等操作
 
-[Koa之洋葱模型分析](https://juejin.cn/post/7095566716347875336)
+[Koa 之洋葱模型分析](https://juejin.cn/post/7095566716347875336)
 
 Koa 是一个由 Express 原班人马打造的新的 web 框架，Koa 本身并没有捆绑任何中间件，只提供了应用（`Application`）、上下文（`Context`）、请求（`Request`）、响应（`Response`）四个模块（源码中可以发现）。原本 Express 中的路由（`Router`）模块已经被移除，改为通过中间件的方式实现。相比较 Express，Koa 能让使用者更大程度上构建个性化的应用。
 
@@ -2070,59 +2076,59 @@ Koa 是一个中间件框架，本身没有捆绑任何中间件。本身支持�
 #### 中间件基本使用
 
 ```js
-const Koa = require('Koa')
-const app = new Koa()
+const Koa = require("Koa");
+const app = new Koa();
 
 // async 函数
 app.use(async (ctx, next) => {
-  const start = Date.now()
-  await next()
-  const ms = Date.now() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
+  const start = Date.now();
+  await next();
+  const ms = Date.now() - start;
+  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+});
 
 // 普通函数
 app.use((ctx, next) => {
-  const start = Date.now()
+  const start = Date.now();
   return next().then(() => {
-    const ms = Date.now() - start
-    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-  })
-})
+    const ms = Date.now() - start;
+    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+  });
+});
 
 app.listen(3001, () => {
-  console.log(`Server port is 3000.`)
-})
+  console.log(`Server port is 3000.`);
+});
 ```
 
-Koa 的中间件就是函数，可以是 `async` 函数，或是普通函数。而`next()`函数则是一个异步promise函数。
+Koa 的中间件就是函数，可以是 `async` 函数，或是普通函数。而`next()`函数则是一个异步 promise 函数。
 
 #### 中间件执行顺序
 
 ```js
 // 最外层的中间件
 app.use(async (ctx, next) => {
-  await console.log(`第 1 个执行`)
-  await next()
-  await console.log(`第 6 个执行`)
-})
+  await console.log(`第 1 个执行`);
+  await next();
+  await console.log(`第 6 个执行`);
+});
 
 // 第二层中间件
 app.use(async (ctx, next) => {
-  await console.log(`第 2 个执行`)
-  await next()
-  await console.log(`第 5 个执行`)
-})
+  await console.log(`第 2 个执行`);
+  await next();
+  await console.log(`第 5 个执行`);
+});
 
 // 最里层的中间件
 app.use(async (ctx, next) => {
-  await console.log(`第 3 个执行`)
-  ctx.body = 'Hello world.'
-  await console.log(`第 4 个执行`)
-})
+  await console.log(`第 3 个执行`);
+  ctx.body = "Hello world.";
+  await console.log(`第 4 个执行`);
+});
 ```
 
-中间件的执行顺序受 `next()`函数影响，以 `next()`为界分为上下两部分，`next()`上面的部分为从上到下顺序执行，直到执行到最深处 `ctx`上下文执行返回结果后（无next函数），再从下到上执行，直到执行到最外层
+中间件的执行顺序受 `next()`函数影响，以 `next()`为界分为上下两部分，`next()`上面的部分为从上到下顺序执行，直到执行到最深处 `ctx`上下文执行返回结果后（无 next 函数），再从下到上执行，直到执行到最外层
 
 把关注点集中在 `next()`函数和`ctx`上下文，再看一遍：
 
@@ -2130,27 +2136,27 @@ app.use(async (ctx, next) => {
 // 最外层的中间件
 app.use(async (ctx, next) => {
   // 这里是针对ctx.request做一些处理
-  ctx.request.query.name = ctx.request.query.name + '_query1'
-  await next()
+  ctx.request.query.name = ctx.request.query.name + "_query1";
+  await next();
   // 这里是针对ctx.response做一些处理
-  ctx.response.body = ctx.response.body + '_query1'
+  ctx.response.body = ctx.response.body + "_query1";
 
-  ctx.res.end(ctx.response.body)
-})
+  ctx.res.end(ctx.response.body);
+});
 
 // 第二层中间件
 app.use(async (ctx, next) => {
-  ctx.request.query.name = ctx.request.query.name + '_query2'
-  await next()
-  ctx.response.body = ctx.response.body + '_query2'
-})
+  ctx.request.query.name = ctx.request.query.name + "_query2";
+  await next();
+  ctx.response.body = ctx.response.body + "_query2";
+});
 
 // 最里层的中间件
 app.use(async (ctx, next) => {
-  const query = ctx.request.query
+  const query = ctx.request.query;
   // console.log(query) => { name: 'zhangsan_query1_query2' }
-  ctx.response.body = 'hello world'
-})
+  ctx.response.body = "hello world";
+});
 
 // 请求参数如下：
 // http://localhost:3001?name=zhangsan
@@ -2162,24 +2168,22 @@ app.use(async (ctx, next) => {
 
 从表现上来看，我觉得这和递归的模式还挺相似的，开始都是先一层层往里调用，直到调用到最后一层，开始执行，得到结果，返回给上一层，然后再从最后一层往回执行，直到回到第一层，得到最终的结果
 
-
-
 中间件的使方式非常简单，只需要在 `app.use(fn)` 中添加中间件函数即可。
 
 该函数接受两个参数：`ctx`——上下文、`next`——下一个中间件函数。
 
 ```js
-const Koa = require('Koa')
-const app = new Koa()
+const Koa = require("Koa");
+const app = new Koa();
 
 const fn = async (ctx, next) => {
-  const start = Date.now()
-  await next()
-  const ms = Date.now() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-}
+  const start = Date.now();
+  await next();
+  const ms = Date.now() - start;
+  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+};
 
-app.use(fn)
+app.use(fn);
 ```
 
 #### 中间件链错误
@@ -2204,7 +2208,7 @@ ctx.onerror = function {
 
 #### 中间件使用举例
 
-##### token校验
+##### token 校验
 
 ```js
 module.exports = (options) => async (ctx, next) {
@@ -2230,16 +2234,16 @@ module.exports = (options) => async (ctx, next) {
 ##### 日志模块
 
 ```js
-const fs = require('fs')
+const fs = require("fs");
 module.exports = (options) => async (ctx, next) => {
-  const startTime = Date.now()
-  const requestTime = new Date()
-  await next()
+  const startTime = Date.now();
+  const requestTime = new Date();
+  await next();
   const ms = Date.now() - startTime;
   let logout = `${ctx.request.ip} -- ${requestTime} -- ${ctx.method} -- ${ctx.url} -- ${ms}ms`;
   // 输出日志文件
-  fs.appendFileSync('./log.txt', logout + '\n')
-}
+  fs.appendFileSync("./log.txt", logout + "\n");
+};
 ```
 
 `Koa`存在很多第三方的中间件，如`koa-bodyparser`、`koa-static`等
@@ -2255,38 +2259,38 @@ module.exports = (options) => async (ctx, next) => {
 const querystring = require("querystring");
 
 module.exports = function bodyParser() {
-    return async (ctx, next) => {
-        await new Promise((resolve, reject) => {
-            // 存储数据的数组
-            let dataArr = [];
+  return async (ctx, next) => {
+    await new Promise((resolve, reject) => {
+      // 存储数据的数组
+      let dataArr = [];
 
-            // 接收数据
-            ctx.req.on("data", data => dataArr.push(data));
+      // 接收数据
+      ctx.req.on("data", (data) => dataArr.push(data));
 
-            // 整合数据并使用 Promise 成功
-            ctx.req.on("end", () => {
-                // 获取请求数据的类型 json 或表单
-                let contentType = ctx.get("Content-Type");
+      // 整合数据并使用 Promise 成功
+      ctx.req.on("end", () => {
+        // 获取请求数据的类型 json 或表单
+        let contentType = ctx.get("Content-Type");
 
-                // 获取数据 Buffer 格式
-                let data = Buffer.concat(dataArr).toString();
+        // 获取数据 Buffer 格式
+        let data = Buffer.concat(dataArr).toString();
 
-                if (contentType === "application/x-www-form-urlencoded") {
-                    // 如果是表单提交，则将查询字符串转换成对象赋值给 ctx.request.body
-                    ctx.request.body = querystring.parse(data);
-                } else if (contentType === "applaction/json") {
-                    // 如果是 json，则将字符串格式的对象转换成对象赋值给 ctx.request.body
-                    ctx.request.body = JSON.parse(data);
-                }
+        if (contentType === "application/x-www-form-urlencoded") {
+          // 如果是表单提交，则将查询字符串转换成对象赋值给 ctx.request.body
+          ctx.request.body = querystring.parse(data);
+        } else if (contentType === "applaction/json") {
+          // 如果是 json，则将字符串格式的对象转换成对象赋值给 ctx.request.body
+          ctx.request.body = JSON.parse(data);
+        }
 
-                // 执行成功的回调
-                resolve();
-            });
-        });
+        // 执行成功的回调
+        resolve();
+      });
+    });
 
-        // 继续向下执行
-        await next();
-    };
+    // 继续向下执行
+    await next();
+  };
 };
 ```
 
@@ -2302,39 +2306,39 @@ const { promisify } = require("util");
 
 // 将 stat 和 access 转换成 Promise
 const stat = promisify(fs.stat);
-const access = promisify(fs.access)
+const access = promisify(fs.access);
 
 module.exports = function (dir) {
-    return async (ctx, next) => {
-        // 将访问的路由处理成绝对路径，这里要使用 join 因为有可能是 /
-        let realPath = path.join(dir, ctx.path);
+  return async (ctx, next) => {
+    // 将访问的路由处理成绝对路径，这里要使用 join 因为有可能是 /
+    let realPath = path.join(dir, ctx.path);
 
-        try {
-            // 获取 stat 对象
-            let statObj = await stat(realPath);
+    try {
+      // 获取 stat 对象
+      let statObj = await stat(realPath);
 
-            // 如果是文件，则设置文件类型并直接响应内容，否则当作文件夹寻找 index.html
-            if (statObj.isFile()) {
-                ctx.set("Content-Type", `${mime.getType()};charset=utf8`);
-                ctx.body = fs.createReadStream(realPath);
-            } else {
-                let filename = path.join(realPath, "index.html");
+      // 如果是文件，则设置文件类型并直接响应内容，否则当作文件夹寻找 index.html
+      if (statObj.isFile()) {
+        ctx.set("Content-Type", `${mime.getType()};charset=utf8`);
+        ctx.body = fs.createReadStream(realPath);
+      } else {
+        let filename = path.join(realPath, "index.html");
 
-                // 如果不存在该文件则执行 catch 中的 next 交给其他中间件处理
-                await access(filename);
+        // 如果不存在该文件则执行 catch 中的 next 交给其他中间件处理
+        await access(filename);
 
-                // 存在设置文件类型并响应内容
-                ctx.set("Content-Type", "text/html;charset=utf8");
-                ctx.body = fs.createReadStream(filename);
-            }
-        } catch (e) {
-            await next();
-        }
+        // 存在设置文件类型并响应内容
+        ctx.set("Content-Type", "text/html;charset=utf8");
+        ctx.body = fs.createReadStream(filename);
+      }
+    } catch (e) {
+      await next();
     }
-}
+  };
+};
 ```
 
-### 3.Koa的洋葱模型
+### 3.Koa 的洋葱模型
 
 ![洋葱模型](https://s2.loli.net/2022/06/19/6DNXLofT1lvgc28.webp)
 
@@ -2346,8 +2350,8 @@ Koa 中间件采用的是洋葱圈模型，每次执行下一个中间件传入�
 
 但是这样会产生一些问题，比如：
 
--   如果只链式执行一次，怎么能保证前面的中间件能使用之后的中间件所添加的东西呢？
--   如何正确划分请求前和请求后的关联逻辑？
+- 如果只链式执行一次，怎么能保证前面的中间件能使用之后的中间件所添加的东西呢？
+- 如何正确划分请求前和请求后的关联逻辑？
 
 简要说明：
 
@@ -2391,44 +2395,40 @@ fnMiddleware(ctx).then(handleResponse).catch(onerror);
 
 `koa`框架总结：主要就是四个核心概念，洋葱模型（把中间件串联起来），`http`请求上下文（`context`）、`http`请求对象、`http`响应对象。
 
+### 4.Koa 简单实现
 
-
-### 4.Koa简单实现
-
-koa2的源码目录结构的lib文件夹，lib文件夹下放着四个koa2的核心文件：**application.js、context.js、request.js、response.js**
+koa2 的源码目录结构的 lib 文件夹，lib 文件夹下放着四个 koa2 的核心文件：**application.js、context.js、request.js、response.js**
 
 #### application.js
 
-**application.js是koa的入口文件**，它向**外导出了创建class实例的构造函数**，它继承了events，这样就会赋予框架事件监听和事件触发的能力。**application还暴露了一些常用的api，比如toJSON、listen、use等等**。
+**application.js 是 koa 的入口文件**，它向**外导出了创建 class 实例的构造函数**，它继承了 events，这样就会赋予框架事件监听和事件触发的能力。**application 还暴露了一些常用的 api，比如 toJSON、listen、use 等等**。
 
-listen的实现原理其实就是对http.createServer进行了一个封装，重点是这个函数中传入的callback，它里面包含了中间件的合并，上下文的处理，对res的特殊处理。
+listen 的实现原理其实就是对 http.createServer 进行了一个封装，重点是这个函数中传入的 callback，它里面包含了中间件的合并，上下文的处理，对 res 的特殊处理。
 
-use是收集中间件，将多个中间件放入一个缓存队列中，然后通过koa-compose这个插件进行递归组合调用这一些列的中间件。
+use 是收集中间件，将多个中间件放入一个缓存队列中，然后通过 koa-compose 这个插件进行递归组合调用这一些列的中间件。
 
 #### context.js
 
-这部分就是koa的应用上下文ctx,其实就一个简单的对象暴露，里面的重点在delegate，这个就是代理，这个就是为了开发者方便而设计的，比如我们要访问ctx.repsponse.status但是我们通过delegate，可以直接访问ctx.status访问到它。
+这部分就是 koa 的应用上下文 ctx,其实就一个简单的对象暴露，里面的重点在 delegate，这个就是代理，这个就是为了开发者方便而设计的，比如我们要访问 ctx.repsponse.status 但是我们通过 delegate，可以直接访问 ctx.status 访问到它。
 
 #### request.js、response.js
 
-这两部分就是对原生的res、req的一些操作了，大量使用es6的get和set的一些语法，去取headers或者设置headers、还有设置body等等
+这两部分就是对原生的 res、req 的一些操作了，大量使用 es6 的 get 和 set 的一些语法，去取 headers 或者设置 headers、还有设置 body 等等
 
+#### 实现 koa2 的四大模块
 
+上文简述了 koa2 源码的大体框架结构，接下来我们来实现一个 koa2 的框架，笔者认为理解和实现一个 koa 框架需要实现四个大模块，分别是：
 
-#### 实现koa2的四大模块
-
-上文简述了koa2源码的大体框架结构，接下来我们来实现一个koa2的框架，笔者认为理解和实现一个koa框架需要实现四个大模块，分别是：
-
-- 封装node http server、创建Koa类构造函数
-- 构造request、response、context对象
+- 封装 node http server、创建 Koa 类构造函数
+- 构造 request、response、context 对象
 - 中间件机制和剥洋葱模型的实现
 - 错误捕获和错误处理
 
 下面我们就逐一分析和实现。
 
-##### 模块一：封装node http server和创建Koa类构造函数
+##### 模块一：封装 node http server 和创建 Koa 类构造函数
 
-阅读koa2的源码得知，实现koa的服务器应用和端口监听，其实就是基于node的原生代码进行了封装，如下图的代码就是通过node原生代码实现的服务器监听。
+阅读 koa2 的源码得知，实现 koa 的服务器应用和端口监听，其实就是基于 node 的原生代码进行了封装，如下图的代码就是通过 node 原生代码实现的服务器监听。
 
 ```ini
 let http = require('http');
@@ -2436,12 +2436,12 @@ let server = http.createServer((req, res) => {
     res.writeHead(200);
     res.end('hello world');
 });
-server.listen(3000, () => {    
+server.listen(3000, () => {
     console.log('listenning on 3000');
 });
 ```
 
-我们需要将上面的node原生代码封装实现成koa的模式：
+我们需要将上面的 node 原生代码封装实现成 koa 的模式：
 
 ```ini
 const http = require('http');
@@ -2450,31 +2450,31 @@ const app = new Koa();
 app.listen(3000);
 ```
 
-实现koa的第一步就是对以上的这个过程**进行封装**，为此我们需要创建application.js实现一个Application类的构造函数：
+实现 koa 的第一步就是对以上的这个过程**进行封装**，为此我们需要创建 application.js 实现一个 Application 类的构造函数：
 
 ```javascript
-let http = require('http');
-class Application {    
-    constructor() {        
-        this.callbackFunc;
-    }
-    listen(port) {        
-        let server = http.createServer(this.callback());
-        server.listen(port);
-    }
-    use(fn) {
-        this.callbackFunc = fn;
-    }
-    callback() {
-        return (req, res) => {
-            this.callbackFunc(req, res);
-        };
-    }
+let http = require("http");
+class Application {
+  constructor() {
+    this.callbackFunc;
+  }
+  listen(port) {
+    let server = http.createServer(this.callback());
+    server.listen(port);
+  }
+  use(fn) {
+    this.callbackFunc = fn;
+  }
+  callback() {
+    return (req, res) => {
+      this.callbackFunc(req, res);
+    };
+  }
 }
 module.exports = Application;
 ```
 
-然后创建example.js，引入application.js，运行服务器实例启动监听代码：
+然后创建 example.js，引入 application.js，运行服务器实例启动监听代码：
 
 ```ini
 let Koa = require('./application');
@@ -2488,26 +2488,26 @@ app.listen(3000, () => {
 });
 ```
 
-现在在浏览器输入localhost:3000即可看到浏览器里显示“hello world”。现在第一步我们已经完成了，对http server进行了简单的封装和创建了一个可以生成koa实例的类class，这个类里还实现了app.use用来注册中间件和注册回调函数，app.listen用来开启服务器实例并传入callback回调函数，第一模块主要是实现典型的koa风格和搭好了一个koa的简单的架子。接下来我们开始编写和讲解第二模块。
+现在在浏览器输入 localhost:3000 即可看到浏览器里显示“hello world”。现在第一步我们已经完成了，对 http server 进行了简单的封装和创建了一个可以生成 koa 实例的类 class，这个类里还实现了 app.use 用来注册中间件和注册回调函数，app.listen 用来开启服务器实例并传入 callback 回调函数，第一模块主要是实现典型的 koa 风格和搭好了一个 koa 的简单的架子。接下来我们开始编写和讲解第二模块。
 
-##### 模块二：构造request、response、context对象
+##### 模块二：构造 request、response、context 对象
 
-阅读koa2的源码得知，其中context.js、request.js、response.js三个文件分别是request、response、context三个模块的代码文件。**context就是我们平时写koa代码时的ctx**，**它相当于一个全局的koa实例上下文this，它连接了request、response两个功能模块，并且暴露给koa的实例和中间件等回调函数的参数中，起到承上启下的作用**。
+阅读 koa2 的源码得知，其中 context.js、request.js、response.js 三个文件分别是 request、response、context 三个模块的代码文件。**context 就是我们平时写 koa 代码时的 ctx**，**它相当于一个全局的 koa 实例上下文 this，它连接了 request、response 两个功能模块，并且暴露给 koa 的实例和中间件等回调函数的参数中，起到承上启下的作用**。
 
-request、response两个功能模块分别对node的**原生request、response**进行了一个功能的封装，使用了getter和setter属性，**基于node的对象req/res对象封装koa的request/response对象**。我们基于这个原理简单实现一下request.js、response.js，首先创建request.js文件，然后写入以下代码：
+request、response 两个功能模块分别对 node 的**原生 request、response**进行了一个功能的封装，使用了 getter 和 setter 属性，**基于 node 的对象 req/res 对象封装 koa 的 request/response 对象**。我们基于这个原理简单实现一下 request.js、response.js，首先创建 request.js 文件，然后写入以下代码：
 
 ```javascript
-let url = require('url');
+let url = require("url");
 module.exports = {
-    get query() {
-        return url.parse(this.req.url, true).query;
-    }
+  get query() {
+    return url.parse(this.req.url, true).query;
+  },
 };
 ```
 
-这样当你在koa实例里使用ctx.query的时候，就会返回**url.parse(this.req.url, true).query**的值。看源码可知，基于getter和setter，在**request.js**里还封装了header、url、origin、path等方法，都是**对原生的request上用getter和setter进行了封装**，笔者不再这里一一实现。
+这样当你在 koa 实例里使用 ctx.query 的时候，就会返回**url.parse(this.req.url, true).query**的值。看源码可知，基于 getter 和 setter，在**request.js**里还封装了 header、url、origin、path 等方法，都是**对原生的 request 上用 getter 和 setter 进行了封装**，笔者不再这里一一实现。
 
-接下来我们实现response.js文件代码模块，它和request原理一样，也是基于getter和setter对原生response进行了封装，那我们接下来通过对常用的ctx.body和ctx.status这个两个语句当做例子简述一下如果实现koa的response的模块，我们首先创建好response.js文件，然后输入下面的代码：
+接下来我们实现 response.js 文件代码模块，它和 request 原理一样，也是基于 getter 和 setter 对原生 response 进行了封装，那我们接下来通过对常用的 ctx.body 和 ctx.status 这个两个语句当做例子简述一下如果实现 koa 的 response 的模块，我们首先创建好 response.js 文件，然后输入下面的代码：
 
 ```csharp
 module.exports = {
@@ -2529,9 +2529,9 @@ module.exports = {
 };
 ```
 
-以上代码实现了对koa的status的读取和设置，读取的时候返回的是基于原生的response对象的statusCode属性，而body的读取则是对this._body进行读写和操作。这里对body进行操作并没有使用原生的this.res.end，因为在我们编写koa代码的时候，会对body进行多次的读取和修改，所以**真正返回浏览器信息的操作是在application.js里进行封装和操作**。
+以上代码实现了对 koa 的 status 的读取和设置，读取的时候返回的是基于原生的 response 对象的 statusCode 属性，而 body 的读取则是对 this.\_body 进行读写和操作。这里对 body 进行操作并没有使用原生的 this.res.end，因为在我们编写 koa 代码的时候，会对 body 进行多次的读取和修改，所以**真正返回浏览器信息的操作是在 application.js 里进行封装和操作**。
 
-现在我们已经实现了request.js、response.js，获取到了request、response对象和他们的封装的方法，然后我们开始实现**context.js，context的作用就是将request、response对象挂载到ctx的上面**，让koa实例和代码能方便的使用到request、response对象中的方法。现在我们创建context.js文件，输入如下代码：
+现在我们已经实现了 request.js、response.js，获取到了 request、response 对象和他们的封装的方法，然后我们开始实现**context.js，context 的作用就是将 request、response 对象挂载到 ctx 的上面**，让 koa 实例和代码能方便的使用到 request、response 对象中的方法。现在我们创建 context.js 文件，输入如下代码：
 
 ```ini
 let proto = {};
@@ -2573,11 +2573,11 @@ responseGet.forEach(ele => {
 module.exports = proto;
 ```
 
-context.js文件主要是对常用的request和response方法进行**挂载和代理**，通过**context.query**直接**代理了context.request.query**，**context.body和context.status代理了context.response.body与context.response.status**。而**context.request，context.response**则会在application.js中挂载
+context.js 文件主要是对常用的 request 和 response 方法进行**挂载和代理**，通过**context.query**直接**代理了 context.request.query**，**context.body 和 context.status 代理了 context.response.body 与 context.response.status**。而**context.request，context.response**则会在 application.js 中挂载
 
-本来可以用简单的setter和getter去设置每一个方法，但是由于context对象定义方法比较简单和规范，在koa源码里可以看到，koa源码用的是__defineSetter__和__defineSetter__来代替setter/getter每一个属性的读取设置，这样做主要是方便拓展和精简了写法，当我们需要代理更多的**res和req**的方法的时候，可以向**context.js**文件里面的数组对象里面添加对应的方法名和属性名即可。
+本来可以用简单的 setter 和 getter 去设置每一个方法，但是由于 context 对象定义方法比较简单和规范，在 koa 源码里可以看到，koa 源码用的是**defineSetter**和**defineSetter**来代替 setter/getter 每一个属性的读取设置，这样做主要是方便拓展和精简了写法，当我们需要代理更多的**res 和 req**的方法的时候，可以向**context.js**文件里面的数组对象里面添加对应的方法名和属性名即可。
 
-目前为止，我们已经得到了request、response、context三个模块对象了，接下来就是将request、response所有方法挂载到context下，让context实现它的承上启下的作用，修改application.js文件，添加如下代码：
+目前为止，我们已经得到了 request、response、context 三个模块对象了，接下来就是将 request、response 所有方法挂载到 context 下，让 context 实现它的承上启下的作用，修改 application.js 文件，添加如下代码：
 
 ```ini
 let http = require('http');
@@ -2585,23 +2585,23 @@ let context = require('./context');
 let request = require('./request');
 let response = require('./response');
 
-createContext(req, res) {       
+createContext(req, res) {
    let ctx = Object.create(this.context);
    ctx.request = Object.create(this.request);
    ctx.response = Object.create(this.response);
    ctx.req = ctx.request.req = req;
-   ctx.res = ctx.response.res = res; 
+   ctx.res = ctx.response.res = res;
    return ctx;
 }
 ```
 
-可以看到，我们添加了**createContext这个方法，这个方法是关键**，它**通过Object.create创建了ctx，并将request和response挂载到了ctx上面，将原生的req和res挂载到了ctx的子属性上**，往回看一下context/request/response.js文件，就能知道当时使用的this.res或者this.response之类的是从哪里来的了，原来是在这个createContext方法中挂载到了对应的实例上，**构建了运行时上下文ctx之后，我们的app.use回调函数参数就都基于ctx了**。
+可以看到，我们添加了**createContext 这个方法，这个方法是关键**，它**通过 Object.create 创建了 ctx，并将 request 和 response 挂载到了 ctx 上面，将原生的 req 和 res 挂载到了 ctx 的子属性上**，往回看一下 context/request/response.js 文件，就能知道当时使用的 this.res 或者 this.response 之类的是从哪里来的了，原来是在这个 createContext 方法中挂载到了对应的实例上，**构建了运行时上下文 ctx 之后，我们的 app.use 回调函数参数就都基于 ctx 了**。
 
 ##### 模块三：中间件机制和剥洋葱模型的实现
 
-目前为止我们已经成功实现了**上下文context对象、 请求request对象和响应response对象**模块，还差一个最重要的模块，就是koa的中间件模块，**koa的中间件机制**是一个剥洋葱式的模型，**多个中间件通过use放进一个数组队列然后从外层开始执行**，**遇到next后进入队列中的下一个中间件**，**所有中间件执行完后开始回帧**，**执行队列中之前中间件中未执行的代码部分**，这就是剥洋葱模型，koa的中间件机制。
+目前为止我们已经成功实现了**上下文 context 对象、 请求 request 对象和响应 response 对象**模块，还差一个最重要的模块，就是 koa 的中间件模块，**koa 的中间件机制**是一个剥洋葱式的模型，**多个中间件通过 use 放进一个数组队列然后从外层开始执行**，**遇到 next 后进入队列中的下一个中间件**，**所有中间件执行完后开始回帧**，**执行队列中之前中间件中未执行的代码部分**，这就是剥洋葱模型，koa 的中间件机制。
 
-koa的剥洋葱模型在koa1中使用的是generator + co.js去实现的，koa2则使用了async/await + Promise去实现的，接下来我们基于async/await + Promise去实现koa2中的中间件机制。首先，假设当koa的中间件机制已经做好了，那么它是能成功运行下面代码的：
+koa 的剥洋葱模型在 koa1 中使用的是 generator + co.js 去实现的，koa2 则使用了 async/await + Promise 去实现的，接下来我们基于 async/await + Promise 去实现 koa2 中的中间件机制。首先，假设当 koa 的中间件机制已经做好了，那么它是能成功运行下面代码的：
 
 ```ini
 let Koa = require('../src/application');
@@ -2631,7 +2631,7 @@ app.listen(3000, () => {
 });
 ```
 
-运行成功后会在终端输出123456，那就能验证我们的koa的剥洋葱模型是正确的。接下来我们开始实现，修改application.js文件，添加如下代码：
+运行成功后会在终端输出 123456，那就能验证我们的 koa 的剥洋葱模型是正确的。接下来我们开始实现，修改 application.js 文件，添加如下代码：
 
 ```ini
     compose() {
@@ -2664,7 +2664,7 @@ app.listen(3000, () => {
     }
 ```
 
-koa通过use函数，把**所有的中间件**push到一个**内部数组队列this.middlewares中**，剥洋葱模型能让所有的中**间件依次执行**，**每次执行完一个中间件**，遇到**next()就会将控制权传递到下一个中间件**，下一个中间件的next参数，剥洋葱模型的最关键代码是compose这个函数：
+koa 通过 use 函数，把**所有的中间件**push 到一个**内部数组队列 this.middlewares 中**，剥洋葱模型能让所有的中**间件依次执行**，**每次执行完一个中间件**，遇到**next()就会将控制权传递到下一个中间件**，下一个中间件的 next 参数，剥洋葱模型的最关键代码是 compose 这个函数：
 
 ```ini
 compose() {
@@ -2687,7 +2687,7 @@ compose() {
     }
 ```
 
-**createNext函数的作用就是将上一个中间件的next当做参数传给下一个中间件，并且将上下文ctx绑定当前中间件**，当中间件执行完，调用next()的时候，其实就是去执行下一个中间件。
+**createNext 函数的作用就是将上一个中间件的 next 当做参数传给下一个中间件，并且将上下文 ctx 绑定当前中间件**，当中间件执行完，调用 next()的时候，其实就是去执行下一个中间件。
 
 ```ini
 for (let i = len - 1; i >= 0; i--) {
@@ -2696,33 +2696,33 @@ for (let i = len - 1; i >= 0; i--) {
  }
 ```
 
-上面这段代码其实就是一个链式反向递归模型的实现，i是从最大数开始循环的，将中间件从最后一个开始封装，每一次都是将自己的执行函数封装成next当做上一个中间件的next参数，这样当循环到第一个中间件的时候，只需要执行一次next()，就能链式的递归调用所有中间件，这个就是koa剥洋葱的核心代码机制。
+上面这段代码其实就是一个链式反向递归模型的实现，i 是从最大数开始循环的，将中间件从最后一个开始封装，每一次都是将自己的执行函数封装成 next 当做上一个中间件的 next 参数，这样当循环到第一个中间件的时候，只需要执行一次 next()，就能链式的递归调用所有中间件，这个就是 koa 剥洋葱的核心代码机制。
 
-到这里我们总结一下上面所有剥洋葱模型代码的流程，**通过use传进来的中间件是一个回调函数，回调函数的参数是ctx上下文和next**，next其实就是**控制权的交接棒**，**next的作用是停止运行当前中间件，将控制权交给下一个中间件**，**执行下一个中间件的next()之前的代码**，当下一个中间件运行的代码遇到了next()，又会将代码执行权交给下下个中间件，**当执行到最后一个中间件的时候，控制权发生反转**，**开始回头去执行之前所有中间件中剩下未执行的代码**，这整个流程有点像一个伪递归，**当最终所有中间件全部执行完后，会返回一个Promise对象**，因为我们的compose函数返回的是一个async的函数，async函数执行完后会返回一个Promise，这样我们就能将所有的中间件异步执行同步化，通过then就可以执行响应函数和错误处理函数。
+到这里我们总结一下上面所有剥洋葱模型代码的流程，**通过 use 传进来的中间件是一个回调函数，回调函数的参数是 ctx 上下文和 next**，next 其实就是**控制权的交接棒**，**next 的作用是停止运行当前中间件，将控制权交给下一个中间件**，**执行下一个中间件的 next()之前的代码**，当下一个中间件运行的代码遇到了 next()，又会将代码执行权交给下下个中间件，**当执行到最后一个中间件的时候，控制权发生反转**，**开始回头去执行之前所有中间件中剩下未执行的代码**，这整个流程有点像一个伪递归，**当最终所有中间件全部执行完后，会返回一个 Promise 对象**，因为我们的 compose 函数返回的是一个 async 的函数，async 函数执行完后会返回一个 Promise，这样我们就能将所有的中间件异步执行同步化，通过 then 就可以执行响应函数和错误处理函数。
 
-当中间件机制代码写好了以后，运行我们的上面的例子，已经能输出123456了，至此，我们的koa的基本框架已经基本做好了，不过一个框架不能只实现功能，为了框架和服务器实例的健壮，还需要加上错误处理机制。
+当中间件机制代码写好了以后，运行我们的上面的例子，已经能输出 123456 了，至此，我们的 koa 的基本框架已经基本做好了，不过一个框架不能只实现功能，为了框架和服务器实例的健壮，还需要加上错误处理机制。
 
 ##### 模块四：错误捕获和错误处理
 
-要实现一个基础框架，错误处理和捕获必不可少，一个健壮的框架，必须保证在发生错误的时候，能够捕获到错误和抛出的异常，并反馈出来，将错误信息发送到监控系统上进行反馈，目前我们实现的简易koa框架还没有能实现这一点，我们接下加上错误处理和捕获的机制。
+要实现一个基础框架，错误处理和捕获必不可少，一个健壮的框架，必须保证在发生错误的时候，能够捕获到错误和抛出的异常，并反馈出来，将错误信息发送到监控系统上进行反馈，目前我们实现的简易 koa 框架还没有能实现这一点，我们接下加上错误处理和捕获的机制。
 
 ```javascript
-throw new Error('oooops');
+throw new Error("oooops");
 ```
 
-基于现在的框架，如果中间件代码中出现如上错误异常抛出，是捕获不到错误的，这时候我们看一下application.js中的callback函数的return返回代码，如下：
+基于现在的框架，如果中间件代码中出现如上错误异常抛出，是捕获不到错误的，这时候我们看一下 application.js 中的 callback 函数的 return 返回代码，如下：
 
 ```php
 return fn(ctx).then(respond);
 ```
 
-可以看到，**fn是中间件的执行函数，每一个中间件代码都是由async包裹着的，而且中间件的执行函数compose返回的也是一个async函数，我们根据es7的规范知道，async返回的是一个promise的对象实例**，我们如果想要捕获promise的错误，只需要使用promise的catch方法，就可以把所有的中间件的异常全部捕获到，修改后callback的返回代码如下：
+可以看到，**fn 是中间件的执行函数，每一个中间件代码都是由 async 包裹着的，而且中间件的执行函数 compose 返回的也是一个 async 函数，我们根据 es7 的规范知道，async 返回的是一个 promise 的对象实例**，我们如果想要捕获 promise 的错误，只需要使用 promise 的 catch 方法，就可以把所有的中间件的异常全部捕获到，修改后 callback 的返回代码如下：
 
 ```php
 return fn(ctx).then(respond).catch(onerror);
 ```
 
-现在我们已经实现了中间件的错误异常捕获，但是我们还缺少框架层发生错误的捕获机制，我们希望我们的服务器实例能有错误事件的监听机制，通过on的监听函数就能订阅和监听框架层面上的错误，实现这个机制不难，使用nodejs原生events模块即可，events模块给我们提供了事件**监听on函数和事件触发emit行为函数**，一个发射事件，一个负责接收事件，我们只需要将koa的构造函数继承events模块即可，构造后的伪代码如下：
+现在我们已经实现了中间件的错误异常捕获，但是我们还缺少框架层发生错误的捕获机制，我们希望我们的服务器实例能有错误事件的监听机制，通过 on 的监听函数就能订阅和监听框架层面上的错误，实现这个机制不难，使用 nodejs 原生 events 模块即可，events 模块给我们提供了事件**监听 on 函数和事件触发 emit 行为函数**，一个发射事件，一个负责接收事件，我们只需要将 koa 的构造函数继承 events 模块即可，构造后的伪代码如下：
 
 ```ini
 let EventEmitter = require('events');
@@ -2731,7 +2731,7 @@ class Application extends EventEmitter {
 }
 ```
 
-继承了events模块后，当我们创建koa实例的时候，加上on监听函数，代码如下：
+继承了 events 模块后，当我们创建 koa 实例的时候，加上 on 监听函数，代码如下：
 
 ```ini
 let app = new Koa();
@@ -2742,13 +2742,7 @@ app.on('error', err => {
 );
 ```
 
-这样我们就实现了框架层面上的错误的捕获和监听机制了。总结一下，错误处理和捕获，分中间件的错误处理捕获和框架层的错误处理捕获，中间件的错误处理用promise的catch，框架层面的错误处理用nodejs的原生模块events，这样我们就可以把一个服务器实例上的所有的错误异常全部捕获到了。至此，我们就完整实现了一个轻量版的koa框架了。
-
-
-
-
-
-
+这样我们就实现了框架层面上的错误的捕获和监听机制了。总结一下，错误处理和捕获，分中间件的错误处理捕获和框架层的错误处理捕获，中间件的错误处理用 promise 的 catch，框架层面的错误处理用 nodejs 的原生模块 events，这样我们就可以把一个服务器实例上的所有的错误异常全部捕获到了。至此，我们就完整实现了一个轻量版的 koa 框架了。
 
 ## Egg
 
@@ -2795,16 +2789,16 @@ egg-project
 路由定义了 **请求路径（URL）** 和 **控制器（Controller）** 之间的映射关系，即用户访问的网址应交由哪个控制器进行处理。我们打开 `app/router.js` 看一下：
 
 ```js
-module.exports = app => {
-  const { router, controller } = app
-  router.get('/', controller.home.index)
+module.exports = (app) => {
+  const { router, controller } = app;
+  router.get("/", controller.home.index);
 };
 ```
 
 可以看到，路由文件导出了一个函数，接收 app 对象作为参数，通过下面的语法定义映射关系：
 
 ```js
-router.verb('path-match', controllerAction)
+router.verb("path-match", controllerAction);
 ```
 
 其中 `verb` 一般是 HTTP 动词的小写，例如：
@@ -2822,34 +2816,34 @@ router.verb('path-match', controllerAction)
 而 `controllerAction` 则是通过点（·）语法指定 `controller` 目录下某个文件内的某个具体函数，例如：
 
 ```js
-controller.home.index // 映射到 controller/home.js 文件的 index 方法
-controller.v1.user.create // controller/v1/user.js 文件的 create 方法
+controller.home.index; // 映射到 controller/home.js 文件的 index 方法
+controller.v1.user.create; // controller/v1/user.js 文件的 create 方法
 ```
 
 下面是一些示例及其解释：
 
 ```js
-module.exports = app => {
-  const { router, controller } = app
+module.exports = (app) => {
+  const { router, controller } = app;
   // 当用户访问 news 会交由 controller/news.js 的 index 方法进行处理
-  router.get('/news', controller.news.index)
+  router.get("/news", controller.news.index);
   // 通过冒号 `:x` 来捕获 URL 中的命名参数 x，放入 ctx.params.x
-  router.get('/user/:id/:name', controller.user.info)
+  router.get("/user/:id/:name", controller.user.info);
   // 通过自定义正则来捕获 URL 中的分组参数，放入 ctx.params 中
-  router.get(/^\/package\/([\w-.]+\/[\w-.]+)$/, controller.package.detail)
-}
+  router.get(/^\/package\/([\w-.]+\/[\w-.]+)$/, controller.package.detail);
+};
 ```
 
 除了使用动词的方式创建路由之外，egg 还提供了下面的语法快速生成 CRUD 路由：
 
 ```js
 // 对 posts 按照 RESTful 风格映射到控制器 controller/posts.js 中
-router.resources('posts', '/posts', controller.posts)
+router.resources("posts", "/posts", controller.posts);
 ```
 
 会自动生成下面的路由：
 
-| HTTP方法                                   | 请求路径        | 路由名称  | 控制器函数                   |
+| HTTP 方法                                  | 请求路径        | 路由名称  | 控制器函数                   |
 | ------------------------------------------ | --------------- | --------- | ---------------------------- |
 | GET                                        | /posts          | posts     | app.controller.posts.index   |
 | GET                                        | /posts/new      | new_post  | app.controller.posts.new     |
@@ -2866,21 +2860,21 @@ router.resources('posts', '/posts', controller.posts)
 
    ```js
    // app/router.js
-   module.exports = app => {
-     require('./router/news')(app)
-     require('./router/admin')(app)
+   module.exports = (app) => {
+     require("./router/news")(app);
+     require("./router/admin")(app);
    };
-   
+
    // app/router/news.js
-   module.exports = app => {
-     app.router.get('/news/list', app.controller.news.list)
-     app.router.get('/news/detail', app.controller.news.detail)
+   module.exports = (app) => {
+     app.router.get("/news/list", app.controller.news.list);
+     app.router.get("/news/detail", app.controller.news.detail);
    };
-   
+
    // app/router/admin.js
-   module.exports = app => {
-     app.router.get('/admin/user', app.controller.admin.user)
-     app.router.get('/admin/log', app.controller.admin.log)
+   module.exports = (app) => {
+     app.router.get("/admin/user", app.controller.admin.user);
+     app.router.get("/admin/log", app.controller.admin.log);
    };
    ```
 
@@ -2888,19 +2882,19 @@ router.resources('posts', '/posts', controller.posts)
 
    ```js
    // app/router.js
-   module.exports = app => {
-     const subRouter = app.router.namespace('/sub')
-     subRouter.get('/test', app.controller.sub.test) // 最终路径为 /sub/test
-   }
+   module.exports = (app) => {
+     const subRouter = app.router.namespace("/sub");
+     subRouter.get("/test", app.controller.sub.test); // 最终路径为 /sub/test
+   };
    ```
 
 除了 HTTP verb 之外，Router 还提供了一个 redirect 方法，用于内部重定向，例如：
 
 ```js
-module.exports = app => {
-  app.router.get('index', '/home/index', app.controller.home.index)
-  app.router.redirect('/', '/home/index', 302)
-}
+module.exports = (app) => {
+  app.router.get("index", "/home/index", app.controller.home.index);
+  app.router.redirect("/", "/home/index", 302);
+};
 ```
 
 ### 中间件（Middleware）
@@ -2915,15 +2909,15 @@ egg 约定一个中间件是一个放置在 `app/middleware` 目录下的单独�
 ```js
 module.exports = (options, app) => {
   return async function (ctx, next) {
-    const startTime = Date.now()
-    await next()
-    const consume = Date.now() - startTime
-    const { threshold = 0 } = options || {}
+    const startTime = Date.now();
+    await next();
+    const consume = Date.now() - startTime;
+    const { threshold = 0 } = options || {};
     if (consume > threshold) {
-      console.log(`${ctx.url}请求耗时${consume}毫秒`)
+      console.log(`${ctx.url}请求耗时${consume}毫秒`);
     }
-  }
-}
+  };
+};
 ```
 
 然后在 `config.default.js` 中使用：
@@ -2931,24 +2925,24 @@ module.exports = (options, app) => {
 ```js
 module.exports = {
   // 配置需要的中间件，数组顺序即为中间件的加载顺序
-  middleware: [ 'slow' ],
+  middleware: ["slow"],
   // slow 中间件的 options 参数
   slow: {
-    enable: true
+    enable: true,
   },
-}
+};
 ```
 
 这里配置的中间件是全局启用的，如果只是想在指定路由中使用中间件的话，例如只针对 `/api` 前缀开头的 url 请求使用某个中间件的话，有两种方式：
 
-1. 在  `config.default.js` 配置中设置 match 或 ignore 属性：
+1. 在 `config.default.js` 配置中设置 match 或 ignore 属性：
 
    ```js
    module.exports = {
-     middleware: [ 'slow' ],
+     middleware: ["slow"],
      slow: {
        threshold: 1,
-       match: '/api'
+       match: "/api",
      },
    };
    ```
@@ -2956,42 +2950,49 @@ module.exports = {
 2. 在路由文件 `router.js` 中引入
 
    ```js
-   module.exports = app => {
-     const { router, controller } = app
+   module.exports = (app) => {
+     const { router, controller } = app;
      // 在 controller 处理之前添加任意中间件
-     router.get('/api/home', app.middleware.slow({ threshold: 1 }), controller.home.index)
-   }
+     router.get(
+       "/api/home",
+       app.middleware.slow({ threshold: 1 }),
+       controller.home.index
+     );
+   };
    ```
 
 egg 把中间件分成应用层定义的中间件（`app.config.appMiddleware`）和框架默认中间件（`app.config.coreMiddleware`），我们打印看一下：
 
 ```js
-module.exports = app => {
-  const { router, controller } = app
-  console.log(app.config.appMiddleware)
-  console.log(app.config.coreMiddleware)
-  router.get('/api/home', app.middleware.slow({ threshold: 1 }), controller.home.index)
-}
+module.exports = (app) => {
+  const { router, controller } = app;
+  console.log(app.config.appMiddleware);
+  console.log(app.config.coreMiddleware);
+  router.get(
+    "/api/home",
+    app.middleware.slow({ threshold: 1 }),
+    controller.home.index
+  );
+};
 ```
 
 结果是：
 
 ```js
 // appMiddleware
-[ 'slow' ] 
-// coreMiddleware
-[
-  'meta',
-  'siteFile',
-  'notfound',
-  'static',
-  'bodyParser',
-  'overrideMethod',
-  'session',
-  'securities',
-  'i18n',
-  'eggLoaderTrace'
-]
+["slow"][
+  // coreMiddleware
+  ("meta",
+  "siteFile",
+  "notfound",
+  "static",
+  "bodyParser",
+  "overrideMethod",
+  "session",
+  "securities",
+  "i18n",
+  "eggLoaderTrace")
+];
 ```
 
 其中那些 coreMiddleware 是 egg 帮我们内置的中间件，默认是开启的，如果不想用，可以通过配置的方式进行关闭：
@@ -2999,9 +3000,9 @@ module.exports = app => {
 ```js
 module.exports = {
   i18n: {
-    enable: false
-  }
-}
+    enable: false,
+  },
+};
 ```
 
 ### 控制器（Controller）
@@ -3009,11 +3010,11 @@ module.exports = {
 Controller 负责**解析用户的输入，处理后返回相应的结果**，一个最简单的 helloworld 示例：
 
 ```js
-const { Controller } = require('egg');
+const { Controller } = require("egg");
 class HomeController extends Controller {
   async index() {
     const { ctx } = this;
-    ctx.body = 'hi, egg';
+    ctx.body = "hi, egg";
   }
 }
 module.exports = HomeController;
@@ -3028,17 +3029,19 @@ module.exports = HomeController;
 一个真实的案例如下：
 
 ```js
-const { Controller } = require('egg');
+const { Controller } = require("egg");
 class PostController extends Controller {
   async create() {
     const { ctx, service } = this;
     const createRule = {
-      title: { type: 'string' },
-      content: { type: 'string' },
+      title: { type: "string" },
+      content: { type: "string" },
     };
     // 校验和组装参数
     ctx.validate(createRule);
-    const data = Object.assign(ctx.request.body, { author: ctx.session.userId });
+    const data = Object.assign(ctx.request.body, {
+      author: ctx.session.userId,
+    });
     // 调用 Service 进行业务处理
     const res = await service.post.create(data);
     // 响应客户端数据
@@ -3053,7 +3056,7 @@ module.exports = PostController;
 
 ```js
 // app/core/base_controller.js
-const { Controller } = require('egg');
+const { Controller } = require("egg");
 class BaseController extends Controller {
   get user() {
     return this.ctx.session.user;
@@ -3062,7 +3065,7 @@ class BaseController extends Controller {
     this.ctx.body = { success: true, data };
   }
   notFound(msg) {
-    this.ctx.throw(404, msg || 'not found');
+    this.ctx.throw(404, msg || "not found");
   }
 }
 module.exports = BaseController;
@@ -3072,7 +3075,7 @@ module.exports = BaseController;
 
 ```js
 // app/controller/post.js
-const Controller = require('../core/base_controller');
+const Controller = require("../core/base_controller");
 class PostController extends Controller {
   async list() {
     const posts = await this.service.listByUser(this.user);
@@ -3103,9 +3106,22 @@ class PostController extends Controller {
 
 ```js
 [
-  'request', 'response', 'app', 'req', 'res', 'onerror', 'originalUrl', 'starttime', 'matched',
-  '_matchedRoute', '_matchedRouteName', 'captures', 'params', 'routerName', 'routerPath'
-]
+  "request",
+  "response",
+  "app",
+  "req",
+  "res",
+  "onerror",
+  "originalUrl",
+  "starttime",
+  "matched",
+  "_matchedRoute",
+  "_matchedRouteName",
+  "captures",
+  "params",
+  "routerName",
+  "routerPath",
+];
 ```
 
 ### 服务（Service）
@@ -3123,11 +3139,14 @@ Controller 可以调用任何一个 Service 上的任何方法，值得注意的
 
 ```js
 // app/service/user.js
-const { Service } = require('egg').Service;
+const { Service } = require("egg").Service;
 
 class UserService extends Service {
   async find(uid) {
-    const user = await this.ctx.db.query('select * from user where uid = ?', uid);
+    const user = await this.ctx.db.query(
+      "select * from user where uid = ?",
+      uid
+    );
     return user;
   }
 }
@@ -3164,14 +3183,14 @@ egg 框架内置了 [egg-view](https://link.juejin.cn?target=https%3A%2F%2Fgithu
 
 ```js
 config.view = {
-  defaultExtension: '.nj',
-  defaultViewEngine: 'nunjucks',
+  defaultExtension: ".nj",
+  defaultViewEngine: "nunjucks",
   mapping: {
-    '.nj': 'nunjucks',
-    '.hbs': 'handlebars',
-    '.ejs': 'ejs',
+    ".nj": "nunjucks",
+    ".hbs": "handlebars",
+    ".ejs": "ejs",
   },
-}
+};
 ```
 
 上面的配置表示，当文件：
@@ -3194,16 +3213,16 @@ $ npm i egg-view-nunjucks egg-view-ejs egg-view-handlebars --save
 ```js
 exports.nunjucks = {
   enable: true,
-  package: 'egg-view-nunjucks',
-}
+  package: "egg-view-nunjucks",
+};
 exports.handlebars = {
   enable: true,
-  package: 'egg-view-handlebars',
-}
+  package: "egg-view-handlebars",
+};
 exports.ejs = {
   enable: true,
-  package: 'egg-view-ejs',
-}
+  package: "egg-view-ejs",
+};
 ```
 
 然后添加 `app/view` 目录，里面增加几个文件：
@@ -3222,79 +3241,79 @@ app/view
 <h1>ejs</h1>
 <ul>
   <% items.forEach(function(item){ %>
-    <li><%= item.title %></li>
+  <li><%= item.title %></li>
   <% }); %>
 </ul>
-      
+
 <!-- handlebars.hbs 文件代码 -->
 <h1>handlebars</h1>
 {{#each items}}
-  <li>{{title}}</li>
+<li>{{title}}</li>
 {{~/each}}
-    
+
 <!-- nunjunks.nj 文件代码 -->
 <h1>nunjunks</h1>
 <ul>
-{% for item in items %}
+  {% for item in items %}
   <li>{{ item.title }}</li>
-{% endfor %}
+  {% endfor %}
 </ul>
 ```
 
 然后在 Router 中配置路由：
 
 ```js
-module.exports = app => {
-  const { router, controller } = app
-  router.get('/ejs', controller.home.ejs)
-  router.get('/handlebars', controller.home.handlebars)
-  router.get('/nunjunks', controller.home.nunjunks)
-}
+module.exports = (app) => {
+  const { router, controller } = app;
+  router.get("/ejs", controller.home.ejs);
+  router.get("/handlebars", controller.home.handlebars);
+  router.get("/nunjunks", controller.home.nunjunks);
+};
 ```
 
 接下来实现 Controller 的逻辑：
 
 ```js
-const Controller = require('egg').Controller
+const Controller = require("egg").Controller;
 
 class HomeController extends Controller {
   async ejs() {
-    const { ctx } = this
-    const items = await ctx.service.view.getItems()
-    await ctx.render('ejs.ejs', {items})
+    const { ctx } = this;
+    const items = await ctx.service.view.getItems();
+    await ctx.render("ejs.ejs", { items });
   }
 
   async handlebars() {
-    const { ctx } = this
-    const items = await ctx.service.view.getItems()
-    await ctx.render('handlebars.hbs', {items})
+    const { ctx } = this;
+    const items = await ctx.service.view.getItems();
+    await ctx.render("handlebars.hbs", { items });
   }
 
   async nunjunks() {
-    const { ctx } = this
-    const items = await ctx.service.view.getItems()
-    await ctx.render('nunjunks.nj', {items})
+    const { ctx } = this;
+    const items = await ctx.service.view.getItems();
+    await ctx.render("nunjunks.nj", { items });
   }
 }
 
-module.exports = HomeController
+module.exports = HomeController;
 ```
 
 我们把数据放到了 Service 里面：
 
 ```js
-const { Service } = require('egg')
+const { Service } = require("egg");
 
 class ViewService extends Service {
   getItems() {
     return [
-      { title: 'foo', id: 1 },
-      { title: 'bar', id: 2 },
-    ]
+      { title: "foo", id: 1 },
+      { title: "bar", id: 2 },
+    ];
   }
 }
 
-module.exports = ViewService
+module.exports = ViewService;
 ```
 
 访问下面的地址可以查看不同模板引擎渲染出的结果：
@@ -3308,14 +3327,14 @@ GET http://localhost:7001/ejs
 你可能会问，ctx.render 方法是哪来的呢？没错，是由 egg-view 对 context 进行扩展而提供的，为 ctx 上下文对象增加了 `render`、`renderView` 和 `renderString` 三个方法，代码如下：
 
 ```js
-const ContextView = require('../../lib/context_view')
-const VIEW = Symbol('Context#view')
+const ContextView = require("../../lib/context_view");
+const VIEW = Symbol("Context#view");
 
 module.exports = {
   render(...args) {
-    return this.renderView(...args).then(body => {
+    return this.renderView(...args).then((body) => {
       this.body = body;
-    })
+    });
   },
 
   renderView(...args) {
@@ -3327,10 +3346,10 @@ module.exports = {
   },
 
   get view() {
-    if (this[VIEW]) return this[VIEW]
-    return this[VIEW] = new ContextView(this)
-  }
-}
+    if (this[VIEW]) return this[VIEW];
+    return (this[VIEW] = new ContextView(this));
+  },
+};
 ```
 
 它内部最终会把调用转发给 ContextView 实例上的 render 方法，ContextView 是一个能够根据配置里面定义的 mapping，帮助我们找到对应渲染引擎的类。
@@ -3342,24 +3361,24 @@ module.exports = {
 ```js
 exports.myPlugin = {
   enable: true, // 是否开启
-  package: 'egg-myPlugin', // 从 node_modules 中引入
-  path: path.join(__dirname, '../lib/plugin/egg-mysql'), // 从本地目录中引入
-  env: ['local', 'unittest', 'prod'], // 只有在指定运行环境才能开启
-}
+  package: "egg-myPlugin", // 从 node_modules 中引入
+  path: path.join(__dirname, "../lib/plugin/egg-mysql"), // 从本地目录中引入
+  env: ["local", "unittest", "prod"], // 只有在指定运行环境才能开启
+};
 ```
 
 开启插件后，就可以使用插件提供的功能了：
 
 ```js
-app.myPlugin.xxx()
+app.myPlugin.xxx();
 ```
 
 如果插件包含需要用户自定义的配置，可以在 `config.default.js` 进行指定，例如：
 
 ```js
 exports.myPlugin = {
-  hello: 'world'
-}
+  hello: "world",
+};
 ```
 
 一个插件其实就是一个『迷你的应用』，包含了 [Service](https://link.juejin.cn?target=https%3A%2F%2Feggjs.org%2Fzh-cn%2Fbasics%2Fservice.html)、[中间件](https://link.juejin.cn?target=https%3A%2F%2Feggjs.org%2Fzh-cn%2Fbasics%2Fmiddleware.html)、[配置](https://link.juejin.cn?target=https%3A%2F%2Feggjs.org%2Fzh-cn%2Fbasics%2Fconfig.html)、[框架扩展](https://link.juejin.cn?target=https%3A%2F%2Feggjs.org%2Fzh-cn%2Fbasics%2Fextend.html)等，但是没有独立的 [Router](https://link.juejin.cn?target=https%3A%2F%2Feggjs.org%2Fzh-cn%2Fbasics%2Frouter.html) 和 [Controller](https://link.juejin.cn?target=https%3A%2F%2Feggjs.org%2Fzh-cn%2Fbasics%2Fcontroller.html)，也不能定义自己的 `plugin.js`。
@@ -3388,84 +3407,87 @@ $ npm i egg-mongoose
 ```js
 exports.mongoose = {
   enable: true,
-  package: 'egg-mongoose',
-}
+  package: "egg-mongoose",
+};
 ```
 
-在  `config/config.default.js` 中定义连接参数：
+在 `config/config.default.js` 中定义连接参数：
 
 ```js
 config.mongoose = {
   client: {
-    url: 'mongodb://127.0.0.1/example',
-    options: {}
-  }
-}
+    url: "mongodb://127.0.0.1/example",
+    options: {},
+  },
+};
 ```
 
-然后在 `model/user.js`  中定义模型：
+然后在 `model/user.js` 中定义模型：
 
 ```js
-module.exports = app => {
-  const mongoose = app.mongoose
+module.exports = (app) => {
+  const mongoose = app.mongoose;
   const UserSchema = new mongoose.Schema(
     {
-      username: {type: String, required: true, unique: true}, // 用户名
-      password: {type: String, required: true}, // 密码
+      username: { type: String, required: true, unique: true }, // 用户名
+      password: { type: String, required: true }, // 密码
     },
     { timestamps: true } // 自动生成 createdAt 和 updatedAt 时间戳
-  )
-  return mongoose.model('user', UserSchema)
-}
+  );
+  return mongoose.model("user", UserSchema);
+};
 ```
 
 在控制器中调用 mongoose 的方法：
 
 ```js
-const {Controller} = require('egg')
+const { Controller } = require("egg");
 
 class UserController extends Controller {
   // 用户列表 GET /users
   async index() {
-    const {ctx} = this
-    ctx.body = await ctx.model.User.find({})
+    const { ctx } = this;
+    ctx.body = await ctx.model.User.find({});
   }
 
   // 用户详情 GET /users/:id
   async show() {
-    const {ctx} = this
-    ctx.body = await ctx.model.User.findById(ctx.params.id)
+    const { ctx } = this;
+    ctx.body = await ctx.model.User.findById(ctx.params.id);
   }
 
   // 创建用户 POST /users
   async create() {
-    const {ctx} = this
-    ctx.body = await ctx.model.User.create(ctx.request.body)
+    const { ctx } = this;
+    ctx.body = await ctx.model.User.create(ctx.request.body);
   }
 
   // 更新用户 PUT /users/:id
   async update() {
-    const {ctx} = this
-    ctx.body = await ctx.model.User.findByIdAndUpdate(ctx.params.id, ctx.request.body)
+    const { ctx } = this;
+    ctx.body = await ctx.model.User.findByIdAndUpdate(
+      ctx.params.id,
+      ctx.request.body
+    );
   }
 
   // 删除用户 DELETE /users/:id
   async destroy() {
-    const {ctx} = this
-    ctx.body = await ctx.model.User.findByIdAndRemove(ctx.params.id)
+    const { ctx } = this;
+    ctx.body = await ctx.model.User.findByIdAndRemove(ctx.params.id);
   }
 }
 
-module.exports = UserController
+module.exports = UserController;
 ```
 
 最后配置 RESTful 路由映射：
 
 ```js
-module.exports = app => {
-  const {router, controller} = app
-  router.resources('users', '/users', controller.user)
-}
+module.exports = (app) => {
+  const { router, controller } = app;
+  router.resources("users", "/users", controller.user);
+};
 ```
 
 ### 集成 MySQL
@@ -3491,22 +3513,22 @@ $ npm i egg-mysql
 ```js
 exports.mysql = {
   enable: true,
-  package: 'egg-mysql',
-}
+  package: "egg-mysql",
+};
 ```
 
-在  `config/config.default.js` 中定义连接参数：
+在 `config/config.default.js` 中定义连接参数：
 
 ```js
 config.mysql = {
   client: {
-    host: 'localhost',
-    port: '3306',
-    user: 'root',
-    password: 'root',
-    database: 'cms',
-  }
-}
+    host: "localhost",
+    port: "3306",
+    user: "root",
+    password: "root",
+    database: "cms",
+  },
+};
 ```
 
 然后就能在 Controller 或 Service 的 `app.mysql` 中获取到 mysql 对象，例如：
@@ -3514,8 +3536,8 @@ config.mysql = {
 ```js
 class UserService extends Service {
   async find(uid) {
-    const user = await this.app.mysql.get('users', { id: 11 });
-    return { user }
+    const user = await this.app.mysql.get("users", { id: 11 });
+    return { user };
   }
 }
 ```
@@ -3523,7 +3545,7 @@ class UserService extends Service {
 但是更好的集成 MySQL 的方式是借助 ORM 框架来帮助我们管理数据层的代码，[sequelize](https://link.juejin.cn?target=http%3A%2F%2Fdocs.sequelizejs.com%2F) 是当前最流行的 ORM 框架，它支持 MySQL、PostgreSQL、SQLite 和 MSSQL 等多个数据源，接下来我们使用 [sequelize](https://link.juejin.cn?target=http%3A%2F%2Fdocs.sequelizejs.com%2F) 来连接 MySQL 数据库，首先安装依赖：
 
 ```sh
-npm install egg-sequelize mysql2 --save 
+npm install egg-sequelize mysql2 --save
 yarn add egg-sequelize mysql2
 ```
 
@@ -3532,19 +3554,19 @@ yarn add egg-sequelize mysql2
 ```js
 exports.sequelize = {
   enable: true,
-  package: 'egg-sequelize',
-}
+  package: "egg-sequelize",
+};
 ```
 
 同样要在 `config/config.default.js` 中编写 sequelize 配置
 
 ```js
 config.sequelize = {
-  dialect: 'mysql',
-  host: '127.0.0.1',
+  dialect: "mysql",
+  host: "127.0.0.1",
   port: 3306,
-  database: 'example',
-}
+  database: "example",
+};
 ```
 
 然后在 egg_example 库中创建 books 表：
@@ -3559,67 +3581,67 @@ CREATE TABLE `books` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='book';
 ```
 
-创建 `model/book.js`  文件，代码是：
+创建 `model/book.js` 文件，代码是：
 
 ```js
-module.exports = app => {
-  const { STRING, INTEGER } = app.Sequelize
-  const Book = app.model.define('book', {
+module.exports = (app) => {
+  const { STRING, INTEGER } = app.Sequelize;
+  const Book = app.model.define("book", {
     id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     name: STRING(30),
-  })
-  return Book
-}
+  });
+  return Book;
+};
 ```
 
 添加 `controller/book.js` 控制器：
 
 ```js
-const Controller = require('egg').Controller
+const Controller = require("egg").Controller;
 
 class BookController extends Controller {
   async index() {
-    const ctx = this.ctx
-    ctx.body = await ctx.model.Book.findAll({})
+    const ctx = this.ctx;
+    ctx.body = await ctx.model.Book.findAll({});
   }
 
   async show() {
-    const ctx = this.ctx
-    ctx.body = await ctx.model.Book.findByPk(+ctx.params.id)
+    const ctx = this.ctx;
+    ctx.body = await ctx.model.Book.findByPk(+ctx.params.id);
   }
 
   async create() {
-    const ctx = this.ctx
-    ctx.body = await ctx.model.Book.create(ctx.request.body)
+    const ctx = this.ctx;
+    ctx.body = await ctx.model.Book.create(ctx.request.body);
   }
 
   async update() {
-    const ctx = this.ctx
-    const book = await ctx.model.Book.findByPk(+ctx.params.id)
-    if (!book) return (ctx.status = 404)
-    await book.update(ctx.request.body)
-    ctx.body = book
+    const ctx = this.ctx;
+    const book = await ctx.model.Book.findByPk(+ctx.params.id);
+    if (!book) return (ctx.status = 404);
+    await book.update(ctx.request.body);
+    ctx.body = book;
   }
 
   async destroy() {
-    const ctx = this.ctx
-    const book = await ctx.model.Book.findByPk(+ctx.params.id)
-    if (!book) return (ctx.status = 404)
-    await book.destroy()
-    ctx.body = book
+    const ctx = this.ctx;
+    const book = await ctx.model.Book.findByPk(+ctx.params.id);
+    if (!book) return (ctx.status = 404);
+    await book.destroy();
+    ctx.body = book;
   }
 }
 
-module.exports = BookController
+module.exports = BookController;
 ```
 
 最后配置 RESTful 路由映射：
 
 ```js
-module.exports = app => {
-  const {router, controller} = app
-  router.resources('books', '/books', controller.book)
-}
+module.exports = (app) => {
+  const { router, controller } = app;
+  router.resources("books", "/books", controller.book);
+};
 ```
 
 ### 自定义插件
@@ -3645,9 +3667,9 @@ npm init egg --type=plugin
 {
   "eggPlugin": {
     "name": "myPlugin",
-    "dependencies": [ "registry" ],
-    "optionalDependencies": [ "vip" ],
-    "env": [ "local", "test", "unittest", "prod" ]
+    "dependencies": ["registry"],
+    "optionalDependencies": ["vip"],
+    "env": ["local", "test", "unittest", "prod"]
   }
 }
 ```
@@ -3671,27 +3693,27 @@ npm init egg --type=plugin
 egg 框架提供了定时任务功能，在 `app/schedule` 目录下，每一个文件都是一个独立的定时任务，可以配置定时任务的属性和要执行的方法，例如创建一个 `update_cache.js` 的更新缓存任务，每分钟执行一次：
 
 ```js
-const Subscription = require('egg').Subscription
+const Subscription = require("egg").Subscription;
 
 class UpdateCache extends Subscription {
   // 通过 schedule 属性来设置定时任务的执行间隔等配置
   static get schedule() {
     return {
-      interval: '1m', // 1 分钟间隔
-      type: 'all', // 指定所有的 worker 都需要执行
-    }
+      interval: "1m", // 1 分钟间隔
+      type: "all", // 指定所有的 worker 都需要执行
+    };
   }
 
   // subscribe 是真正定时任务执行时被运行的函数
   async subscribe() {
-    const res = await this.ctx.curl('http://www.api.com/cache', {
-      dataType: 'json',
-    })
-    this.ctx.app.cache = res.data
+    const res = await this.ctx.curl("http://www.api.com/cache", {
+      dataType: "json",
+    });
+    this.ctx.app.cache = res.data;
   }
 }
 
-module.exports = UpdateCache
+module.exports = UpdateCache;
 ```
 
 也就是说，egg 会从静态访问器属性 schedule 中获取定时任务的配置，然后按照配置来执行 subscribe 方法。执行任务的时机可以用 interval 或者 cron 两种方式来指定：
@@ -3722,12 +3744,12 @@ module.exports = UpdateCache
 有一些场景我们可能需要手动的执行定时任务，例如应用启动时的初始化任务，可以通过 `app.runSchedule(schedulePath)` 来运行。`app.runSchedule` 接受一个定时任务文件路径（`app/schedule` 目录下的相对路径或者完整的绝对路径），在 `app.js` 中代码为：
 
 ```js
-module.exports = app => {
+module.exports = (app) => {
   app.beforeStart(async () => {
     // 程序启动前确保缓存已更新
-    await app.runSchedule('update_cache')
-  })
-}
+    await app.runSchedule("update_cache");
+  });
+};
 ```
 
 ### 生命周期
@@ -3742,12 +3764,12 @@ module.exports = app => {
 - 应用启动完成（`serverDidReady`）
 - 应用即将关闭（`beforeClose`）
 
-只要在项目根目录中创建  `app.js`，添加并导出一个类即可：
+只要在项目根目录中创建 `app.js`，添加并导出一个类即可：
 
 ```js
 class AppBootHook {
   constructor(app) {
-    this.app = app
+    this.app = app;
   }
 
   configWillLoad() {
@@ -3782,7 +3804,7 @@ class AppBootHook {
   }
 }
 
-module.exports = AppBootHook
+module.exports = AppBootHook;
 ```
 
 ### 框架扩展
@@ -3798,17 +3820,18 @@ egg 框架提供了下面几个**扩展点**：
 也就是说，开发者可以对上述框架内置对象进行任意扩展。扩展的写法为：
 
 ```js
-const BAR = Symbol('bar') 
+const BAR = Symbol("bar");
 
 module.exports = {
   foo(param) {}, // 扩展方法
-  get bar() { // 扩展属性
+  get bar() {
+    // 扩展属性
     if (!this[BAR]) {
-      this[BAR] = this.get('x-bar')
+      this[BAR] = this.get("x-bar");
     }
-    return this[BAR]
+    return this[BAR];
   },
-}
+};
 ```
 
 扩展点方法里面的 `this` 就指代扩展点对象自身，扩展的本质就是将用户自定义的对象合并到 Koa 扩展点对象的原型上面，即：
@@ -3818,83 +3841,75 @@ module.exports = {
 - 扩展 Request/Response 就是把 `app/extend/<request|response>.js` 中定义的对象与内置 `request` 或 `response` 的 prototype 对象进行合并，在处理请求时会基于扩展后的 prototype 生成`request` 或 `response` 对象。
 - 扩展 Helper 就是把 `app/extend/helper.js` 中定义的对象与内置 `helper` 的 prototype 对象进行合并，在处理请求时会基于扩展后的 prototype 生成 `helper` 对象。
 
-
-
 ## 综合问题
 
-### Node.js架构
+### Node.js 架构
 
-nodejs架构，下图所示：
-
-
+nodejs 架构，下图所示：
 
 ![image-20220903225718982](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/imgsimage-20220903225718982.png)
 
-如上图所示，nodejs自上而下分为
-
-
+如上图所示，nodejs 自上而下分为
 
 - **用户代码 ( js 代码 )**
 
-> 用户代码即我们编写的应用程序代码、npm包、nodejs内置的js模块等，我们日常工作中的大部分时间都是编写这个层面的代码。
+> 用户代码即我们编写的应用程序代码、npm 包、nodejs 内置的 js 模块等，我们日常工作中的大部分时间都是编写这个层面的代码。
 
-- **binding代码**或者**三方插件（js 或 C/C++ 代码）**
+- **binding 代码**或者**三方插件（js 或 C/C++ 代码）**
 
-> **胶水代码**，能够让js调用C/C++的代码。可以将其理解为一个桥，桥这头是js，桥那头是C/C++，通过这个桥可以让js调用C/C++。
-> 在nodejs里，胶水代码的主要作用是把nodejs底层实现的C/C++库暴露给js环境。
-> **三方插件**是我们自己实现的C/C++库，同时需要我们自己实现胶水代码，将js和C/C++进行桥接。
+> **胶水代码**，能够让 js 调用 C/C++的代码。可以将其理解为一个桥，桥这头是 js，桥那头是 C/C++，通过这个桥可以让 js 调用 C/C++。
+> 在 nodejs 里，胶水代码的主要作用是把 nodejs 底层实现的 C/C++库暴露给 js 环境。
+> **三方插件**是我们自己实现的 C/C++库，同时需要我们自己实现胶水代码，将 js 和 C/C++进行桥接。
 
 - **底层库**
 
-> nodejs的依赖库，包括大名鼎鼎的V8、libuv。
-> **V8**： 我们都知道，是google开发的一套高效javascript运行时，nodejs能够高效执行 js 代码的很大原因主要在它。
-> **libuv**：是用C语言实现的一套异步功能库，nodejs高效的异步编程模型很大程度上归功于libuv的实现，而libuv则是我们今天重点要分析的。
+> nodejs 的依赖库，包括大名鼎鼎的 V8、libuv。
+> **V8**： 我们都知道，是 google 开发的一套高效 javascript 运行时，nodejs 能够高效执行 js 代码的很大原因主要在它。
+> **libuv**：是用 C 语言实现的一套异步功能库，nodejs 高效的异步编程模型很大程度上归功于 libuv 的实现，而 libuv 则是我们今天重点要分析的。
 > 还有一些其他的依赖库
-> **http-parser**：负责解析http响应
+> **http-parser**：负责解析 http 响应
 > **openssl**：加解密
-> **c-ares**：dns解析
-> **npm**：nodejs包管理器
+> **c-ares**：dns 解析
+> **npm**：nodejs 包管理器
 > ...
 
-重点要分析的就是libuv。
+重点要分析的就是 libuv。
 
 #### libuv 架构
 
-我们知道，nodejs实现异步机制的核心便是libuv，libuv承担着nodejs与文件、网络等异步任务的沟通桥梁，下面这张图让我们对libuv有个大概的印象：
+我们知道，nodejs 实现异步机制的核心便是 libuv，libuv 承担着 nodejs 与文件、网络等异步任务的沟通桥梁，下面这张图让我们对 libuv 有个大概的印象：
 
 ![image-20220903225748745](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/imgsimage-20220903225748745.png)
 
+> 这是 libuv 官网的一张图，很明显，nodejs 的网络 I/O、文件 I/O、DNS 操作、还有一些用户代码都是在 libuv 工作的。 既然谈到了异步，那么我们首先归纳下 nodejs 里的异步事件：
 
-
-> 这是libuv官网的一张图，很明显，nodejs的网络I/O、文件I/O、DNS操作、还有一些用户代码都是在 libuv 工作的。 既然谈到了异步，那么我们首先归纳下nodejs里的异步事件：
-
-- 非I/O：
-    - 定时器（setTimeout，setInterval）
-    - microtask（promise）
-    - process.nextTick
-    - setImmediate
-    - DNS.lookup
+- 非 I/O：
+  - 定时器（setTimeout，setInterval）
+  - microtask（promise）
+  - process.nextTick
+  - setImmediate
+  - DNS.lookup
 - I/O：
-    - 网络I/O
-    - 文件I/O
-    - 一些DNS操作
+  - 网络 I/O
+  - 文件 I/O
+  - 一些 DNS 操作
 
-#### 网络I/O
+#### 网络 I/O
 
-对于网络I/O，各个平台的实现机制不一样，linux 是 epoll 模型，类 unix 是 kquene 、windows 下是高效的 IOCP 完成端口、SunOs 是 event ports，libuv 对这几种网络I/O模型进行了封装。
+对于网络 I/O，各个平台的实现机制不一样，linux 是 epoll 模型，类 unix 是 kquene 、windows 下是高效的 IOCP 完成端口、SunOs 是 event ports，libuv 对这几种网络 I/O 模型进行了封装。
 
-#### 文件I/O、异步DNS操作
+#### 文件 I/O、异步 DNS 操作
 
-libuv内部还维护着一个默认4个线程的线程池，这些线程负责执行文件I/O操作、DNS操作、用户异步代码。当 js 层传递给 libuv 一个操作任务时，libuv 会把这个任务加到队列中。之后分两种情况：
+libuv 内部还维护着一个默认 4 个线程的线程池，这些线程负责执行文件 I/O 操作、DNS 操作、用户异步代码。当 js 层传递给 libuv 一个操作任务时，libuv 会把这个任务加到队列中。之后分两种情况：
 
 - 1、线程池中的线程都被占用的时候，队列中任务就要进行排队等待空闲线程。
-- 2、线程池中有可用线程时，从队列中取出这个任务执行，执行完毕后，线程归还到线程池，等待下个任务。同时以事件的方式通知event-loop，event-loop接收到事件执行该事件注册的回调函数。
+- 2、线程池中有可用线程时，从队列中取出这个任务执行，执行完毕后，线程归还到线程池，等待下个任务。同时以事件的方式通知 event-loop，event-loop 接收到事件执行该事件注册的回调函数。
 
-> 当然，如果觉得4个线程不够用，可以在nodejs启动时，设置环境变量**UV_THREADPOOL_SIZE**来调整，出于系统性能考虑，libuv 规定可设置线程数不能超过**128**个。
+> 当然，如果觉得 4 个线程不够用，可以在 nodejs 启动时，设置环境变量**UV_THREADPOOL_SIZE**来调整，出于系统性能考虑，libuv 规定可设置线程数不能超过**128**个。
 
-#### nodejs源码
+#### nodejs 源码
 
-> 先简要介绍下nodejs的启动过程：
+> 先简要介绍下 nodejs 的启动过程：
 
 - 1、调用**platformInit**方法 ，初始化 **nodejs** 的运行环境。
 - 2、调用 **performance_node_start** 方法，对 **nodejs** 进行性能统计。
@@ -3903,53 +3918,53 @@ libuv内部还维护着一个默认4个线程的线程池，这些线程负责�
 - 5、调用 **V8::Initialize**，初始化 **V8** 环境。
 - 6、创建一个**nodejs**运行实例。
 - 7、启动上一步创建好的实例。
-- 8、开始执行js文件，同步代码执行完毕后，进入事件循环。
+- 8、开始执行 js 文件，同步代码执行完毕后，进入事件循环。
 - 9、在没有任何可监听的事件时，销毁 **nodejs** 实例，程序执行完毕。
 
 #### 事件循环原理
 
 - node 的初始化
-    - 初始化 node 环境。
-    - 执行输入代码。
-    - 执行 **process.nextTick** 回调。
-    - 执行 microtasks。
+  - 初始化 node 环境。
+  - 执行输入代码。
+  - 执行 **process.nextTick** 回调。
+  - 执行 microtasks。
 - 进入 event-loop
-    - 进入timers阶段
-        - 检查 timer 队列是否有到期的 timer 回调，如果有，将到期的 timer 回调按照 timerId 升序执行。
-        - 检查是否有 process.nextTick 任务，如果有，全部执行。
-        - 检查是否有microtask，如果有，全部执行。
-        - 退出该阶段。
-    - 进入IO callbacks阶段。
-        - 检查是否有 pending 的 I/O 回调。如果有，执行回调。如果没有，退出该阶段。
-        - 检查是否有 process.nextTick 任务，如果有，全部执行。
-        - 检查是否有microtask，如果有，全部执行。
-        - 退出该阶段。
-    - 进入idle，prepare阶段：
-        - 这两个阶段与我们编程关系不大，暂且按下不表。
-    - 进入poll阶段
-        - 首先检查是否存在尚未完成的回调，如果存在，那么分两种情况。
-            - 第一种情况：
-                - 如果有可用回调（可用回调包含到期的定时器还有一些IO事件等），执行所有可用回调。
-                - 检查是否有 process.nextTick 回调，如果有，全部执行。
-                - 检查是否有 microtaks，如果有，全部执行。
-                - 退出该阶段。
-            - 第二种情况：
-                - 如果没有可用回调。
-                - 检查是否有 immediate 回调，如果有，退出 poll 阶段。如果没有，阻塞在此阶段，等待新的事件通知。
-        - 如果不存在尚未完成的回调，退出poll阶段。
-    - 进入check阶段。
-        - 如果有immediate回调，则执行所有immediate回调。
+  - 进入 timers 阶段
+    - 检查 timer 队列是否有到期的 timer 回调，如果有，将到期的 timer 回调按照 timerId 升序执行。
+    - 检查是否有 process.nextTick 任务，如果有，全部执行。
+    - 检查是否有 microtask，如果有，全部执行。
+    - 退出该阶段。
+  - 进入 IO callbacks 阶段。
+    - 检查是否有 pending 的 I/O 回调。如果有，执行回调。如果没有，退出该阶段。
+    - 检查是否有 process.nextTick 任务，如果有，全部执行。
+    - 检查是否有 microtask，如果有，全部执行。
+    - 退出该阶段。
+  - 进入 idle，prepare 阶段：
+    - 这两个阶段与我们编程关系不大，暂且按下不表。
+  - 进入 poll 阶段
+    - 首先检查是否存在尚未完成的回调，如果存在，那么分两种情况。
+      - 第一种情况：
+        - 如果有可用回调（可用回调包含到期的定时器还有一些 IO 事件等），执行所有可用回调。
         - 检查是否有 process.nextTick 回调，如果有，全部执行。
         - 检查是否有 microtaks，如果有，全部执行。
-        - 退出 **check** 阶段
-    - 进入closing阶段。
-        - 如果有immediate回调，则执行所有immediate回调。
-        - 检查是否有 process.nextTick 回调，如果有，全部执行。
-        - 检查是否有 microtaks，如果有，全部执行。
-        - 退出 **closing** 阶段
-    - 检查是否有活跃的 handles（定时器、IO等事件句柄）。
-        - 如果有，继续下一轮循环。
-        - 如果没有，结束事件循环，退出程序。
+        - 退出该阶段。
+      - 第二种情况：
+        - 如果没有可用回调。
+        - 检查是否有 immediate 回调，如果有，退出 poll 阶段。如果没有，阻塞在此阶段，等待新的事件通知。
+    - 如果不存在尚未完成的回调，退出 poll 阶段。
+  - 进入 check 阶段。
+    - 如果有 immediate 回调，则执行所有 immediate 回调。
+    - 检查是否有 process.nextTick 回调，如果有，全部执行。
+    - 检查是否有 microtaks，如果有，全部执行。
+    - 退出 **check** 阶段
+  - 进入 closing 阶段。
+    - 如果有 immediate 回调，则执行所有 immediate 回调。
+    - 检查是否有 process.nextTick 回调，如果有，全部执行。
+    - 检查是否有 microtaks，如果有，全部执行。
+    - 退出 **closing** 阶段
+  - 检查是否有活跃的 handles（定时器、IO 等事件句柄）。
+    - 如果有，继续下一轮循环。
+    - 如果没有，结束事件循环，退出程序。
 
 可以发现，在事件循环的每一个子阶段退出之前都会按顺序执行如下过程：
 
@@ -3957,53 +3972,53 @@ libuv内部还维护着一个默认4个线程的线程池，这些线程负责�
 - 检查是否有 microtaks，如果有，全部执行。
 - 退出当前阶段。
 
-### Node.js的异步IO
+### Node.js 的异步 IO
 
-[一文吃透异步I/O和事件循环](https://juejin.cn/post/7002106372200333319)
+[一文吃透异步 I/O 和事件循环](https://juejin.cn/post/7002106372200333319)
 
 #### Node 事件循环的流程
 
-在传统web服务中，大多都是使用多线程机制来解决并发的问题，原因是I/O事件会阻塞线程，而阻塞就意味着要等待。而node的设计是采用了单线程的机制，但它为什么还能承载高并发的请求呢？因为node的单线程仅针对主线程来说，即每个node进程只有一个主线程来执行程序代码，但node采用了事件驱动的机制，将耗时阻塞的I/O操作交给线程池中的某个线程去完成，主线程本身只负责不断地调度，并没有执行真正的I/O操作。也就是说node实现的是异步非阻塞式
+在传统 web 服务中，大多都是使用多线程机制来解决并发的问题，原因是 I/O 事件会阻塞线程，而阻塞就意味着要等待。而 node 的设计是采用了单线程的机制，但它为什么还能承载高并发的请求呢？因为 node 的单线程仅针对主线程来说，即每个 node 进程只有一个主线程来执行程序代码，但 node 采用了事件驱动的机制，将耗时阻塞的 I/O 操作交给线程池中的某个线程去完成，主线程本身只负责不断地调度，并没有执行真正的 I/O 操作。也就是说 node 实现的是异步非阻塞式
 
 - 在进程启动时，Node 便会创建一个类似于 while(true)的循环，每执行一次循环体的过程我们成为 Tick。
 - 每个 Tick 的过程就是查看是否有事件待处理。如果有就取出事件及其相关的回调函数。然后进入下一个循环，如果不再有事件处理，就退出进程。
 
 ![img](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/imgs113857.png)
 
-node每次事件循环机制都包含了6个阶段：
+node 每次事件循环机制都包含了 6 个阶段：
 
-- timers阶段：这个阶段执行已经到期的timer(setTimeout、setInterval)回调
-- I/O callbacks阶段：执行I/O（例如文件、网络）的回调
-- idle, prepare 阶段：node内部使用
-- poll阶段：获取新的I/O事件, 适当的条件下node将阻塞在这里
-- check阶段：执行setImmediate回调
-- close callbacks阶段：执行close事件回调，比如TCP断开连接
+- timers 阶段：这个阶段执行已经到期的 timer(setTimeout、setInterval)回调
+- I/O callbacks 阶段：执行 I/O（例如文件、网络）的回调
+- idle, prepare 阶段：node 内部使用
+- poll 阶段：获取新的 I/O 事件, 适当的条件下 node 将阻塞在这里
+- check 阶段：执行 setImmediate 回调
+- close callbacks 阶段：执行 close 事件回调，比如 TCP 断开连接
 
-node和浏览器相比一个明显的不同就是node在**每个阶段结束后会去执行所有microtask任务**
+node 和浏览器相比一个明显的不同就是 node 在**每个阶段结束后会去执行所有 microtask 任务**
 
-相对于浏览器环境，**node环境下多出了setImmediate和process.nextTick这两种异步操作**。setImmediate的回调函数是被放在check阶段执行，即相当于事件循环的最后阶段了。而process.nextTick会被当做一种microtask，前面提到每个阶段结束后都会执行所有microtask任务，所以process.nextTick有种类似于插队的作用
+相对于浏览器环境，**node 环境下多出了 setImmediate 和 process.nextTick 这两种异步操作**。setImmediate 的回调函数是被放在 check 阶段执行，即相当于事件循环的最后阶段了。而 process.nextTick 会被当做一种 microtask，前面提到每个阶段结束后都会执行所有 microtask 任务，所以 process.nextTick 有种类似于插队的作用
 
 ![image-20220903230335671](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/imgsimage-20220903230335671.png)
 
 这个图是整个 Node.js 的运行原理，从左到右，从上到下，Node.js 被分为了四层，分别是 `应用层`、`V8引擎层`、`Node API层` 和 `LIBUV层`。
 
 > - 应用层： 即 JavaScript 交互层，常见的就是 Node.js 的模块，比如 http，fs
-> - V8引擎层： 即利用 V8 引擎来解析JavaScript 语法，进而和下层 API 交互
-> - NodeAPI层： 为上层模块提供系统调用，一般是由 C 语言来实现，和操作系统进行交互 。
-> - LIBUV层： 是跨平台的底层封装，实现了 事件循环、文件操作等，是 Node.js 实现异步的核心 。
+> - V8 引擎层： 即利用 V8 引擎来解析 JavaScript 语法，进而和下层 API 交互
+> - NodeAPI 层： 为上层模块提供系统调用，一般是由 C 语言来实现，和操作系统进行交互 。
+> - LIBUV 层： 是跨平台的底层封装，实现了 事件循环、文件操作等，是 Node.js 实现异步的核心 。
 
 #### 在每个 tick 的过程中，如何判断是否有事件需要处理呢
 
 - 每个事件循环中有一个或者多个观察者，而判断是否有事件需要处理的过程就是向这些观察者询问是否有要处理的事件。
 - 在 Node 中，事件主要来源于网络请求、文件的 I/O 等，这些事件对应的观察者有文件 I/O 观察者，网络 I/O 的观察者。
 - 事件循环是一个典型的生产者/消费者模型。异步 I/O，网络请求等则是事件的生产者，源源不断为 Node 提供不同类型的事件，这些事件被传递到对应的观察者那里，事件循环则从观察者那里取出事件并处理。
-- 在 windows 下，这个循环基于 IOCP 创建，在*nix 下则基于多线程创建
+- 在 windows 下，这个循环基于 IOCP 创建，在\*nix 下则基于多线程创建
 
 #### 描述一下整个异步 I/O 的流程
 
 ![img](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/imgs113903.png)
 
-### Node.js中创建子进程的方法
+### Node.js 中创建子进程的方法
 
 众所周知，Node.js 是单线程、异步非阻塞的程序语言，那如何充分利用多核 CPU 的优势呢？这就需要用到 child_process 模块来创建子进程了，在 Node.js 中，有四种方法可以创建子进程：
 
@@ -4012,7 +4027,7 @@ node和浏览器相比一个明显的不同就是node在**每个阶段结束后�
 - `spawn`
 - `fork`
 
-上面四个方法都会返回 `ChildProcess` 实例（继承自 `EventEmitter`），该实例拥有三个标准的  stdio 流：
+上面四个方法都会返回 `ChildProcess` 实例（继承自 `EventEmitter`），该实例拥有三个标准的 stdio 流：
 
 - `child.stdin`
 - `child.stdout`
@@ -4030,7 +4045,7 @@ node和浏览器相比一个明显的不同就是node在**每个阶段结束后�
 
 `message`：子进程通过 `process.send()` 发送消息时触发。
 
-`spawn`：子进程创建成功时触发（Node.js v15.1版本才添加此事件）。
+`spawn`：子进程创建成功时触发（Node.js v15.1 版本才添加此事件）。
 
 而 `exec` 和 `execFile` 方法还额外提供了一个回调函数，会在子进程终止的时候触发。接下来进行详细分析：
 
@@ -4072,7 +4087,7 @@ const child = execFile("node", ["--version"], (error, stdout, stderr) => {
 
 #### spawn
 
-spawn 函数和  execFile 类似，默认不开启 shell，但区别在于 execFile 会缓存命令行的输出，然后把结果传入回调函数中，而 spawn 则是以流的方式输出，有了流，就能非常方便的对接输入和输出了，例如典型的 `wc` 命令：
+spawn 函数和 execFile 类似，默认不开启 shell，但区别在于 execFile 会缓存命令行的输出，然后把结果传入回调函数中，而 spawn 则是以流的方式输出，有了流，就能非常方便的对接输入和输出了，例如典型的 `wc` 命令：
 
 ```
 const child = spawn("wc")
@@ -4229,27 +4244,27 @@ server.listen(3000)
 - 创建非 node 子进程用 execFile 或 spawn。如果输出内容较少用 execFile，会缓存结果并传给回调方便处理；如果输出内容多用 spawn，使用流的方式不会占用大量内存。
 - 执行复杂的、固定的终端命令用 exec，写起来更方便。但一定要记住 exec 会创建 shell，效率不如 execFile 和 spawn，且存在命令行注入的风险。
 
-### Express和Koa的区别
+### Express 和 Koa 的区别
 
 ##### Koa
 
--   基于node的一个web开发框架，利用co作为底层运行框架，利用Generator的特性，实现“无回调”的异步处理；
--   ES7;
--   更小、更富有表现力、更健壮的基石；
--   利用async函数、Koa丢弃回调函数，增强错误处理；
--   很小的体积，因为没有捆绑任何中间件；
--   类似堆栈的方式组织和执行；
--   低级中间件层中提供高级“语法糖”，提高了互操性、稳健性；
+- 基于 node 的一个 web 开发框架，利用 co 作为底层运行框架，利用 Generator 的特性，实现“无回调”的异步处理；
+- ES7;
+- 更小、更富有表现力、更健壮的基石；
+- 利用 async 函数、Koa 丢弃回调函数，增强错误处理；
+- 很小的体积，因为没有捆绑任何中间件；
+- 类似堆栈的方式组织和执行；
+- 低级中间件层中提供高级“语法糖”，提高了互操性、稳健性；
 
 ##### Express
 
--   Node的基础框架，基础Connect中间件，自身封装了路由、视图处理等功能；
--   线性逻辑，路由和中间件完美融合，清晰明了；
--   弊端是callback回调方式，不可组合、异常不可捕获；
--   ES5;
--   connect的执行流程： connect的中间件模型是线性的，即一个一个往下执行；
+- Node 的基础框架，基础 Connect 中间件，自身封装了路由、视图处理等功能；
+- 线性逻辑，路由和中间件完美融合，清晰明了；
+- 弊端是 callback 回调方式，不可组合、异常不可捕获；
+- ES5;
+- connect 的执行流程： connect 的中间件模型是线性的，即一个一个往下执行；
 
-### egg.js的特点
+### egg.js 的特点
 
 **Egg**
 
@@ -4263,7 +4278,7 @@ server.listen(3000)
 
 [node.js 上传文件图片](https://juejin.cn/post/6998440011389468703)
 
-[Nodejs文件上传](https://juejin.cn/post/6844903497897345032)
+[Nodejs 文件上传](https://juejin.cn/post/6844903497897345032)
 
 #### 一、是什么
 
@@ -4273,7 +4288,7 @@ server.listen(3000)
 
 对于文件上传，我们需要设置请求头为`content-type:multipart/form-data`
 
-> multipart互联网上的混合资源，就是资源由多种元素组成，form-data表示可以使用HTML Forms 和 POST 方法上传文件
+> multipart 互联网上的混合资源，就是资源由多种元素组成，form-data 表示可以使用 HTML Forms 和 POST 方法上传文件
 
 结构如下：
 
@@ -4295,13 +4310,13 @@ Santa colo
 Content-Disposition: form-data;name="desc"
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
- 
+
 ...
 --ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC
 Content-Disposition: form-data;name="pic"; filename="photo.jpg"
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: binary
- 
+
 ... binary data of the jpg ...
 --ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC--
 ```
@@ -4332,9 +4347,13 @@ Content-Disposition: form-data; name="user"; filename="logo.png"
 传统前端文件上传的表单结构如下：
 
 ```html
-<form action="http://localhost:8080/api/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" id="file" value="" multiple="multiple" />
-    <input type="submit" value="提交"/>
+<form
+  action="http://localhost:8080/api/upload"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <input type="file" name="file" id="file" value="" multiple="multiple" />
+  <input type="submit" value="提交" />
 </form>
 ```
 
@@ -4360,13 +4379,15 @@ npm install koa-body
 引入`koa-body`中间件
 
 ```js
-const koaBody = require('koa-body');
-app.use(koaBody({
+const koaBody = require("koa-body");
+app.use(
+  koaBody({
     multipart: true,
     formidable: {
-        maxFileSize: 200*1024*1024    // 设置上传文件大小最大限制，默认2M
-    }
-}));
+      maxFileSize: 200 * 1024 * 1024, // 设置上传文件大小最大限制，默认2M
+    },
+  })
+);
 ```
 
 获取上传的文件
@@ -4378,17 +4399,17 @@ const file = ctx.request.files.file; // 获取上传文件
 获取文件数据后，可以通过`fs`模块将文件保存到指定目录
 
 ```js
-router.post('/uploadfile', async (ctx, next) => {
+router.post("/uploadfile", async (ctx, next) => {
   // 上传单个文件
   const file = ctx.request.files.file; // 获取上传文件
   // 创建可读流
   const reader = fs.createReadStream(file.path);
-  let filePath = path.join(__dirname, 'public/upload/') + `/${file.name}`;
+  let filePath = path.join(__dirname, "public/upload/") + `/${file.name}`;
   // 创建可写流
   const upStream = fs.createWriteStream(filePath);
   // 可读流通过管道写入可写流
   reader.pipe(upStream);
-  return ctx.body = "上传成功！";
+  return (ctx.body = "上传成功！");
 });
 ```
 
@@ -4405,27 +4426,25 @@ npm install koa-multer
 ```js
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./upload/")
+    cb(null, "./upload/");
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname))
-  }
-})
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
 
 const upload = multer({
-  storage
+  storage,
 });
 
 const fileRouter = new Router();
 
-fileRouter.post("/upload", upload.single('file'), (ctx, next) => {
+fileRouter.post("/upload", upload.single("file"), (ctx, next) => {
   console.log(ctx.req.file); // 获取文件
-})
+});
 
 app.use(fileRouter.routes());
 ```
-
-
 
 ### 怎么进行大文件上传
 
@@ -4433,7 +4452,7 @@ app.use(fileRouter.routes());
 
 [Nodejs 大文件分片上传 实现](https://juejin.cn/post/6844904097145946126)
 
-[NodeJS实现jwt鉴权、文件上传、分页、性能监控和优化](https://juejin.cn/post/7075241423032811551)
+[NodeJS 实现 jwt 鉴权、文件上传、分页、性能监控和优化](https://juejin.cn/post/7075241423032811551)
 
 不管怎样简单的需求，在量级达到一定层次时，都会变得异常复杂
 
@@ -4451,7 +4470,7 @@ app.use(fileRouter.routes());
 
 这里涉及到分片上传及断点续传两个概念
 
-#### http断点续传
+#### http 断点续传
 
 断点续传：指的是在上传/下载时，将任务（一个文件或压缩包）人为的划分为几个部分，每一个部分采用一个线程进行上传/下载，如果碰到网络故障，可以从已经上传/下载的部分开始继续上传/下载未完成的部分，而没有必要从头开始上传/下载。可以节省时间，提高速度。
 
@@ -4464,11 +4483,11 @@ Range:(unit=first byte pos)-[last byte pos]
 
 Range 头部的格式有以下几种情况：
 
-Range: bytes=0-499 表示第 0-499 字节范围的内容 
-Range: bytes=500-999 表示第 500-999 字节范围的内容 
-Range: bytes=-500 表示最后 500 字节的内容 
-Range: bytes=500- 表示从第 500 字节开始到文件结束部分的内容 
-Range: bytes=0-0,-1 表示第一个和最后一个字节 
+Range: bytes=0-499 表示第 0-499 字节范围的内容
+Range: bytes=500-999 表示第 500-999 字节范围的内容
+Range: bytes=-500 表示最后 500 字节的内容
+Range: bytes=500- 表示从第 500 字节开始到文件结束部分的内容
+Range: bytes=0-0,-1 表示第一个和最后一个字节
 Range: bytes=500-600,601-999 同时指定几个范围
 
 Content-Range
@@ -4485,26 +4504,25 @@ Content-Range: bytes 0-499/22400
 
 而在响应完成后，返回的响应头内容也不同：
 
-HTTP/1.1 200 Ok（不使用断点续传方式） 
+HTTP/1.1 200 Ok（不使用断点续传方式）
 HTTP/1.1 206 Partial Content（使用断点续传方式）
 
 断点续传流程
-HTTP1.1协议（RFC2616）中定义了断点续传相关的HTTP头 Range和Content-Range字段，一个最简单的断点续传实现大概如下：
+HTTP1.1 协议（RFC2616）中定义了断点续传相关的 HTTP 头 Range 和 Content-Range 字段，一个最简单的断点续传实现大概如下：
 
-客户端下载一个1024K的文件，已经下载了其中512K
-网络中断，客户端请求续传，因此需要在HTTP头中申明本次需要续传的片段：Range:bytes=512000-，这个头通知服务端从文件的512K位置开始传输文件
-服务端收到断点续传请求，从文件的512K位置开始传输，并且在HTTP头中增加：Content-Range:bytes 512000-/1024000，并且此时服务端返回的HTTP状态码应该是206，而不是200。
+客户端下载一个 1024K 的文件，已经下载了其中 512K
+网络中断，客户端请求续传，因此需要在 HTTP 头中申明本次需要续传的片段：Range:bytes=512000-，这个头通知服务端从文件的 512K 位置开始传输文件
+服务端收到断点续传请求，从文件的 512K 位置开始传输，并且在 HTTP 头中增加：Content-Range:bytes 512000-/1024000，并且此时服务端返回的 HTTP 状态码应该是 206，而不是 200。
 
 注意的问题
 
-在实际场景中，会出现一种情况，即在终端发起续传请求时，URL对应的文件内容在服务端已经发生变化，此时续传的数据肯定是错误的。如何解决这个问题了？显然此时我们需要有一个标识文件唯一性的方法。
+在实际场景中，会出现一种情况，即在终端发起续传请求时，URL 对应的文件内容在服务端已经发生变化，此时续传的数据肯定是错误的。如何解决这个问题了？显然此时我们需要有一个标识文件唯一性的方法。
 
-在RFC2616中也有相应的定义，比如实现Last-Modified来标识文件的最后修改时间，这样即可判断出续传文件时是否已经发生过改动。同时RFC2616中还定义有一个ETag的头，可以使用ETag头来放置文件的唯一标识，比如文件的MD5值。
+在 RFC2616 中也有相应的定义，比如实现 Last-Modified 来标识文件的最后修改时间，这样即可判断出续传文件时是否已经发生过改动。同时 RFC2616 中还定义有一个 ETag 的头，可以使用 ETag 头来放置文件的唯一标识，比如文件的 MD5 值。
 
-终端在发起续传请求时应该在HTTP头中申明If-Match 或者If-Modified-Since 字段，帮助服务端判别文件变化。
+终端在发起续传请求时应该在 HTTP 头中申明 If-Match 或者 If-Modified-Since 字段，帮助服务端判别文件变化。
 
-另外RFC2616中同时定义有一个If-Range头，终端如果在续传是使用If-Range。If-Range中的内容可以为最初收到的ETag头或者是Last-Modfied中的最后修改时候。服务端在收到续传请求时，通过If-Range中的内容进行校验，校验一致时返回206的续传回应，不一致时服务端则返回200回应，回应的内容为新的文件的全部数据。
-
+另外 RFC2616 中同时定义有一个 If-Range 头，终端如果在续传是使用 If-Range。If-Range 中的内容可以为最初收到的 ETag 头或者是 Last-Modfied 中的最后修改时候。服务端在收到续传请求时，通过 If-Range 中的内容进行校验，校验一致时返回 206 的续传回应，不一致时服务端则返回 200 回应，回应的内容为新的文件的全部数据。
 
 #### 分片上传
 
@@ -4549,9 +4567,9 @@ HTTP1.1协议（RFC2616）中定义了断点续传相关的HTTP头 Range和Conte
 读取文件内容：
 
 ```js
-const input = document.querySelector('input');
-input.addEventListener('change', function() {
-    var file = this.files[0];
+const input = document.querySelector("input");
+input.addEventListener("change", function () {
+  var file = this.files[0];
 });
 ```
 
@@ -4566,32 +4584,32 @@ const md5code = md5(file);
 ```js
 var reader = new FileReader();
 reader.readAsArrayBuffer(file);
-reader.addEventListener("load", function(e) {
-    //每10M切割一段,这里只做一个切割演示，实际切割需要循环切割，
-    var slice = e.target.result.slice(0, 10*1024*1024);
+reader.addEventListener("load", function (e) {
+  //每10M切割一段,这里只做一个切割演示，实际切割需要循环切割，
+  var slice = e.target.result.slice(0, 10 * 1024 * 1024);
 });
 ```
 
-h5上传一个（一片）
+h5 上传一个（一片）
 
 ```js
 const formdata = new FormData();
-formdata.append('0', slice);
+formdata.append("0", slice);
 //这里是有一个坑的，部分设备无法获取文件名称，和文件类型，这个在最后给出解决方案
-formdata.append('filename', file.filename);
+formdata.append("filename", file.filename);
 var xhr = new XMLHttpRequest();
-xhr.addEventListener('load', function() {
-    //xhr.responseText
+xhr.addEventListener("load", function () {
+  //xhr.responseText
 });
-xhr.open('POST', '');
+xhr.open("POST", "");
 xhr.send(formdata);
-xhr.addEventListener('progress', updateProgress);
-xhr.upload.addEventListener('progress', updateProgress);
+xhr.addEventListener("progress", updateProgress);
+xhr.upload.addEventListener("progress", updateProgress);
 
 function updateProgress(event) {
-    if (event.lengthComputable) {
-        //进度条
-    }
+  if (event.lengthComputable) {
+    //进度条
+  }
 }
 ```
 
@@ -4599,115 +4617,113 @@ function updateProgress(event) {
 
 ```js
 function checkFileType(type, file, back) {
-/**
-* type png jpg mp4 ...
-* file input.change=> this.files[0]
-* back callback(boolean)
-*/
-    var args = arguments;
-    if (args.length != 3) {
-        back(0);
-    }
-    var type = args[0]; // type = '(png|jpg)' , 'png'
-    var file = args[1];
-    var back = typeof args[2] == 'function' ? args[2] : function() {};
-    if (file.type == '') {
-        // 如果系统无法获取文件类型，则读取二进制流，对二进制进行解析文件类型
-        var imgType = [
-            'ff d8 ff', //jpg
-            '89 50 4e', //png
+  /**
+   * type png jpg mp4 ...
+   * file input.change=> this.files[0]
+   * back callback(boolean)
+   */
+  var args = arguments;
+  if (args.length != 3) {
+    back(0);
+  }
+  var type = args[0]; // type = '(png|jpg)' , 'png'
+  var file = args[1];
+  var back = typeof args[2] == "function" ? args[2] : function () {};
+  if (file.type == "") {
+    // 如果系统无法获取文件类型，则读取二进制流，对二进制进行解析文件类型
+    var imgType = [
+      "ff d8 ff", //jpg
+      "89 50 4e", //png
 
-            '0 0 0 14 66 74 79 70 69 73 6F 6D', //mp4
-            '0 0 0 18 66 74 79 70 33 67 70 35', //mp4
-            '0 0 0 0 66 74 79 70 33 67 70 35', //mp4
-            '0 0 0 0 66 74 79 70 4D 53 4E 56', //mp4
-            '0 0 0 0 66 74 79 70 69 73 6F 6D', //mp4
+      "0 0 0 14 66 74 79 70 69 73 6F 6D", //mp4
+      "0 0 0 18 66 74 79 70 33 67 70 35", //mp4
+      "0 0 0 0 66 74 79 70 33 67 70 35", //mp4
+      "0 0 0 0 66 74 79 70 4D 53 4E 56", //mp4
+      "0 0 0 0 66 74 79 70 69 73 6F 6D", //mp4
 
-            '0 0 0 18 66 74 79 70 6D 70 34 32', //m4v
-            '0 0 0 0 66 74 79 70 6D 70 34 32', //m4v
+      "0 0 0 18 66 74 79 70 6D 70 34 32", //m4v
+      "0 0 0 0 66 74 79 70 6D 70 34 32", //m4v
 
-            '0 0 0 14 66 74 79 70 71 74 20 20', //mov
-            '0 0 0 0 66 74 79 70 71 74 20 20', //mov
-            '0 0 0 0 6D 6F 6F 76', //mov
+      "0 0 0 14 66 74 79 70 71 74 20 20", //mov
+      "0 0 0 0 66 74 79 70 71 74 20 20", //mov
+      "0 0 0 0 6D 6F 6F 76", //mov
 
-            '4F 67 67 53 0 02', //ogg
-            '1A 45 DF A3', //ogg
+      "4F 67 67 53 0 02", //ogg
+      "1A 45 DF A3", //ogg
 
-            '52 49 46 46 x x x x 41 56 49 20', //avi (RIFF fileSize fileType LIST)(52 49 46 46,DC 6C 57 09,41 56 49 20,4C 49 53 54)
-        ];
-        var typeName = [
-            'jpg',
-            'png',
-            'mp4',
-            'mp4',
-            'mp4',
-            'mp4',
-            'mp4',
-            'm4v',
-            'm4v',
-            'mov',
-            'mov',
-            'mov',
-            'ogg',
-            'ogg',
-            'avi',
-        ];
-        var sliceSize = /png|jpg|jpeg/.test(type) ? 3 : 12;
-        var reader = new FileReader();
-        reader.readAsArrayBuffer(file);
-        reader.addEventListener("load", function(e) {
-            var slice = e.target.result.slice(0, sliceSize);
-            reader = null;
-            if (slice && slice.byteLength == sliceSize) {
-                var view = new Uint8Array(slice);
-                var arr = [];
-                view.forEach(function(v) {
-                    arr.push(v.toString(16));
-                });
-                view = null;
-                var idx = arr.join(' ').indexOf(imgType);
-                if (idx > -1) {
-                    back(typeName[idx]);
-                } else {
-                    arr = arr.map(function(v) {
-                        if (i > 3 && i < 8) {
-                            return 'x';
-                        }
-                        return v;
-                    });
-                    var idx = arr.join(' ').indexOf(imgType);
-                    if (idx > -1) {
-                        back(typeName[idx]);
-                    } else {
-                        back(false);
-                    }
-
-                }
-            } else {
-                back(false);
-            }
-
+      "52 49 46 46 x x x x 41 56 49 20", //avi (RIFF fileSize fileType LIST)(52 49 46 46,DC 6C 57 09,41 56 49 20,4C 49 53 54)
+    ];
+    var typeName = [
+      "jpg",
+      "png",
+      "mp4",
+      "mp4",
+      "mp4",
+      "mp4",
+      "mp4",
+      "m4v",
+      "m4v",
+      "mov",
+      "mov",
+      "mov",
+      "ogg",
+      "ogg",
+      "avi",
+    ];
+    var sliceSize = /png|jpg|jpeg/.test(type) ? 3 : 12;
+    var reader = new FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.addEventListener("load", function (e) {
+      var slice = e.target.result.slice(0, sliceSize);
+      reader = null;
+      if (slice && slice.byteLength == sliceSize) {
+        var view = new Uint8Array(slice);
+        var arr = [];
+        view.forEach(function (v) {
+          arr.push(v.toString(16));
         });
-    } else {
-        var type = file.name.match(/\.(\w+)$/)[1];
-        back(type);
-    }
+        view = null;
+        var idx = arr.join(" ").indexOf(imgType);
+        if (idx > -1) {
+          back(typeName[idx]);
+        } else {
+          arr = arr.map(function (v) {
+            if (i > 3 && i < 8) {
+              return "x";
+            }
+            return v;
+          });
+          var idx = arr.join(" ").indexOf(imgType);
+          if (idx > -1) {
+            back(typeName[idx]);
+          } else {
+            back(false);
+          }
+        }
+      } else {
+        back(false);
+      }
+    });
+  } else {
+    var type = file.name.match(/\.(\w+)$/)[1];
+    back(type);
+  }
 }
 ```
 
 调用方法如下
 
 ```js
-checkFileType('(mov|mp4|avi)',file,function(fileType){
-    // fileType = mp4,
-    // 如果file的类型不在枚举之列，则返回false
+checkFileType("(mov|mp4|avi)", file, function (fileType) {
+  // fileType = mp4,
+  // 如果file的类型不在枚举之列，则返回false
 });
 ```
 
 上面上传文件的一步，可以改成：
 
 ```js
-formdata.append('filename', md5code+'.'+fileType);
+formdata.append("filename", md5code + "." + fileType);
 ```
 
 有了切割上传后，也就有了文件唯一标识信息，断点续传变成了后台的一个小小的逻辑判断
@@ -4716,12 +4732,10 @@ formdata.append('filename', md5code+'.'+fileType);
 
 如果想要暂停切片的上传，可以使用`XMLHttpRequest`的 `abort`方法
 
-
-
 #### 三、使用场景
 
 - 大文件加速上传：当文件大小超过预期大小时，使用分片上传可实现并行上传多个 Part， 以加快上传速度
-- 网络环境较差：建议使用分片上传。当出现上传失败的时候，仅需重传失败的Part
+- 网络环境较差：建议使用分片上传。当出现上传失败的时候，仅需重传失败的 Part
 - 流式上传：可以在需要上传的文件大小还不确定的情况下开始上传。这种场景在视频监控等行业应用中比较常见
 
 #### 小结
@@ -4734,8 +4748,6 @@ formdata.append('filename', md5code+'.'+fileType);
 - 切片什么时候按数量切，什么时候按大小切
 - 如何结合 Web Worker 处理大文件上传
 - 如何实现秒传
-
-
 
 ### FormData 传输表单文件
 
@@ -4753,7 +4765,7 @@ formdata.append('filename', md5code+'.'+fileType);
 <form action="/submit" method="POST" enctype="multipart/form-data">
     <input type="text" name="username"><br>
     <input type="text" name="password"><br>
-    <button>提交</button> 
+    <button>提交</button>
 </form>
 复制代码
 ```
@@ -4795,7 +4807,7 @@ Content-Disposition: form-data; name="password"
 
 - 请求头 Content-Length 的换行用的是 `\r\n` 而不是 `\n`
 
-  > 请求体的真实面目是下面的字符串： "-----------------------------340073633417401055292887335273\r\nContent-Disposition: form-data; name="username"\r\n\r\n张三\r\n-----------------------------340073633417401055292887335273\r\nContent-Disposition: form-data; name="password"\r\n\r\n123456\r\n-----------------------------340073633417401055292887335273--\r\n"
+  > 请求体的真实面目是下面的字符串： "-----------------------------340073633417401055292887335273\r\nContent-Disposition: form-data; name="username"\r\n\r\n 张三\r\n-----------------------------340073633417401055292887335273\r\nContent-Disposition: form-data; name="password"\r\n\r\n123456\r\n-----------------------------340073633417401055292887335273--\r\n"
 
 - 请求头 Content-Length 的值表示字节的长度，而不是字符串的长度
 
@@ -4825,46 +4837,47 @@ xxxxxx文件的二进制数据xxxxx
 了解这这些规律之后，接下来就可以在服务端对 `multipart/form-data` 进行解码了：
 
 ```javascript
-const http = require('http')
-const fs = require('fs')
+const http = require("http");
+const fs = require("fs");
 http
   .createServer(function (req, res) {
     // 获取 content-type 头，格式为： multipart/form-data; boundary=--------------------------754404743474233185974315
-    const contentType = req.headers['content-type']
-    const headBoundary = contentType.slice(contentType.lastIndexOf('=') + 1) // 截取 header 里面的 boundary 部分
-    const bodyBoundary = '--' + headBoundary // 前面加两个 - 才是 body 里面真实的分隔符
-    const arr = [], obj = {}
-    req.on('data', (chunk) => arr.push(chunk))
-    req.on('end', function () {
-      const parts = Buffer.concat(arr).split(bodyBoundary).slice(1, -1) // 根据分隔符进行分割
+    const contentType = req.headers["content-type"];
+    const headBoundary = contentType.slice(contentType.lastIndexOf("=") + 1); // 截取 header 里面的 boundary 部分
+    const bodyBoundary = "--" + headBoundary; // 前面加两个 - 才是 body 里面真实的分隔符
+    const arr = [],
+      obj = {};
+    req.on("data", (chunk) => arr.push(chunk));
+    req.on("end", function () {
+      const parts = Buffer.concat(arr).split(bodyBoundary).slice(1, -1); // 根据分隔符进行分割
       for (let i = 0; i < parts.length; i++) {
-        const { key, value } = handlePart(parts[i])
-        obj[key] = value
+        const { key, value } = handlePart(parts[i]);
+        obj[key] = value;
       }
-      res.end(JSON.stringify(obj))
-    })
+      res.end(JSON.stringify(obj));
+    });
   })
-  .listen(3000)
+  .listen(3000);
 ```
 
 其中关键的就是 handlePart 部分，即对分隔出来的每一部分单独处理，如果是二进制的就保存到文件，是字符串就返回键值对：
 
 ```javascript
 function handlePart(part) {
-  const [head, body] = part.split('\r\n\r\n') // buffer 分割
-  const headStr = head.toString()
-  const key = headStr.match(/name="(.+?)"/)[1]
-  const match = headStr.match(/filename="(.+?)"/)
+  const [head, body] = part.split("\r\n\r\n"); // buffer 分割
+  const headStr = head.toString();
+  const key = headStr.match(/name="(.+?)"/)[1];
+  const match = headStr.match(/filename="(.+?)"/);
   if (!match) {
-    const value = body.toString().slice(0, -2) // 把末尾的 \r\n 去掉
-    return { key, value }
+    const value = body.toString().slice(0, -2); // 把末尾的 \r\n 去掉
+    return { key, value };
   }
-  const filename = match[1]
-  const content = part.slice(head.length + 4, -2) // 文件二进制部分是 head + \r\n\r\n 再去掉最后的 \r\n
-  fs.writeFileSync(filename, content)
-  return { key, value: filename }
+  const filename = match[1];
+  const content = part.slice(head.length + 4, -2); // 文件二进制部分是 head + \r\n\r\n 再去掉最后的 \r\n
+  fs.writeFileSync(filename, content);
+  return { key, value: filename };
 }
-复制代码
+复制代码;
 ```
 
 这里面涉及到 buffer 的分割，nodejs 中并没有提供 split 方法，可根据 slice 方法自己实现：
@@ -4881,10 +4894,6 @@ Buffer.prototype.split = function (sep) {
 }
 ```
 
-
-
-
-
 #### FormData 传输表单文件
 
 在浏览器中，我们用 `<form>` 元素来提交表单中的文件，表单的编码类型由 `enctype` 属性决定，必须是以下三种之一：
@@ -4896,13 +4905,13 @@ Buffer.prototype.split = function (sep) {
 最重要的就是 `multipart/form-data` 这种类型了，因为可以传输文件，之前有写过专门的[文章](https://juejin.cn/post/6854573218679046157)介绍过其底层原理。在 node.js 中我们一般用 [form-data](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fform-data%2Fform-data) 这个包来模拟浏览器中的表单，使用方法如下：
 
 ```js
-var form = new FormData()
-form.append('my_string', 'my value')
-form.append('my_integer', 1)
-form.append('my_boolean', true)
-form.append('my_buffer', Buffer.from('hello'))
-form.append('my_file', fs.readFileSync('/foo/bar.jpg'))
-form.append('my_file', fs.createReadStream('/foo/bar.jpg'))
+var form = new FormData();
+form.append("my_string", "my value");
+form.append("my_integer", 1);
+form.append("my_boolean", true);
+form.append("my_buffer", Buffer.from("hello"));
+form.append("my_file", fs.readFileSync("/foo/bar.jpg"));
+form.append("my_file", fs.createReadStream("/foo/bar.jpg"));
 ```
 
 用法很简单，不再赘述，对于文件类型，用 `createReadStream` 或者 `readFileSync` 两种方式来读取即可，这里主要强调一点：form-data 对这两种格式的处理稍有不同。请看下面两段代码：
@@ -4910,17 +4919,17 @@ form.append('my_file', fs.createReadStream('/foo/bar.jpg'))
 1. `createReadStream`
 
    ```js
-   var media = new FormData()
-   media.append('contentType', 'image/jpeg')
-   media.append('value', fs.createReadStream('/Users/keliq/Pictures/1.jpeg'))
+   var media = new FormData();
+   media.append("contentType", "image/jpeg");
+   media.append("value", fs.createReadStream("/Users/keliq/Pictures/1.jpeg"));
    ```
 
 2. `readFileSync`
 
    ```js
-   var media = new FormData()
-   media.append('contentType', 'image/jpeg')
-   media.append('value', fs.readFileSync('/Users/keliq/Pictures/1.jpeg'))
+   var media = new FormData();
+   media.append("contentType", "image/jpeg");
+   media.append("value", fs.readFileSync("/Users/keliq/Pictures/1.jpeg"));
    ```
 
 抓包得到的结果是：
@@ -4930,7 +4939,7 @@ form.append('my_file', fs.createReadStream('/foo/bar.jpg'))
    ```arduino
    ----------------------------015517802272525417891317
    Content-Disposition: form-data; name="contentType"
-   
+
    image/jpeg
    ----------------------------015517802272525417891317
    Content-Disposition: form-data; name="value"; filename="1.jpeg"
@@ -4942,7 +4951,7 @@ form.append('my_file', fs.createReadStream('/foo/bar.jpg'))
    ```css
    ----------------------------152374567568773937407488
    Content-Disposition: form-data; name="contentType"
-   
+
    image/jpeg
    ----------------------------152374567568773937407488
    Content-Disposition: form-data; name="value"
@@ -4952,45 +4961,51 @@ form.append('my_file', fs.createReadStream('/foo/bar.jpg'))
 最后发现原因在这个 [merge](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fform-data%2Fform-data%2Fpull%2F128%2Ffiles) 里面，把 `Content-Type` 默认设置为 `application/octet-stream` 了，那如果想和 createReadStream 的格式一样，需要改成这样子：
 
 ```js
-var media = new FormData()
-media.append('contentType', 'image/jpeg')
-media.append('value', fs.readFileSync('/Users/keliq/Pictures/1.jpeg'), '1.jpeg')
+var media = new FormData();
+media.append("contentType", "image/jpeg");
+media.append(
+  "value",
+  fs.readFileSync("/Users/keliq/Pictures/1.jpeg"),
+  "1.jpeg"
+);
 ```
 
 这是 form-data 库提供的 API：
 
 ```js
 // Set filename by providing a string for options
-form.append( 'my_file', fs.createReadStream('/foo/bar.jpg'), 'bar.jpg' );
+form.append("my_file", fs.createReadStream("/foo/bar.jpg"), "bar.jpg");
 
 // provide an object.
-form.append( 'my_file', fs.createReadStream('/foo/bar.jpg'), {filename: 'bar.jpg', contentType: 'image/jpeg', knownLength: 19806} );
+form.append("my_file", fs.createReadStream("/foo/bar.jpg"), {
+  filename: "bar.jpg",
+  contentType: "image/jpeg",
+  knownLength: 19806,
+});
 ```
 
 查看了一下源码，原因是如果提供了文件名，就会用 [mime-types](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fjshttp%2Fmime-types) 的 lookup 方法自动判断 `Content-Type`，例如：
 
 ```js
-mime.lookup('json') // 'application/json'
-mime.lookup('.md') // 'text/markdown'
-mime.lookup('file.html') // 'text/html'
-mime.lookup('folder/file.js') // 'application/javascript'
+mime.lookup("json"); // 'application/json'
+mime.lookup(".md"); // 'text/markdown'
+mime.lookup("file.html"); // 'text/html'
+mime.lookup("folder/file.js"); // 'application/javascript'
 ```
 
 这也是为什么当提供了 `1.jpeg` 参数之后，`Content-Type` 会从默认的 `application/octet-stream` 变成了 `image/jpeg`。
-
-
 
 ### 设计一个分页功能
 
 #### 一、是什么
 
-在我们做数据查询的时候，如果数据量很大，比如几万条数据，放在一个页面显示的话显然不友好，这时候就需要采用分页显示的形式，如每次只显示10条数据
+在我们做数据查询的时候，如果数据量很大，比如几万条数据，放在一个页面显示的话显然不友好，这时候就需要采用分页显示的形式，如每次只显示 10 条数据
 
 ![img](https://static.vue-js.com/6070e8c0-cf14-11eb-85f6-6fac77c0c9b3.png)
 
-要实现分页功能，实际上就是从结果集中显示第1~10条记录作为第1页，显示第11~20条记录作为第2页，以此类推
+要实现分页功能，实际上就是从结果集中显示第 1~10 条记录作为第 1 页，显示第 11~20 条记录作为第 2 页，以此类推
 
-因此，分页实际上就是从结果集中截取出第M~N条记录
+因此，分页实际上就是从结果集中截取出第 M~N 条记录
 
 #### 二、如何实现
 
@@ -5010,16 +5025,16 @@ mime.lookup('folder/file.js') // 'application/javascript'
 
 后端采用`mysql`作为数据的持久性存储
 
-前端向后端发送目标的页码`page`以及每页显示数据的数量`pageSize`，默认情况每次取10条数据，则每一条数据的起始位置`start`为：
+前端向后端发送目标的页码`page`以及每页显示数据的数量`pageSize`，默认情况每次取 10 条数据，则每一条数据的起始位置`start`为：
 
 ```js
-const start = (page - 1) * pageSize
+const start = (page - 1) * pageSize;
 ```
 
 当确定了`limit`和`start`的值后，就能够确定`SQL`语句：
 
 ```js
-const sql = `SELECT * FROM record limit ${pageSize} OFFSET ${start};`
+const sql = `SELECT * FROM record limit ${pageSize} OFFSET ${start};`;
 ```
 
 上诉`SQL`语句表达的意思为：截取从`start`到`start`+`pageSize`之间（左闭右开）的数据
@@ -5032,61 +5047,70 @@ SELECT COUNT(*) FROM record
 
 因此后端的处理逻辑为：
 
-- 获取用户参数页码数page和每页显示的数目 pageSize ，其中page 是必须传递的参数，pageSize为可选参数，默认为10
+- 获取用户参数页码数 page 和每页显示的数目 pageSize ，其中 page 是必须传递的参数，pageSize 为可选参数，默认为 10
 - 编写 SQL 语句，利用 limit 和 OFFSET 关键字进行分页查询
 - 查询数据库，返回总数据量、总页数、当前页、当前页数据给前端
 
 代码如下所示：
 
 ```js
-router.all('/api', function (req, res, next) {
-  var param = '';
+router.all("/api", function (req, res, next) {
+  var param = "";
   // 获取参数
   if (req.method == "POST") {
     param = req.body;
   } else {
     param = req.query || req.params;
   }
-  if (param.page == '' || param.page == null || param.page == undefined) {
-    res.end(JSON.stringify({ msg: '请传入参数page', status: '102' }));
+  if (param.page == "" || param.page == null || param.page == undefined) {
+    res.end(JSON.stringify({ msg: "请传入参数page", status: "102" }));
     return;
   }
   const pageSize = param.pageSize || 10;
   const start = (param.page - 1) * pageSize;
-  const sql = `SELECT * FROM record limit ${pageSize} OFFSET ${start};`
+  const sql = `SELECT * FROM record limit ${pageSize} OFFSET ${start};`;
   pool.getConnection(function (err, connection) {
     if (err) throw err;
     connection.query(sql, function (err, results) {
       connection.release();
       if (err) {
-        throw err
+        throw err;
       } else {
         // 计算总页数
-        var allCount = results[0][0]['COUNT(*)'];
+        var allCount = results[0][0]["COUNT(*)"];
         var allPage = parseInt(allCount) / 20;
         var pageStr = allPage.toString();
         // 不能被整除
-        if (pageStr.indexOf('.') > 0) {
-          allPage = parseInt(pageStr.split('.')[0]) + 1;
+        if (pageStr.indexOf(".") > 0) {
+          allPage = parseInt(pageStr.split(".")[0]) + 1;
         }
         var list = results[1];
-        res.end(JSON.stringify({ msg: '操作成功', status: '200', totalPages: allPage, currentPage: param.page, totalCount: allCount, data: list }));
+        res.end(
+          JSON.stringify({
+            msg: "操作成功",
+            status: "200",
+            totalPages: allPage,
+            currentPage: param.page,
+            totalCount: allCount,
+            data: list,
+          })
+        );
       }
-    })
-  })
+    });
+  });
 });
 ```
 
 #### 三、总结
 
-通过上面的分析，可以看到分页查询的关键在于，要首先确定每页显示的数量`pageSize`，然后根据当前页的索引`pageIndex`（从1开始），确定`LIMIT`和`OFFSET`应该设定的值：
+通过上面的分析，可以看到分页查询的关键在于，要首先确定每页显示的数量`pageSize`，然后根据当前页的索引`pageIndex`（从 1 开始），确定`LIMIT`和`OFFSET`应该设定的值：
 
 - LIMIT 总是设定为 pageSize
-- OFFSET 计算公式为 pageSize * (pageIndex - 1)
+- OFFSET 计算公式为 pageSize \* (pageIndex - 1)
 
 确定了这两个值，就能查询出第 `N`页的数据
 
-### Node.js性能监控和优化
+### Node.js 性能监控和优化
 
 #### 一、 是什么
 
@@ -5101,20 +5125,20 @@ router.all('/api', function (req, res, next) {
 
 主要分成了两部分：
 
-- CPU负载：在某个时间段内，占用以及等待CPU的进程总数
-- CPU使用率：CPU时间占用状况，等于 1 - 空闲CPU时间(idle time) / CPU总时间
+- CPU 负载：在某个时间段内，占用以及等待 CPU 的进程总数
+- CPU 使用率：CPU 时间占用状况，等于 1 - 空闲 CPU 时间(idle time) / CPU 总时间
 
-这两个指标都是用来评估系统当前CPU的繁忙程度的量化指标
+这两个指标都是用来评估系统当前 CPU 的繁忙程度的量化指标
 
 `Node`应用一般不会消耗很多的`CPU`，如果`CPU`占用率高，则表明应用存在很多同步操作，导致异步任务回调被阻塞
 
 ##### 内存指标
 
-内存是一个非常容易量化的指标。 内存占用率是评判一个系统的内存瓶颈的常见指标。 对于Node来说，内部内存堆栈的使用状态也是一个可以量化的指标
+内存是一个非常容易量化的指标。 内存占用率是评判一个系统的内存瓶颈的常见指标。 对于 Node 来说，内部内存堆栈的使用状态也是一个可以量化的指标
 
 ```js
 // /app/lib/memory.js
-const os = require('os');
+const os = require("os");
 // 获取当前Node内存堆栈情况
 const { rss, heapUsed, heapTotal } = process.memoryUsage();
 // 获取系统空闲内存
@@ -5125,20 +5149,20 @@ const sysTotal = os.totalmem();
 module.exports = {
   memory: () => {
     return {
-      sys: 1 - sysFree / sysTotal,  // 系统内存占用率
-      heap: heapUsed / headTotal,   // Node堆内存占用率
-      node: rss / sysTotal,         // Node占用系统内存的比例
-    }
-  }
-}
+      sys: 1 - sysFree / sysTotal, // 系统内存占用率
+      heap: heapUsed / headTotal, // Node堆内存占用率
+      node: rss / sysTotal, // Node占用系统内存的比例
+    };
+  },
+};
 ```
 
-- rss：表示node进程占用的内存总量。
+- rss：表示 node 进程占用的内存总量。
 - heapTotal：表示堆内存的总量。
 - heapUsed：实际堆内存的使用量。
-- external ：外部程序的内存使用量，包含Node核心的C++程序的内存使用量
+- external ：外部程序的内存使用量，包含 Node 核心的 C++程序的内存使用量
 
-在`Node`中，一个进程的最大内存容量为1.5GB。因此我们需要减少内存泄露
+在`Node`中，一个进程的最大内存容量为 1.5GB。因此我们需要减少内存泄露
 
 ##### 磁盘 I/O
 
@@ -5159,8 +5183,8 @@ module.exports = {
 在你的项目入口文件中按照如下方式引入，当然请传入你的项目名称：
 
 ```js
-const easyMonitor = require('easy-monitor');
-easyMonitor('你的项目名称');
+const easyMonitor = require("easy-monitor");
+easyMonitor("你的项目名称");
 ```
 
 打开你的浏览器，访问 `http://localhost:12333` ，即可看到进程界面
@@ -5171,12 +5195,12 @@ easyMonitor('你的项目名称');
 
 关于`Node`的性能优化的方式有：
 
-- 使用最新版本Node.js
+- 使用最新版本 Node.js
 - 正确使用流 Stream
 - 代码层面优化
 - 内存管理优化
 
-##### 使用最新版本Node.js
+##### 使用最新版本 Node.js
 
 每个版本的性能提升主要来自于两个方面：
 
@@ -5188,20 +5212,20 @@ easyMonitor('你的项目名称');
 在`Node`中，很多对象都实现了流，对于一个大文件可以通过流的形式发送，不需要将其完全读入内存
 
 ```js
-const http = require('http');
-const fs = require('fs');
+const http = require("http");
+const fs = require("fs");
 
 // bad
 http.createServer(function (req, res) {
-    fs.readFile(__dirname + '/data.txt', function (err, data) {
-        res.end(data);
-    });
+  fs.readFile(__dirname + "/data.txt", function (err, data) {
+    res.end(data);
+  });
 });
 
 // good
 http.createServer(function (req, res) {
-    const stream = fs.createReadStream(__dirname + '/data.txt');
-    stream.pipe(res);
+  const stream = fs.createReadStream(__dirname + "/data.txt");
+  stream.pipe(res);
 });
 ```
 
@@ -5211,7 +5235,7 @@ http.createServer(function (req, res) {
 
 ```js
 // bad
-for user_id in userIds 
+for user_id in userIds
      let account = user_account.findOne(user_id)
 
 // good
@@ -5219,7 +5243,7 @@ const user_account_map = {}   // 注意这个对象将会消耗大量内存。
 user_account.find(user_id in user_ids).forEach(account){
     user_account_map[account.user_id] =  account
 }
-for user_id in userIds 
+for user_id in userIds
     var account = user_account_map[user_id]
 ```
 
@@ -5237,15 +5261,15 @@ for user_id in userIds
 如下面情况：
 
 ```js
-const buffer = fs.readFileSync(__dirname + '/source/index.htm');
+const buffer = fs.readFileSync(__dirname + "/source/index.htm");
 
 app.use(
-    mount('/', async (ctx) => {
-        ctx.status = 200;
-        ctx.type = 'html';
-        ctx.body = buffer;
-        leak.push(fs.readFileSync(__dirname + '/source/index.htm'));
-    })
+  mount("/", async (ctx) => {
+    ctx.status = 200;
+    ctx.type = "html";
+    ctx.body = buffer;
+    leak.push(fs.readFileSync(__dirname + "/source/index.htm"));
+  })
 );
 
 const leak = [];
@@ -5255,7 +5279,7 @@ const leak = [];
 
 而节省内存最好的方式是使用池，其将频用、可复用对象存储起来，减少创建和销毁操作
 
-例如有个图片请求接口，每次请求，都需要用到类。若每次都需要重新new这些类，并不是很合适，在大量请求时，频繁创建和销毁这些类，造成内存抖动
+例如有个图片请求接口，每次请求，都需要用到类。若每次都需要重新 new 这些类，并不是很合适，在大量请求时，频繁创建和销毁这些类，造成内存抖动
 
 使用对象池的机制，对这种频繁需要创建和销毁的对象保存在一个对象池中。每次用到该对象时，就取对象池空闲的对象，并对它进行初始化操作，从而提高框架的性能
 
@@ -5266,46 +5290,46 @@ const fs = require("fs");
 const path = require("path");
 
 function readDir(pathUrl) {
-	fs.readdir(pathUrl, (err, fileName) => {
-		if (err) {
-			console.log('文件夹读取错误', err)
-		} else {
-			for (let i = 0; i < fileName.length; i++) {
-				if (fs.statSync(`${pathUrl}/${fileName[i]}`).isFile() === true) {
-					let extent = fileName[i].split('.')[1]
-					if (extent == "json") {
-						fs.readFile(`${pathUrl}/${fileName[i]}`, 'utf-8', (err, content) => {
-							if (err) {
-								console.log('读取文件内容失败', err);
-							} else {
-								let copyJson = JSON.parse(JSON.stringify(content));
-								let copyObj = JSON.parse(copyJson)
-								let itemsArr = copyObj.items
-								for (let i = 0; i < itemsArr.length; i++) {
-									let str = itemsArr[i].evaluate_text
-									let reg = /[\u3002|\uff1f|\uff01|\uff1b]$/g  //判断是否为
-									if (reg.test(str)) {
-										itemsArr[i].category = "read_sentence"
-									}
-								}
-								copyObj.items = itemsArr
-								let result = JSON.stringify(copyObj)
-							 fs.writeFile(`${pathUrl}/${fileName[i]}`,result,(err)=>{
-									if(!err) console.log("修改成功");
-								})
-							}
-						});
-					}
-				}
-				else {
-					readDir(`${pathUrl}/${fileName[i]}`);
-				}
-			}
-		}
-	});
-};
-readDir('./classification');
+  fs.readdir(pathUrl, (err, fileName) => {
+    if (err) {
+      console.log("文件夹读取错误", err);
+    } else {
+      for (let i = 0; i < fileName.length; i++) {
+        if (fs.statSync(`${pathUrl}/${fileName[i]}`).isFile() === true) {
+          let extent = fileName[i].split(".")[1];
+          if (extent == "json") {
+            fs.readFile(
+              `${pathUrl}/${fileName[i]}`,
+              "utf-8",
+              (err, content) => {
+                if (err) {
+                  console.log("读取文件内容失败", err);
+                } else {
+                  let copyJson = JSON.parse(JSON.stringify(content));
+                  let copyObj = JSON.parse(copyJson);
+                  let itemsArr = copyObj.items;
+                  for (let i = 0; i < itemsArr.length; i++) {
+                    let str = itemsArr[i].evaluate_text;
+                    let reg = /[\u3002|\uff1f|\uff01|\uff1b]$/g; //判断是否为
+                    if (reg.test(str)) {
+                      itemsArr[i].category = "read_sentence";
+                    }
+                  }
+                  copyObj.items = itemsArr;
+                  let result = JSON.stringify(copyObj);
+                  fs.writeFile(`${pathUrl}/${fileName[i]}`, result, (err) => {
+                    if (!err) console.log("修改成功");
+                  });
+                }
+              }
+            );
+          }
+        } else {
+          readDir(`${pathUrl}/${fileName[i]}`);
+        }
+      }
+    }
+  });
+}
+readDir("./classification");
 ```
-
-
-

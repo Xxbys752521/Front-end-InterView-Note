@@ -20,8 +20,8 @@ webpack 本身只能处理 js、json 等资源，其他资源需要借助 loader
 
 主要由两种模式：
 
--   开发模式：development
--   生产模式：production
+- 开发模式：development
+- 生产模式：production
 
 在项目根目录下新建文件：`webpack.config.js`
 
@@ -72,10 +72,9 @@ module.exports = {
   // 模式
   mode: "development", // 开发模式
 };
-
 ```
 
-运行指令  
+运行指令
 
 ```js
 npx webpack
@@ -101,8 +100,8 @@ npx webpack
 
 Webpack 本身是不能识别样式资源的，所以我们需要借助 Loader 来帮助 Webpack 解析样式资源
 
--   `css-loader`：负责将 Css 文件编译成 Webpack 能识别的模块
--   `style-loader`：会动态创建一个 Style 标签，里面放置 Webpack 中 Css 模块内容
+- `css-loader`：负责将 Css 文件编译成 Webpack 能识别的模块
+- `style-loader`：会动态创建一个 Style 标签，里面放置 Webpack 中 Css 模块内容
 
 样式就会以 Style 标签的形式在页面上生效
 
@@ -136,13 +135,13 @@ module.exports = {
 };
 ```
 
--   `less-loader`：负责将 Less 文件编译成 Css 文件
+- `less-loader`：负责将 Less 文件编译成 Css 文件
 
 ```js
 npm i less-loader -D
 ```
 
-匹配less
+匹配 less
 
 ```js
 const path = require("path");
@@ -172,8 +171,8 @@ module.exports = {
 };
 ```
 
--   `sass-loader`：负责将 Sass 文件编译成 css 文件
--   `sass`：`sass-loader` 依赖 `sass` 进行编译
+- `sass-loader`：负责将 Sass 文件编译成 css 文件
+- `sass`：`sass-loader` 依赖 `sass` 进行编译
 
 ```js
 npm i sass-loader sass -D
@@ -209,7 +208,6 @@ module.exports = {
   plugins: [],
   mode: "development",
 };
-
 ```
 
 经过 `style-loader` 的处理，样式资源打包到 main.js 里面去了，所以没有额外输出出来
@@ -218,7 +216,7 @@ module.exports = {
 
 在 Webpack4 时，我们处理图片资源通过 `file-loader` 和 `url-loader` 进行处理
 
- Webpack5 已经将两个 Loader 功能内置到 Webpack 里了，我们只需要简单配置即可处理图片资源
+Webpack5 已经将两个 Loader 功能内置到 Webpack 里了，我们只需要简单配置即可处理图片资源
 
 ```js
 const path = require("path");
@@ -237,9 +235,9 @@ module.exports = {
         //
         parser: {
           dataUrlCondition: {
-            maxSize: 10 * 1024 // 小于10kb的图片会被base64处理
-          }
-        }
+            maxSize: 10 * 1024, // 小于10kb的图片会被base64处理
+          },
+        },
       },
     ],
   },
@@ -250,11 +248,11 @@ module.exports = {
 
 ## 修改输出资源的名称和路径
 
-修改filename
+修改 filename
 
 generator: {
-          `filename: "static/imgs/[hash:8][ext][query]`",
-      },
+`filename: "static/imgs/[hash:8][ext][query]`",
+},
 
 ```js
 const path = require("path");
@@ -297,7 +295,7 @@ module.exports = {
 };
 ```
 
-修改html
+修改 html
 
 修改 js 资源路径
 
@@ -315,16 +313,16 @@ clean: true, // 自动将上次打包目录资源清空
 
 ## 处理字体图标资源
 
-html中使用字体图标
+html 中使用字体图标
 
 ```html
 <!-- 使用字体图标 -->
-    <i class="iconfont icon-arrow-down"></i>
-    <i class="iconfont icon-ashbin"></i>
-    <i class="iconfont icon-browse"></i>
+<i class="iconfont icon-arrow-down"></i>
+<i class="iconfont icon-ashbin"></i>
+<i class="iconfont icon-browse"></i>
 ```
 
-loader中配置
+loader 中配置
 
 ```js
 {
@@ -353,14 +351,14 @@ loader中配置
 },
 ```
 
-## 处理js资源
+## 处理 js 资源
 
 Webpack 对 js 处理是有限的，只能编译 js 中 ES 模块化语法，不能编译其他语法，导致 js 不能在 IE 等浏览器运行，所以我们希望做一些兼容性处理
 
 其次开发中，团队对代码格式是有严格要求的，我们不能由肉眼去检测代码格式，需要使用专业的工具来检测。
 
--   针对 js 兼容性处理，我们使用 Babel 来完成
--   针对代码格式，我们使用 Eslint 来完成
+- 针对 js 兼容性处理，我们使用 Babel 来完成
+- 针对代码格式，我们使用 Eslint 来完成
 
 我们先完成 Eslint，检测代码格式无误后，在由 Babel 做代码兼容性处理
 
@@ -376,14 +374,14 @@ Webpack 对 js 处理是有限的，只能编译 js 中 ES 模块化语法，不
 
 配置文件由很多种写法：
 
--   
-    .eslintrc.*：新建文件，位于项目根目录
-    -   `.eslintrc`
-    -   `.eslintrc.js`
-    -   `.eslintrc.json`
-    -   区别在于配置格式不一样
+- .eslintrc.\*：新建文件，位于项目根目录
 
--   `package.json` 中 `eslintConfig`：不需要创建文件，在原有文件基础上写
+  - `.eslintrc`
+  - `.eslintrc.js`
+  - `.eslintrc.json`
+  - 区别在于配置格式不一样
+
+- `package.json` 中 `eslintConfig`：不需要创建文件，在原有文件基础上写
 
 ESLint 会查找和自动读取它们，所以以上配置文件只需要存在一个即可
 
@@ -418,9 +416,9 @@ parserOptions: {
 
 2.rules 具体规则
 
--   `"off"` 或 `0` - 关闭规则
--   `"warn"` 或 `1` - 开启规则，使用警告级别的错误：`warn` (不会导致程序退出)
--   `"error"` 或 `2` - 开启规则，使用错误级别的错误：`error` (当被触发的时候，程序会退出)
+- `"off"` 或 `0` - 关闭规则
+- `"warn"` 或 `1` - 开启规则，使用警告级别的错误：`warn` (不会导致程序退出)
+- `"error"` 或 `2` - 开启规则，使用错误级别的错误：`error` (当被触发的时候，程序会退出)
 
 ```js
 rules: {
@@ -437,13 +435,13 @@ rules: {
 }
 ```
 
-3.extends继承
+3.extends 继承
 
 现有以下较为有名的规则：
 
--   [Eslint 官方的规则](https://eslint.bootcss.com/docs/rules/)：`eslint:recommended`
--   [Vue Cli 官方的规则](https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/cli-plugin-eslint)：`plugin:vue/essential`
--   [React Cli 官方的规则](https://github.com/facebook/create-react-app/tree/main/packages/eslint-config-react-app)：`react-app`
+- [Eslint 官方的规则](https://eslint.bootcss.com/docs/rules/)：`eslint:recommended`
+- [Vue Cli 官方的规则](https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/cli-plugin-eslint)：`plugin:vue/essential`
+- [React Cli 官方的规则](https://github.com/facebook/create-react-app/tree/main/packages/eslint-config-react-app)：`react-app`
 
 ```js
 // 例如在React项目中，我们可以这样写配置
@@ -457,7 +455,7 @@ module.exports = {
 };
 ```
 
-####  在 Webpack 中使用
+#### 在 Webpack 中使用
 
 下载
 
@@ -467,7 +465,7 @@ npm i eslint-webpack-plugin eslint -D
 
 定义 Eslint 配置文件
 
--   .eslintrc.js
+- .eslintrc.js
 
 ```js
 module.exports = {
@@ -487,7 +485,7 @@ module.exports = {
 };
 ```
 
--   webpack.config.js
+- webpack.config.js
 
 引入
 
@@ -495,7 +493,7 @@ module.exports = {
 const ESLintWebpackPlugin = require("eslint-webpack-plugin");
 ```
 
-设置plugin
+设置 plugin
 
 ```js
 plugins: [
@@ -514,26 +512,26 @@ plugins: [
 
 配置文件由很多种写法：
 
--   ```
-    babel.config.*
-    ```
+- ```
+  babel.config.*
+  ```
 
-    ：新建文件，位于项目根目录
+  ：新建文件，位于项目根目录
 
-    -   `babel.config.js`
-    -   `babel.config.json`
+  - `babel.config.js`
+  - `babel.config.json`
 
--   ```
-    .babelrc.*
-    ```
+- ```
+  .babelrc.*
+  ```
 
-    ：新建文件，位于项目根目录
+  ：新建文件，位于项目根目录
 
-    -   `.babelrc`
-    -   `.babelrc.js`
-    -   `.babelrc.json`
+  - `.babelrc`
+  - `.babelrc.js`
+  - `.babelrc.json`
 
--   `package.json` 中 `babel`：不需要创建文件，在原有文件基础上写
+- `package.json` 中 `babel`：不需要创建文件，在原有文件基础上写
 
 Babel 会查找和自动读取它们，所以以上配置文件只需要存在一个即可
 
@@ -552,11 +550,11 @@ module.exports = {
 
 简单理解：就是一组 Babel 插件, 扩展 Babel 功能
 
--   `@babel/preset-env`: 一个智能预设，允许您使用最新的 JavaScript。
--   `@babel/preset-react`：一个用来编译 React jsx 语法的预设
--   `@babel/preset-typescript`：一个用来编译 TypeScript 语法的预设
+- `@babel/preset-env`: 一个智能预设，允许您使用最新的 JavaScript。
+- `@babel/preset-react`：一个用来编译 React jsx 语法的预设
+- `@babel/preset-typescript`：一个用来编译 TypeScript 语法的预设
 
-####  在 Webpack 中使用
+#### 在 Webpack 中使用
 
 下载包
 
@@ -566,7 +564,7 @@ npm i babel-loader @babel/core @babel/preset-env -D
 
 定义 Babel 配置文件
 
--   babel.config.js
+- babel.config.js
 
 ```js
 module.exports = {
@@ -574,7 +572,7 @@ module.exports = {
 };
 ```
 
--   webpack.config.js
+- webpack.config.js
 
 ```js
 {
@@ -594,15 +592,15 @@ npm i html-webpack-plugin -D
 
 配置
 
--   webpack.config.js
+- webpack.config.js
 
-引入   html-webpack-plugin
+引入 html-webpack-plugin
 
 ```js
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 ```
 
-plugin内
+plugin 内
 
 ```js
 new HtmlWebpackPlugin({
@@ -624,7 +622,7 @@ npm i webpack-dev-server -D
 
 配置
 
--   webpack.config.js
+- webpack.config.js
 
 ```js
 // 开发服务器
@@ -748,7 +746,6 @@ module.exports = {
   },
   mode: "development",
 };
-
 ```
 
 运行开发模式的指令：
@@ -761,22 +758,22 @@ npx webpack serve --config ./config/webpack.dev.js
 
 需要输出
 
-output中
+output 中
 
 ```js
-path: path.resolve(__dirname, "../dist"), 
+path: path.resolve(__dirname, "../dist"),
 ```
 
-不能使用   devServer 
+不能使用 devServer
 
- 运行生产模式的指令：
+运行生产模式的指令：
 
 ```text
 npx webpack --config ./config/webpack.prod.js
 ```
 
--   开发模式：可以编译 ES Module 语法
--   生产模式：可以编译 ES Module 语法，压缩 js 代码
+- 开发模式：可以编译 ES Module 语法
+- 生产模式：可以编译 ES Module 语法，压缩 js 代码
 
 ### 配置运行指令
 
@@ -796,8 +793,8 @@ npx webpack --config ./config/webpack.prod.js
 
 以后启动指令：
 
--   开发模式：`npm start` 或 `npm run dev`
--   生产模式：`npm run build`
+- 开发模式：`npm start` 或 `npm run dev`
+- 生产模式：`npm run build`
 
 ## Css 处理
 
@@ -817,44 +814,44 @@ npm i mini-css-extract-plugin -D
 
 配置
 
--   webpack.prod.js
+- webpack.prod.js
 
 ```js
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 ```
 
-不能再使用style-loader
+不能再使用 style-loader
 
-需要在之前的样式文件配置中将style-loader替换为
+需要在之前的样式文件配置中将 style-loader 替换为
 
 MiniCssExtractPlugin.loader
 
 ```js
 module: {
-    rules: [
-      {
-        // 用来匹配 .css 结尾的文件
-        test: /\.css$/,
-        // use 数组里面 Loader 执行顺序是从右到左
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
-      {
-        test: /\.less$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
-      },
-      {
-        test: /\.s[ac]ss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-      },
-      {
-        test: /\.styl$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "stylus-loader"],
-      }
-      ]
+  rules: [
+    {
+      // 用来匹配 .css 结尾的文件
+      test: /\.css$/,
+      // use 数组里面 Loader 执行顺序是从右到左
+      use: [MiniCssExtractPlugin.loader, "css-loader"],
+    },
+    {
+      test: /\.less$/,
+      use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
+    },
+    {
+      test: /\.s[ac]ss$/,
+      use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+    },
+    {
+      test: /\.styl$/,
+      use: [MiniCssExtractPlugin.loader, "css-loader", "stylus-loader"],
+    },
+  ];
 }
 ```
 
-plugin配置
+plugin 配置
 
 ```js
  // 提取css成单独文件
@@ -864,7 +861,7 @@ plugin配置
     }),
 ```
 
-### css兼容性处理
+### css 兼容性处理
 
 下载
 
@@ -872,34 +869,34 @@ plugin配置
 npm i postcss-loader postcss postcss-preset-env -D
 ```
 
- 配置
+配置
 
--   webpack.prod.js
+- webpack.prod.js
 
 ```js
 module: {
-    rules: [
-      {
-        // 用来匹配 .css 结尾的文件
-        test: /\.css$/,
-        // use 数组里面 Loader 执行顺序是从右到左
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  "postcss-preset-env", // 能解决大多数样式兼容性问题
-                ],
-              },
+  rules: [
+    {
+      // 用来匹配 .css 结尾的文件
+      test: /\.css$/,
+      // use 数组里面 Loader 执行顺序是从右到左
+      use: [
+        MiniCssExtractPlugin.loader,
+        "css-loader",
+        {
+          loader: "postcss-loader",
+          options: {
+            postcssOptions: {
+              plugins: [
+                "postcss-preset-env", // 能解决大多数样式兼容性问题
+              ],
             },
           },
-        ],
-      }
-      ]
-      }
+        },
+      ],
+    },
+  ];
+}
 ```
 
 控制兼容性
@@ -947,29 +944,30 @@ const getStyleLoaders = (preProcessor) => {
 
 ```js
 module: {
-    rules: [
-      {
-        // 用来匹配 .css 结尾的文件
-        test: /\.css$/,
-        // use 数组里面 Loader 执行顺序是从右到左
-        use: getStyleLoaders(),
-      },
-      {
-        test: /\.less$/,
-        use: getStyleLoaders("less-loader"),
-      },
-      {
-        test: /\.s[ac]ss$/,
-        use: getStyleLoaders("sass-loader"),
-      },
-      {
-        test: /\.styl$/,
-        use: getStyleLoaders("stylus-loader"),
-      }]
-      }
+  rules: [
+    {
+      // 用来匹配 .css 结尾的文件
+      test: /\.css$/,
+      // use 数组里面 Loader 执行顺序是从右到左
+      use: getStyleLoaders(),
+    },
+    {
+      test: /\.less$/,
+      use: getStyleLoaders("less-loader"),
+    },
+    {
+      test: /\.s[ac]ss$/,
+      use: getStyleLoaders("sass-loader"),
+    },
+    {
+      test: /\.styl$/,
+      use: getStyleLoaders("stylus-loader"),
+    },
+  ];
+}
 ```
 
-### Css压缩
+### Css 压缩
 
 下载
 
@@ -979,7 +977,7 @@ npm i css-minimizer-webpack-plugin -D
 
 配置
 
--   webpack.prod.js
+- webpack.prod.js
 
 引入
 
@@ -987,7 +985,7 @@ npm i css-minimizer-webpack-plugin -D
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 ```
 
-plugin中配置
+plugin 中配置
 
 ```js
 // css压缩
@@ -1012,9 +1010,9 @@ SourceMap（源代码映射）是一个用来生成源代码与构建后代码�
 
 实际开发时我们只需要关注两种情况即可：
 
--   开发模式：`cheap-module-source-map`
-    -   优点：打包编译速度快，只包含行映射
-    -   缺点：没有列映射
+- 开发模式：`cheap-module-source-map`
+  - 优点：打包编译速度快，只包含行映射
+  - 缺点：没有列映射
 
 ```javascript
 module.exports = {
@@ -1024,10 +1022,10 @@ module.exports = {
 };
 ```
 
--   生产模式：source-map
-   
-    -   优点：包含行/列映射
-    -   缺点：打包编译速度更慢
+- 生产模式：source-map
+
+  - 优点：包含行/列映射
+  - 缺点：打包编译速度更慢
 
 ```javascript
 module.exports = {
@@ -1037,7 +1035,7 @@ module.exports = {
 };
 ```
 
-###  提升打包构建速度
+### 提升打包构建速度
 
 开发时我们修改了其中一个模块代码，Webpack 默认会将所有模块全部重新打包编译，速度很慢。
 
@@ -1047,7 +1045,7 @@ HotModuleReplacement（HMR/热模块替换）：在程序运行中，替换、�
 
 配置
 
-devServer中设置 hot:true
+devServer 中设置 hot:true
 
 ```js
 module.exports = {
@@ -1063,21 +1061,21 @@ module.exports = {
 
 此时 css 样式经过 style-loader 处理，已经具备 HMR 功能了。 但是 js 还不行
 
-####  Include/Exclude
+#### Include/Exclude
 
 开发时我们需要使用第三方的库或插件，所有文件都下载到 node_modules 中了。而这些文件是不需要编译可以直接使用的。
 
 所以我们在对 js 文件处理时，要排除 node_modules 下面的文件
 
--   include
+- include
 
 包含，只处理 xxx 文件
 
--   exclude
+- exclude
 
 排除，除了 xxx 文件以外其他文件都处理
 
-babel-loader中设置
+babel-loader 中设置
 
 ```js
 {
@@ -1088,7 +1086,7 @@ babel-loader中设置
           },
 ```
 
-ESLintWebpackPlugin设置
+ESLintWebpackPlugin 设置
 
 ```js
 new ESLintWebpackPlugin({
@@ -1106,7 +1104,7 @@ new ESLintWebpackPlugin({
 
 对 Eslint 检查 和 Babel 编译结果进行缓存
 
-针对Babel
+针对 Babel
 
 ```js
 {
@@ -1121,7 +1119,7 @@ new ESLintWebpackPlugin({
           },
 ```
 
-针对ESLintWebpackPlugin
+针对 ESLintWebpackPlugin
 
 ```js
 new ESLintWebpackPlugin({
@@ -1157,7 +1155,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const threads = os.cpus().length;
 ```
 
-针对js
+针对 js
 
 ```js
 {
@@ -1353,31 +1351,27 @@ optimization: {
     },
 ```
 
-
-
 ##### 按需加载，动态导入
 
 想要实现按需加载，动态导入模块。还需要额外配置
 
+## loader 原理
 
-
-## loader原理
-
-loader帮助 webpack 将不同类型的文件转换为 webpack 可识别的模块
+loader 帮助 webpack 将不同类型的文件转换为 webpack 可识别的模块
 
 ### loader 执行顺序
 
 1.  分类
 
--   pre： 前置 loader
--   normal： 普通 loader
--   inline： 内联 loader
--   post： 后置 loader
+- pre： 前置 loader
+- normal： 普通 loader
+- inline： 内联 loader
+- post： 后置 loader
 
 1.  执行顺序
 
--   4 类 loader 的执行优级为：`pre > normal > inline > post` 。
--   相同优先级的 loader 执行顺序为：`从右到左，从下到上`
+- 4 类 loader 的执行优级为：`pre > normal > inline > post` 。
+- 相同优先级的 loader 执行顺序为：`从右到左，从下到上`
 
 ```js
 // 此时loader执行顺序：loader1 - loader2 - loader3
@@ -1405,8 +1399,8 @@ module: {
 
 使用 loader 的方式
 
--   配置方式：在 `webpack.config.js` 文件中指定 loader。（pre、normal、post loader）
--   内联方式：在每个 `import` 语句中显式指定 loader。（inline loader）
+- 配置方式：在 `webpack.config.js` 文件中指定 loader。（pre、normal、post loader）
+- 内联方式：在每个 `import` 语句中显式指定 loader。（inline loader）
 
 inline loader
 
@@ -1414,32 +1408,32 @@ inline loader
 
 含义：
 
--   使用 `css-loader` 和 `style-loader` 处理 `styles.css` 文件
--   通过 `!` 将资源中的 loader 分开
+- 使用 `css-loader` 和 `style-loader` 处理 `styles.css` 文件
+- 通过 `!` 将资源中的 loader 分开
 
 `inline loader` 可以通过添加不同前缀，跳过其他类型 loader。
 
--   `!` 跳过 normal loader。
+- `!` 跳过 normal loader。
 
 ```javascript
-import Styles from '!style-loader!css-loader?modules!./styles.css';
+import Styles from "!style-loader!css-loader?modules!./styles.css";
 ```
 
--   `-!` 跳过 pre 和 normal loader。
+- `-!` 跳过 pre 和 normal loader。
 
 ```javascript
-import Styles from '-!style-loader!css-loader?modules!./styles.css';
+import Styles from "-!style-loader!css-loader?modules!./styles.css";
 ```
 
--   `!!` 跳过 pre、 normal 和 post loader。
+- `!!` 跳过 pre、 normal 和 post loader。
 
 ```javascript
-import Styles from '!!style-loader!css-loader?modules!./styles.css'
+import Styles from "!!style-loader!css-loader?modules!./styles.css";
 ```
 
-### 开发一个loader
+### 开发一个 loader
 
-#### 简单的loader
+#### 简单的 loader
 
 ```js
 // loaders/loader1.js
@@ -1451,15 +1445,15 @@ module.exports = function loader1(content) {
 
 它接受要处理的源码作为参数，输出转换后的 js 代码
 
-####  loader 接受的参数
+#### loader 接受的参数
 
--   `content` 源文件的内容
--   `map` SourceMap 数据
--   `meta` 数据，可以是任何内容
+- `content` 源文件的内容
+- `map` SourceMap 数据
+- `meta` 数据，可以是任何内容
 
-#### loader分类
+#### loader 分类
 
-**同步loader**
+**同步 loader**
 
 ```js
 module.exports = function (content, map, meta) {
@@ -1471,9 +1465,9 @@ module.exports = function (content, map, meta) {
 
 `content`
 
-**传递map，让source-map不中断**
+**传递 map，让 source-map 不中断**
 
- **传递meta，让下一个loader接收到其他参数**
+**传递 meta，让下一个 loader 接收到其他参数**
 
 ```js
 module.exports = function (content, map, meta) {
@@ -1482,7 +1476,7 @@ module.exports = function (content, map, meta) {
 };
 ```
 
-**异步loader**
+**异步 loader**
 
 ```js
 module.exports = function (content, map, meta) {
@@ -1506,7 +1500,7 @@ module.exports = function (content) {
 module.exports.raw = true; // 开启 Raw Loader
 ```
 
- **Pitching Loader**
+**Pitching Loader**
 
 ```js
 module.exports = function (content) {
@@ -1525,7 +1519,7 @@ webpack 会先**从左到右**执行 loader 链中的每个 loader 上的 **pitc
 
 ![loader执行流程](https://s2.loli.net/2022/05/19/uYxEHXTMmFi5Gn8.png)
 
-####  loader API
+#### loader API
 
 | 方法名                  | 含义                                       | 用法                                           |
 | ----------------------- | ------------------------------------------ | ---------------------------------------------- |
@@ -1552,7 +1546,7 @@ module.exports = function cleanLogLoader(content) {
 
 作用：给 js 代码添加文本注释
 
--   loaders/banner-loader/index.js
+- loaders/banner-loader/index.js
 
 ```js
 const schema = require("./schema.json");
@@ -1572,7 +1566,7 @@ module.exports = function (content) {
 };
 ```
 
--   loaders/banner-loader/schema.json
+- loaders/banner-loader/schema.json
 
 ```js
 {
@@ -1590,13 +1584,13 @@ module.exports = function (content) {
 
 作用：编译 js 代码，将 ES6+语法编译成 ES5-语法
 
--   下载依赖
+- 下载依赖
 
 ```js
 npm i @babel/core @babel/preset-env -D
 ```
 
--   loaders/babel-loader/index.js
+- loaders/babel-loader/index.js
 
 ```js
 const schema = require("./schema.json");
@@ -1613,7 +1607,7 @@ module.exports = function (content) {
 };
 ```
 
--   loaders/banner-loader/schema.json
+- loaders/banner-loader/schema.json
 
 ```js
 {
@@ -1631,13 +1625,13 @@ module.exports = function (content) {
 
 作用：将文件原封不动输出出去
 
--   下载包  loader-utils
+- 下载包 loader-utils
 
 ```js
 npm i loader-utils -D
 ```
 
--   loaders/file-loader.js
+- loaders/file-loader.js
 
 ```js
 const loaderUtils = require("loader-utils");
@@ -1661,7 +1655,7 @@ fileLoader.raw = true;
 module.exports = fileLoader;
 ```
 
--   loader 配置
+- loader 配置
 
 ```js
 {
@@ -1675,7 +1669,7 @@ module.exports = fileLoader;
 
 作用：动态创建 style 标签，插入 js 中的样式代码，使样式生效。
 
--   loaders/style-loader.js
+- loaders/style-loader.js
 
 ```javascript
 const styleLoader = () => {};
@@ -1740,7 +1734,7 @@ module.exports = styleLoader;
 
 通过插件我们可以扩展 webpack，加入自定义的构建行为，使 webpack 可以执行更广泛的任务，拥有更强的构建能力
 
->webpack 就像一条生产线，要经过一系列处理流程后才能将源文件转换成输出结果。 这条生产线上的每个处理流程的职责都是单一的，多个流程之间有存在依赖关系，只有完成当前处理后才能交给下一个流程去处理。 插件就像是一个插入到生产线中的一个功能，在特定的时机对生产线上的资源做处理。webpack 通过 Tapable 来组织这条复杂的生产线。 webpack 在运行过程中会广播事件，插件只需要监听它所关心的事件，就能加入到这条生产线中，去改变生产线的运作。 webpack 的事件流机制保证了插件的有序性，使得整个系统扩展性很好。 ——「深入浅出 Webpack」
+> webpack 就像一条生产线，要经过一系列处理流程后才能将源文件转换成输出结果。 这条生产线上的每个处理流程的职责都是单一的，多个流程之间有存在依赖关系，只有完成当前处理后才能交给下一个流程去处理。 插件就像是一个插入到生产线中的一个功能，在特定的时机对生产线上的资源做处理。webpack 通过 Tapable 来组织这条复杂的生产线。 webpack 在运行过程中会广播事件，插件只需要监听它所关心的事件，就能加入到这条生产线中，去改变生产线的运作。 webpack 的事件流机制保证了插件的有序性，使得整个系统扩展性很好。 ——「深入浅出 Webpack」
 
 站在代码逻辑的角度就是：webpack 在编译代码过程中，会触发一系列 `Tapable` 钩子事件，插件所做的，就是找到相应的钩子，往上面挂上自己的任务，也就是注册事件，这样，当 webpack 构建的时候，插件注册的事件就会随着钩子的触发而执行了
 
@@ -1770,9 +1764,9 @@ exports.MultiHook = require("./MultiHook");
 
 `Tapable` 还统一暴露了三个方法给插件，用于注入不同类型的自定义构建行为：
 
--   `tap`：可以注册同步钩子和异步钩子。
--   `tapAsync`：回调方式注册异步钩子。
--   `tapPromise`：Promise 方式注册异步钩子
+- `tap`：可以注册同步钩子和异步钩子。
+- `tapAsync`：回调方式注册异步钩子。
+- `tapPromise`：Promise 方式注册异步钩子
 
 ### Plugin 构建对象
 
@@ -1784,11 +1778,11 @@ exports.MultiHook = require("./MultiHook");
 
 它有以下主要属性：
 
--   `compiler.options` 可以访问本次启动 webpack 时候所有的**配置文件**，包括但不限于 loaders 、 entry 、 output 、 plugin 等等完整配置信息。
--   `compiler.inputFileSystem` 和 `compiler.outputFileSystem` 可以进行文件操作，相当于 Node.js 中 fs。
--   `compiler.hooks` 可以**注册 tapable 的不同种类 Hook**，从而可以**在 compiler 生命周期中植入不同的逻辑**
+- `compiler.options` 可以访问本次启动 webpack 时候所有的**配置文件**，包括但不限于 loaders 、 entry 、 output 、 plugin 等等完整配置信息。
+- `compiler.inputFileSystem` 和 `compiler.outputFileSystem` 可以进行文件操作，相当于 Node.js 中 fs。
+- `compiler.hooks` 可以**注册 tapable 的不同种类 Hook**，从而可以**在 compiler 生命周期中植入不同的逻辑**
 
->[complier hooks文档](https://webpack.docschina.org/api/compiler-hooks/)
+> [complier hooks 文档](https://webpack.docschina.org/api/compiler-hooks/)
 
 #### Compilation
 
@@ -1798,12 +1792,12 @@ compilation 对象代表一次资源的构建，compilation 实例能够访问�
 
 它有以下主要属性：
 
--   `compilation.modules` 可以访问所有模块，打包的每一个文件都是一个模块。
--   `compilation.chunks` chunk 即是多个 modules 组成而来的一个代码块。入口文件引入的资源组成一个 chunk，通过代码分割的模块又是另外的 chunk。
--   `compilation.assets` 可以访问本次打包生成所有文件的结果。
--   `compilation.hooks` 可以注册 tapable 的不同种类 Hook，用于在 compilation 编译模块阶段进行逻辑添加以及修改
+- `compilation.modules` 可以访问所有模块，打包的每一个文件都是一个模块。
+- `compilation.chunks` chunk 即是多个 modules 组成而来的一个代码块。入口文件引入的资源组成一个 chunk，通过代码分割的模块又是另外的 chunk。
+- `compilation.assets` 可以访问本次打包生成所有文件的结果。
+- `compilation.hooks` 可以注册 tapable 的不同种类 Hook，用于在 compilation 编译模块阶段进行逻辑添加以及修改
 
->[compilation hooks文档](https://webpack.docschina.org/api/compilation-hooks/)
+> [compilation hooks 文档](https://webpack.docschina.org/api/compilation-hooks/)
 
 #### 生命周期简图
 
@@ -1813,7 +1807,7 @@ compilation 对象代表一次资源的构建，compilation 实例能够访问�
 
 #### 最简单插件
 
--   plugins/test-plugin.js
+- plugins/test-plugin.js
 
 ```js
 class TestPlugin {
@@ -1902,13 +1896,13 @@ class TestPlugin {
 module.exports = TestPlugin;
 ```
 
-####  BannerWebpackPlugin
+#### BannerWebpackPlugin
 
 1.  作用：给打包输出文件添加注释。
 2.  开发思路:
 
--   需要打包输出前添加注释：需要使用 `compiler.hooks.emit` 钩子, 它是打包输出前触发。
--   如何获取打包输出的资源？`compilation.assets` 可以获取所有即将输出的资源文件
+- 需要打包输出前添加注释：需要使用 `compiler.hooks.emit` 钩子, 它是打包输出前触发。
+- 如何获取打包输出的资源？`compilation.assets` 可以获取所有即将输出的资源文件
 
 ```js
 // plugins/banner-webpack-plugin.js
@@ -1922,36 +1916,39 @@ class BannerWebpackPlugin {
     const extensions = ["js", "css"];
 
     // emit是异步串行钩子
-    compiler.hooks.emit.tapAsync("BannerWebpackPlugin", (compilation, callback) => {
-      // compilation.assets包含所有即将输出的资源
-      // 通过过滤只保留需要处理的文件
-      const assetPaths = Object.keys(compilation.assets).filter((path) => {
-        const splitted = path.split(".");
-        return extensions.includes(splitted[splitted.length - 1]);
-      });
+    compiler.hooks.emit.tapAsync(
+      "BannerWebpackPlugin",
+      (compilation, callback) => {
+        // compilation.assets包含所有即将输出的资源
+        // 通过过滤只保留需要处理的文件
+        const assetPaths = Object.keys(compilation.assets).filter((path) => {
+          const splitted = path.split(".");
+          return extensions.includes(splitted[splitted.length - 1]);
+        });
 
-      assetPaths.forEach((assetPath) => {
-        const asset = compilation.assets[assetPath];
+        assetPaths.forEach((assetPath) => {
+          const asset = compilation.assets[assetPath];
 
-        const source = `/*
+          const source = `/*
 * Author: ${this.options.author}
 */\n${asset.source()}`;
 
-        // 覆盖资源
-        compilation.assets[assetPath] = {
-          // 资源内容
-          source() {
-            return source;
-          },
-          // 资源大小
-          size() {
-            return source.length;
-          },
-        };
-      });
+          // 覆盖资源
+          compilation.assets[assetPath] = {
+            // 资源内容
+            source() {
+              return source;
+            },
+            // 资源大小
+            size() {
+              return source.length;
+            },
+          };
+        });
 
-      callback();
-    });
+        callback();
+      }
+    );
   }
 }
 module.exports = BannerWebpackPlugin;
@@ -1962,10 +1959,10 @@ module.exports = BannerWebpackPlugin;
 1.  作用：在 webpack 打包输出前将上次打包内容清空。
 2.  开发思路：
 
--   如何在打包输出前执行？需要使用 `compiler.hooks.emit` 钩子, 它是打包输出前触发。
--   如何清空上次打包内容？
-    -   获取打包输出目录：通过 compiler 对象。
-    -   通过文件操作清空内容：通过 `compiler.outputFileSystem` 操作文件。
+- 如何在打包输出前执行？需要使用 `compiler.hooks.emit` 钩子, 它是打包输出前触发。
+- 如何清空上次打包内容？
+  - 获取打包输出目录：通过 compiler 对象。
+  - 通过文件操作清空内容：通过 `compiler.outputFileSystem` 操作文件。
 
 ```js
 // plugins/clean-webpack-plugin.js
@@ -1974,14 +1971,17 @@ class CleanWebpackPlugin {
     // 获取操作文件的对象
     const fs = compiler.outputFileSystem;
     // emit是异步串行钩子
-    compiler.hooks.emit.tapAsync("CleanWebpackPlugin", (compilation, callback) => {
-      // 获取输出文件目录
-      const outputPath = compiler.options.output.path;
-      // 删除目录所有文件
-      const err = this.removeFiles(fs, outputPath);
-      // 执行成功err为undefined，执行失败err就是错误原因
-      callback(err);
-    });
+    compiler.hooks.emit.tapAsync(
+      "CleanWebpackPlugin",
+      (compilation, callback) => {
+        // 获取输出文件目录
+        const outputPath = compiler.options.output.path;
+        // 删除目录所有文件
+        const err = this.removeFiles(fs, outputPath);
+        // 执行成功err为undefined，执行失败err就是错误原因
+        callback(err);
+      }
+    );
   }
 
   removeFiles(fs, path) {
@@ -2022,7 +2022,7 @@ module.exports = CleanWebpackPlugin;
 1.  作用：分析 webpack 打包资源大小，并输出分析文件。
 2.  开发思路:
 
--   在哪做? `compiler.hooks.emit`, 它是在打包输出前触发，我们需要分析资源大小同时添加上分析后的 md 文件。
+- 在哪做? `compiler.hooks.emit`, 它是在打包输出前触发，我们需要分析资源大小同时添加上分析后的 md 文件。
 
 ```js
 // plugins/analyze-webpack-plugin.js
@@ -2059,11 +2059,11 @@ module.exports = AnalyzeWebpackPlugin;
 
 1.  作用：webpack 打包生成的 runtime 文件太小了，额外发送请求性能不好，所以需要将其内联到 js 中，从而减少请求数量。
 2.  开发思路:
--   我们需要借助html-webpack-plugin来实现
-    -   在 `html-webpack-plugin` 输出 index.html 前将内联 runtime 注入进去
-    -   删除多余的 runtime 文件
-    
--   如何操作 `html-webpack-plugin`
+
+- 我们需要借助 html-webpack-plugin 来实现
+  - 在 `html-webpack-plugin` 输出 index.html 前将内联 runtime 注入进去
+  - 删除多余的 runtime 文件
+- 如何操作 `html-webpack-plugin`
 
 ```js
 // plugins/inline-chunk-webpack-plugin.js
@@ -2075,22 +2075,31 @@ class InlineChunkWebpackPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.compilation.tap("InlineChunkWebpackPlugin", (compilation) => {
-      const hooks = HtmlWebpackPlugin.getHooks(compilation);
+    compiler.hooks.compilation.tap(
+      "InlineChunkWebpackPlugin",
+      (compilation) => {
+        const hooks = HtmlWebpackPlugin.getHooks(compilation);
 
-      hooks.alterAssetTagGroups.tap("InlineChunkWebpackPlugin", (assets) => {
-        assets.headTags = this.getInlineTag(assets.headTags, compilation.assets);
-        assets.bodyTags = this.getInlineTag(assets.bodyTags, compilation.assets);
-      });
-
-      hooks.afterEmit.tap("InlineChunkHtmlPlugin", () => {
-        Object.keys(compilation.assets).forEach((assetName) => {
-          if (this.tests.some((test) => assetName.match(test))) {
-            delete compilation.assets[assetName];
-          }
+        hooks.alterAssetTagGroups.tap("InlineChunkWebpackPlugin", (assets) => {
+          assets.headTags = this.getInlineTag(
+            assets.headTags,
+            compilation.assets
+          );
+          assets.bodyTags = this.getInlineTag(
+            assets.bodyTags,
+            compilation.assets
+          );
         });
-      });
-    });
+
+        hooks.afterEmit.tap("InlineChunkHtmlPlugin", () => {
+          Object.keys(compilation.assets).forEach((assetName) => {
+            if (this.tests.some((test) => assetName.match(test))) {
+              delete compilation.assets[assetName];
+            }
+          });
+        });
+      }
+    );
   }
 
   getInlineTag(tags, assets) {
@@ -2101,12 +2110,14 @@ class InlineChunkWebpackPlugin {
 
       if (!this.tests.some((test) => scriptName.match(test))) return tag;
 
-      return { tagName: "script", innerHTML: assets[scriptName].source(), closeTag: true };
+      return {
+        tagName: "script",
+        innerHTML: assets[scriptName].source(),
+        closeTag: true,
+      };
     });
   }
 }
 
 module.exports = InlineChunkWebpackPlugin;
-
 ```
-

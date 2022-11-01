@@ -1,29 +1,34 @@
-### 如何去封装axios
+---
+sidebar_position: 1
+description: Axios
+---
 
-[ 面试官：Vue/React项目中有封装过axios吗？怎么封装的？](https://juejin.cn/post/6999932338566070308)
+### 如何去封装 axios
 
-#### 一、什么是axios，有什么特性
+[ 面试官：Vue/React 项目中有封装过 axios 吗？怎么封装的？](https://juejin.cn/post/6999932338566070308)
+
+#### 一、什么是 axios，有什么特性
 
 ##### 描述
 
-axios是一个基于`promise`的`HTTP`库，可以用在`浏览器`或者`node.js`中。本文围绕XHR。
+axios 是一个基于`promise`的`HTTP`库，可以用在`浏览器`或者`node.js`中。本文围绕 XHR。
 
-> axios提供两个http请求适配器，XHR和HTTP。XHR的核心是浏览器端的XMLHttpRequest对象；HTTP的核心是node的http.request方法。
+> axios 提供两个 http 请求适配器，XHR 和 HTTP。XHR 的核心是浏览器端的 XMLHttpRequest 对象；HTTP 的核心是 node 的 http.request 方法。
 
 ##### **特性**：
 
--   从浏览器中创建XMLHttpRequests
--   从node.js创建http请求
--   支持promise API
--   拦截请求与响应
--   转换请求数据与响应数据
--   取消请求
--   自动转换JSON数据
--   客户端支持防御XSRF
+- 从浏览器中创建 XMLHttpRequests
+- 从 node.js 创建 http 请求
+- 支持 promise API
+- 拦截请求与响应
+- 转换请求数据与响应数据
+- 取消请求
+- 自动转换 JSON 数据
+- 客户端支持防御 XSRF
 
 ##### 背景
 
-自`Vue`2.0起，尤大宣布取消对 `vue-resource` 的官方推荐，转而推荐 `axios`。现在 `axios` 已经成为大部分 `Vue` 开发者的首选，目前在github上有87.3k star。`axios`的熟练使用和基本封装也成为了vue技术栈系列必不可少的一部分。如果你还不了解axios，建议先熟悉 [axios官网文档](https://link.juejin.cn/?target=https%3A%2F%2Faxios-http.com%2Fdocs%2Fintro "https://axios-http.com/docs/intro")。
+自`Vue`2.0 起，尤大宣布取消对  `vue-resource`  的官方推荐，转而推荐  `axios`。现在  `axios`  已经成为大部分  `Vue`  开发者的首选，目前在 github 上有 87.3k star。`axios`的熟练使用和基本封装也成为了 vue 技术栈系列必不可少的一部分。如果你还不了解 axios，建议先熟悉 [axios 官网文档](https://link.juejin.cn/?target=https%3A%2F%2Faxios-http.com%2Fdocs%2Fintro "https://axios-http.com/docs/intro")。
 
 ##### 基本使用
 
@@ -36,55 +41,60 @@ npm install axios -S
 使用
 
 ```js
-import axios from 'axios'
-// 为给定ID的user创建请求 
-axios.get('/user?ID=12345')   
-    .then(function (response) {     
-        console.log(response);   
-    })   
-    .catch(function (error) {    
-        console.log(error);   
-    });  
-// 上面的请求也可以这样做 
-axios.get('/user', {     
-    params: {ID: 12345}})   
-    .then(function (response) {     
-        console.log(response);   
-    })   
-    .catch(function (error) {     
-        console.log(error);   
-    });
+import axios from "axios";
+// 为给定ID的user创建请求
+axios
+  .get("/user?ID=12345")
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+// 上面的请求也可以这样做
+axios
+  .get("/user", {
+    params: { ID: 12345 },
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
-#### 二、Vue项目中为什么要封装axios
+#### 二、Vue 项目中为什么要封装 axios
 
-`axios`的API很友好，可以在项目中直接使用。但是在大型项目中，http请求很多，且需要区分环境， 每个网络请求有相似需要处理的部分，如下，会导致代码冗余，破坏工程的`可维护性`，`扩展性`
+`axios`的 API 很友好，可以在项目中直接使用。但是在大型项目中，http 请求很多，且需要区分环境， 每个网络请求有相似需要处理的部分，如下，会导致代码冗余，破坏工程的`可维护性`，`扩展性`
 
 ```js
-axios('http://www.kaifa.com/data', {
+axios("http://www.kaifa.com/data", {
   // 配置代码
-  method: 'GET',
+  method: "GET",
   timeout: 3000,
   withCredentials: true,
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
   // 其他请求配置...
-})
-.then((data) => {
-  // todo: 真正业务逻辑代码
-  console.log(data);
-}, (err) => {
-  // 错误处理代码  
-  if (err.response.status === 401) {
-  // handle authorization error
+}).then(
+  (data) => {
+    // todo: 真正业务逻辑代码
+    console.log(data);
+  },
+  (err) => {
+    // 错误处理代码
+    if (err.response.status === 401) {
+      // handle authorization error
+    }
+    if (err.response.status === 403) {
+      // handle server forbidden error
+    }
+    // 其他错误处理.....
+    console.log(err);
   }
-  if (err.response.status === 403) {
-  // handle server forbidden error
-  }
-  // 其他错误处理.....
-  console.log(err);
-});
+);
 ```
 
 - 环境区分
@@ -95,27 +105,25 @@ axios('http://www.kaifa.com/data', {
 
 - 请求超时时间
 
-    -   timeout: 3000
+  - timeout: 3000
 
-- 允许携带cookie
+- 允许携带 cookie
 
-    -   withCredentials: true
+  - withCredentials: true
 
 - 响应结果处理
 
-    -   登录校验失败
-    -   无权限
-    -   成功
+  - 登录校验失败
+  - 无权限
+  - 成功
 
-    
+#### 三、Vue 项目中如何封装 axios
 
-#### 三、Vue项目中如何封装axios
-
-axios文件封装在目录`src/utils/https.js`，对外暴露`callApi`函数
+axios 文件封装在目录`src/utils/https.js`，对外暴露`callApi`函数
 
 ##### 1、环境区分
 
-`callApi`函数暴露`prefixUrl`参数，用来配置api url`前缀`，默认值为`api`
+`callApi`函数暴露`prefixUrl`参数，用来配置 api url`前缀`，默认值为`api`
 
 ```js
 // src/utils/https.js
@@ -131,9 +139,9 @@ export const callApi = ({
     return Promise.reject(error)
   }
   const fullUrl = `/${prefixUrl}/${url}`
-  
+
   ...
-  
+
   return axios({
     url: fullUrl,
     ...
@@ -141,39 +149,45 @@ export const callApi = ({
 }
 ```
 
-看到这里大家可能会问，为什么不用axios提供的配置参数`baseURL`，原因是`baseURL`会给每个接口都加上对应前缀，而项目实际场景中，存在一个前端工程，对应多个`服务`的场景。需要通过不用的前缀代理到不同的服务，`baseURL`虽然能实现，但是需要二级前缀，不优雅，且在使用的时候看不到真实的api地址是啥，因为代理前缀跟真实地址混合在一起了
+看到这里大家可能会问，为什么不用 axios 提供的配置参数`baseURL`，原因是`baseURL`会给每个接口都加上对应前缀，而项目实际场景中，存在一个前端工程，对应多个`服务`的场景。需要通过不用的前缀代理到不同的服务，`baseURL`虽然能实现，但是需要二级前缀，不优雅，且在使用的时候看不到真实的 api 地址是啥，因为代理前缀跟真实地址混合在一起了
 
 使用`baseURL`，效果如下
 
-函数设![image-20220929191731937](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929191731937.png)置prefixUrl参数，效果如下 ![image-20220929191752333](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929191752333.png)
+函数设![image-20220929191731937](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929191731937.png)置 prefixUrl 参数，效果如下 ![image-20220929191752333](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929191752333.png)
 
-利用`环境变量`及`webpack代理`(这里用vuecli3配置)来作判断，用来区分开发、测试环境。生产环境同理配置`nginx`代理
+利用`环境变量`及`webpack代理`(这里用 vuecli3 配置)来作判断，用来区分开发、测试环境。生产环境同理配置`nginx`代理
 
 ```js
 // vue.config.js
-const targetApi1 = process.env.NODE_ENV === 'development' ? "http://www.kaifa1.com" : "http://www.ceshi1.com"
+const targetApi1 =
+  process.env.NODE_ENV === "development"
+    ? "http://www.kaifa1.com"
+    : "http://www.ceshi1.com";
 
-const targetApi2 = process.env.NODE_ENV === 'development' ? "http://www.kaifa2.com" : "http://www.ceshi2.com"
+const targetApi2 =
+  process.env.NODE_ENV === "development"
+    ? "http://www.kaifa2.com"
+    : "http://www.ceshi2.com";
 module.exports = {
-    devServer: {
-        proxy: {
-            '/api1': {
-                target: targetApi1,
-                changeOrigin: true,
-                pathRewrite: {
-                    '/api1': ""
-                }
-            },
-            '/api2': {
-                target: targetApi2,
-                changeOrigin: true,
-                pathRewrite: {
-                    '/api2': ""
-                }
-            },
-        }
-    }
-}
+  devServer: {
+    proxy: {
+      "/api1": {
+        target: targetApi1,
+        changeOrigin: true,
+        pathRewrite: {
+          "/api1": "",
+        },
+      },
+      "/api2": {
+        target: targetApi2,
+        changeOrigin: true,
+        pathRewrite: {
+          "/api2": "",
+        },
+      },
+    },
+  },
+};
 ```
 
 ##### 2、请求头
@@ -182,7 +196,7 @@ module.exports = {
 
 **(1)application/json**
 
-参数会直接放在请求体中，以JSON格式的发送到后端。这也是axios请求的默认方式。这种类型使用最为广泛。
+参数会直接放在请求体中，以 JSON 格式的发送到后端。这也是 axios 请求的默认方式。这种类型使用最为广泛。
 
 ![image-20220929191945497](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929191945497.png)
 
@@ -194,13 +208,13 @@ module.exports = {
 
 **(3)multipart/form-data**
 
-参数会在请求体中，以标签为单元，用分隔符(可以自定义的boundary)分开。既可以上传键值对，也可以上传文件。通常被用来上传文件的格式。
+参数会在请求体中，以标签为单元，用分隔符(可以自定义的 boundary)分开。既可以上传键值对，也可以上传文件。通常被用来上传文件的格式。
 
 ![image-20220929192038358](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929192038358.png) `callApi`函数暴露`contentType`参数，用来配置`请求头`，默认值为`application/json; charset=utf-8`
 
 看到这里大家可以会疑惑，直接通过`options`配置`headers`不可以嘛，答案是可以的，可以看到`newOptions`的取值顺序，先取默认值，再取配置的`options`，最后取`contentType`，`contentType`能满足绝大部分场景，满足不了的场景下可用`options`配置
 
-通过`options`配置`headers`，写n遍`headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}`；而通过`contentType`配置，传参`json || urlencoded || multipart`即可
+通过`options`配置`headers`，写 n 遍`headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}`；而通过`contentType`配置，传参`json || urlencoded || multipart`即可
 
 当`contentType` === `urlencoded`时，`qs.stringify(data)`
 
@@ -233,7 +247,7 @@ export const callApi = ({
 }) => {
 
   ...
-  
+
   const newOptions = {
     ...defaultOptions,
     ...options,
@@ -241,7 +255,7 @@ export const callApi = ({
       'Content-Type': options.headers && options.headers['Content-Type'] || contentTypes[contentType],
     },
   }
-  
+
   const { method } = newOptions
 
   if (method !== 'get' && method !== 'head') {
@@ -267,7 +281,7 @@ export const callApi = ({
       // newOptions.data = JSON.stringify(data);
     }
   }
-  
+
   return axios({
     url: fullUrl,
     ...newOptions,
@@ -275,7 +289,7 @@ export const callApi = ({
 }
 ```
 
-注意，在`application/json`格式下，JSON.stringify处理传参没有意义，因为axios会将JavaScript对象序列化为JSON，也就说无论你转不转化都是JSON
+注意，在`application/json`格式下，JSON.stringify 处理传参没有意义，因为 axios 会将 JavaScript 对象序列化为 JSON，也就说无论你转不转化都是 JSON
 
 ##### 3、请求类型
 
@@ -285,23 +299,25 @@ export const callApi = ({
 
 ```js
 // src/service/index.js
-import { callApi } from '@/utils/https';
+import { callApi } from "@/utils/https";
 
-export const delFile = (params) => callApi({
-  url: `file/delete?systemName=${params.systemName}&menuId=${params.menuId}&appSign=${params.appSign}`,
-  option: {
-    method: 'get',
-  },
-});
+export const delFile = (params) =>
+  callApi({
+    url: `file/delete?systemName=${params.systemName}&menuId=${params.menuId}&appSign=${params.appSign}`,
+    option: {
+      method: "get",
+    },
+  });
 
 // 或者
-export const delFile = (params) => callApi({
-  url: 'file/delete',
-  option: {
-    method: 'get',
-    params
-  },
-});
+export const delFile = (params) =>
+  callApi({
+    url: "file/delete",
+    option: {
+      method: "get",
+      params,
+    },
+  });
 ```
 
 官方文档如下
@@ -310,11 +326,11 @@ export const delFile = (params) => callApi({
 
 `callApi`函数暴露`method`参数，用来配置`请求类型`，默认值为`get`
 
-当请求类型为`get`时，将`callApi`函数暴露的`data`参数，设置为`options.params`，从而参数自动拼接到url地址之后
+当请求类型为`get`时，将`callApi`函数暴露的`data`参数，设置为`options.params`，从而参数自动拼接到 url 地址之后
 
 ```js
-// src/utils/https.js 
-import axios from 'axios' 
+// src/utils/https.js
+import axios from 'axios'
 
 export const callApi = ({
   url,
@@ -334,12 +350,12 @@ export const callApi = ({
     if(method === 'get'){
         newOptions.params = data
     }
-    ... 
-    
-    return axios({ 
-        url: fullUrl, 
+    ...
+
+    return axios({
+        url: fullUrl,
         ...newOptions,
-    }) 
+    })
 }
 ```
 
@@ -349,16 +365,16 @@ export const callApi = ({
 // src/utils/https.js
 const defaultOptions = {
   timeout: 15000,
-}
+};
 ```
 
-##### 5、允许携带cookie
+##### 5、允许携带 cookie
 
 ```js
 // src/utils/https.js
 const defaultOptions = {
   withCredentials: true,
-}
+};
 ```
 
 ##### 6、响应结果处理
@@ -367,9 +383,9 @@ const defaultOptions = {
 
 这块需要跟服务端约定`接口响应全局码`，从而统一处理`登录校验失败`，`无权限`，`成功`等结果
 
-比如有些服务端对于`登录校验失败`，`无权限`，`成功`等返回的响应码都是200，在响应体内返回的状态码分别是20001，20002，10000，在`then()`中处理
+比如有些服务端对于`登录校验失败`，`无权限`，`成功`等返回的响应码都是 200，在响应体内返回的状态码分别是 20001，20002，10000，在`then()`中处理
 
-比如有些服务端对于`登录校验失败`，`无权限`，`成功`响应码返回401，403，200，在`catch()`中处理
+比如有些服务端对于`登录校验失败`，`无权限`，`成功`响应码返回 401，403，200，在`catch()`中处理
 
 ```js
 // src/utils/https.js
@@ -381,7 +397,7 @@ export const callApi = ({
 }) => {
 
  ...
- 
+
  return axios({
     url: fullUrl,
     ...newOptions,
@@ -442,85 +458,85 @@ export const callApi = ({
 
 代码可访问[github](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fzxyue25%2Faxios-ajax "https://github.com/zxyue25/axios-ajax")
 
-#### axios-ajax完整封装
+#### axios-ajax 完整封装
 
 ```js
 // src/utils/https.js
-import axios from 'axios'
-import qs from 'qs'
-import { debounce } from './debounce'
+import axios from "axios";
+import qs from "qs";
+import { debounce } from "./debounce";
 
 const contentTypes = {
-  json: 'application/json; charset=utf-8',
-  urlencoded: 'application/x-www-form-urlencoded; charset=utf-8',
-  multipart: 'multipart/form-data',
-}
+  json: "application/json; charset=utf-8",
+  urlencoded: "application/x-www-form-urlencoded; charset=utf-8",
+  multipart: "multipart/form-data",
+};
 
 function toastMsg() {
   Object.keys(errorMsgObj).map((item) => {
-    Message.error(item)
-    delete errorMsgObj[item]
-  })
+    Message.error(item);
+    delete errorMsgObj[item];
+  });
 }
 
-let errorMsgObj = {}
+let errorMsgObj = {};
 
 const defaultOptions = {
   withCredentials: true, // 允许把cookie传递到后台
   headers: {
-    Accept: 'application/json',
-    'Content-Type': contentTypes.json,
+    Accept: "application/json",
+    "Content-Type": contentTypes.json,
   },
   timeout: 15000,
-}
+};
 
 export const callApi = ({
   url,
   data = {},
-  method = 'get',
+  method = "get",
   options = {},
-  contentType = 'json', // json || urlencoded || multipart
-  prefixUrl = 'api',
+  contentType = "json", // json || urlencoded || multipart
+  prefixUrl = "api",
 }) => {
   if (!url) {
-    const error = new Error('请传入url')
-    return Promise.reject(error)
+    const error = new Error("请传入url");
+    return Promise.reject(error);
   }
-  const fullUrl = `/${prefixUrl}/${url}`
+  const fullUrl = `/${prefixUrl}/${url}`;
 
   const newOptions = {
     ...defaultOptions,
     ...options,
     headers: {
-      'Content-Type':
-        (options.headers && options.headers['Content-Type']) ||
+      "Content-Type":
+        (options.headers && options.headers["Content-Type"]) ||
         contentTypes[contentType],
     },
     method,
-  }
-  if (method === 'get') {
-    newOptions.params = data
+  };
+  if (method === "get") {
+    newOptions.params = data;
   }
 
-  if (method !== 'get' && method !== 'head') {
-    newOptions.data = data
+  if (method !== "get" && method !== "head") {
+    newOptions.data = data;
     if (data instanceof FormData) {
       newOptions.headers = {
-        'x-requested-with': 'XMLHttpRequest',
-        'cache-control': 'no-cache',
-      }
-    } else if (newOptions.headers['Content-Type'] === contentTypes.urlencoded) {
-      newOptions.data = qs.stringify(data)
+        "x-requested-with": "XMLHttpRequest",
+        "cache-control": "no-cache",
+      };
+    } else if (newOptions.headers["Content-Type"] === contentTypes.urlencoded) {
+      newOptions.data = qs.stringify(data);
     } else {
       Object.keys(data).forEach((item) => {
         if (
           data[item] === null ||
           data[item] === undefined ||
-          data[item] === ''
+          data[item] === ""
         ) {
-          delete data[item]
+          delete data[item];
         }
-      })
+      });
       // 没有必要，因为axios会将JavaScript对象序列化为JSON
       // newOptions.data = JSON.stringify(data);
     }
@@ -528,40 +544,40 @@ export const callApi = ({
 
   axios.interceptors.request.use((request) => {
     // 移除起始部分 / 所有请求url走相对路径
-    request.url = request.url.replace(/^\//, '')
-    return request
-  })
+    request.url = request.url.replace(/^\//, "");
+    return request;
+  });
 
   return axios({
     url: fullUrl,
     ...newOptions,
   })
     .then((response) => {
-      const { data } = response
-      if (data.code === 'xxx') {
+      const { data } = response;
+      if (data.code === "xxx") {
         // 与服务端约定
         // 登录校验失败
-      } else if (data.code === 'xxx') {
+      } else if (data.code === "xxx") {
         // 与服务端约定
         // 无权限
-        router.replace({ path: '/403' })
-      } else if (data.code === 'xxx') {
+        router.replace({ path: "/403" });
+      } else if (data.code === "xxx") {
         // 与服务端约定
-        return Promise.resolve(data)
+        return Promise.resolve(data);
       } else {
-        const { message } = data
+        const { message } = data;
         if (!errorMsgObj[message]) {
-          errorMsgObj[message] = message
+          errorMsgObj[message] = message;
         }
-        setTimeout(debounce(toastMsg, 1000, true), 1000)
-        return Promise.reject(data)
+        setTimeout(debounce(toastMsg, 1000, true), 1000);
+        return Promise.reject(data);
       }
     })
     .catch((error) => {
       if (error.response) {
-        const { data } = error.response
-        const resCode = data.status
-        const resMsg = data.message || '服务异常'
+        const { data } = error.response;
+        const resCode = data.status;
+        const resMsg = data.message || "服务异常";
         // if (resCode === 401) { // 与服务端约定
         //     // 登录校验失败
         // } else if (data.code === 403) { // 与服务端约定
@@ -569,61 +585,59 @@ export const callApi = ({
         //     router.replace({ path: '/403' })
         // }
         if (!errorMsgObj[resMsg]) {
-          errorMsgObj[resMsg] = resMsg
+          errorMsgObj[resMsg] = resMsg;
         }
-        setTimeout(debounce(toastMsg, 1000, true), 1000)
-        const err = { code: resCode, respMsg: resMsg }
-        return Promise.reject(err)
+        setTimeout(debounce(toastMsg, 1000, true), 1000);
+        const err = { code: resCode, respMsg: resMsg };
+        return Promise.reject(err);
       } else {
-        const err = { type: 'canceled', respMsg: '数据请求超时' }
-        return Promise.reject(err)
+        const err = { type: "canceled", respMsg: "数据请求超时" };
+        return Promise.reject(err);
       }
-    })
-}
+    });
+};
 ```
 
 ```js
 // src/utils/debounce.js
 export const debounce = (func, timeout, immediate) => {
-  let timer
+  let timer;
 
   return function () {
-    let context = this
-    let args = arguments
+    let context = this;
+    let args = arguments;
 
-    if (timer) clearTimeout(timer)
+    if (timer) clearTimeout(timer);
     if (immediate) {
-      var callNow = !timer
+      var callNow = !timer;
       timer = setTimeout(() => {
-        timer = null
-      }, timeout)
-      if (callNow) func.apply(context, args)
+        timer = null;
+      }, timeout);
+      if (callNow) func.apply(context, args);
     } else {
       timer = setTimeout(function () {
-        func.apply(context, args)
-      }, timeout)
+        func.apply(context, args);
+      }, timeout);
     }
-  }
-}
+  };
+};
 ```
 
 #### 具体使用
 
-api管理文件在目录`src/service`下，`index.js`文件暴露其他模块，其他文件按`功能模块划分`文件
+api 管理文件在目录`src/service`下，`index.js`文件暴露其他模块，其他文件按`功能模块划分`文件
 
-get请求带参数 ![image-20220929192406659](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929192406659.png) 自定义前缀代理不同服务 ![image-20220929192429170](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929192429170.png) 文件类型处理 ![image-20220929192444605](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929192444605.png)
-
-
+get 请求带参数 ![image-20220929192406659](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929192406659.png) 自定义前缀代理不同服务 ![image-20220929192429170](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929192429170.png) 文件类型处理 ![image-20220929192444605](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929192444605.png)
 
 ### 拦截器原理
 
 [拦截器原理](https://juejin.cn/post/7051209129985048584#heading-6)
 
- 现在我们重新理一下, 请求拦截器发生在api请求之前， 响应拦截器发生在api请求之后，仔细思考🤔一下，其实它们`本质上只是一个执行顺序的关系`。 这其实就是一个数组chain能实现的，把请求拦截器的函数推到数组前面， api请求放在中间， 响应拦截器放在数组后面，遍历执行数组chain就实现了拦截器的执行顺序关系，是不是很简单。
+现在我们重新理一下, 请求拦截器发生在 api 请求之前， 响应拦截器发生在 api 请求之后，仔细思考 🤔 一下，其实它们`本质上只是一个执行顺序的关系`。 这其实就是一个数组 chain 能实现的，把请求拦截器的函数推到数组前面， api 请求放在中间， 响应拦截器放在数组后面，遍历执行数组 chain 就实现了拦截器的执行顺序关系，是不是很简单。
 
 ![image-20220929182830929](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929182830929.png)
 
-InterceptorManager构造函数有handlers数组，保存所有的拦截函数， 并且在它的原型上添加三个方法， `use用于添加拦截函数`， 返回一个id， `eject用于取消拦截器`， forEach遍历所有拦截器。
+InterceptorManager 构造函数有 handlers 数组，保存所有的拦截函数， 并且在它的原型上添加三个方法， `use用于添加拦截函数`， 返回一个 id， `eject用于取消拦截器`， forEach 遍历所有拦截器。
 
 ```js
 // 拦截器构造函数
@@ -639,14 +653,14 @@ InterceptorManager.prototype.use = function use(fulfilled, rejected, options) {
     fulfilled: fulfilled,
     rejected: rejected,
     synchronous: options ? options.synchronous : false,
-    runWhen: options ? options.runWhen : null
+    runWhen: options ? options.runWhen : null,
   });
   return this.handlers.length - 1;
 };
 
 // 移除拦截器
 InterceptorManager.prototype.eject = function eject(id) {
-   // 通过id可以查找对应的拦截器，进行移除
+  // 通过id可以查找对应的拦截器，进行移除
   if (this.handlers[id]) {
     this.handlers[id] = null;
   }
@@ -660,10 +674,9 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
     }
   });
 };
-
 ```
 
-请求拦截器和响应拦截器都是使用new InterceptorManager实现
+请求拦截器和响应拦截器都是使用 new InterceptorManager 实现
 
 ```js
 function Axios(instanceConfig) {
@@ -671,13 +684,12 @@ function Axios(instanceConfig) {
   // 请求拦截器和响应拦截器使用的都是 InterceptorManager构造函数
   this.interceptors = {
     request: new InterceptorManager(),
-    response: new InterceptorManager()
+    response: new InterceptorManager(),
   };
 }
-
 ```
 
-`任务编排`, 重点来了(`敲黑板`), 通过 把requestInterceptorChain放在 chain数组的前面，responseInterceptorChain放在chain的后面，然后遍历执行chain（chain数组里的数据是成对出现的，一个是拦截器成功和拦截失败的函数，[dispatchRequest, undefined]中的undefined只起一个`占位`的作用 ）。 达到 请求拦截器 -> api请求 -> 响应拦截器 执行顺序的目的。
+`任务编排`, 重点来了(`敲黑板`), 通过 把 requestInterceptorChain 放在 chain 数组的前面，responseInterceptorChain 放在 chain 的后面，然后遍历执行 chain（chain 数组里的数据是成对出现的，一个是拦截器成功和拦截失败的函数，[dispatchRequest, undefined]中的 undefined 只起一个`占位`的作用 ）。 达到 请求拦截器 -> api 请求 -> 响应拦截器 执行顺序的目的。
 
 ```js
 ...
@@ -709,21 +721,22 @@ axios 为我们提供了一个 isCancel() 方法，用于判断请求的中止�
 const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
 
-axios.get('https://mdn.github.io/dom-examples/abort-api/sintel.mp4', {
-  cancelToken: source.token
-}).catch(function (thrown) {
-  // 判断请求是否已中止
-  if (axios.isCancel(thrown)) {
-    // 参数 thrown 是自定义的信息
-    console.log('Request canceled', thrown.message);
-  } else {
-    // 处理错误
-  }
-});
+axios
+  .get("https://mdn.github.io/dom-examples/abort-api/sintel.mp4", {
+    cancelToken: source.token,
+  })
+  .catch(function (thrown) {
+    // 判断请求是否已中止
+    if (axios.isCancel(thrown)) {
+      // 参数 thrown 是自定义的信息
+      console.log("Request canceled", thrown.message);
+    } else {
+      // 处理错误
+    }
+  });
 
 // 取消请求（message 参数是可选的）
-source.cancel('Operation canceled by the user.');
-
+source.cancel("Operation canceled by the user.");
 ```
 
 通过传递一个 executor 函数到 CancelToken 的构造函数来创建一个 cancel token：
@@ -732,23 +745,22 @@ source.cancel('Operation canceled by the user.');
 const CancelToken = axios.CancelToken;
 let cancel;
 
-axios.get('/user/12345', {
+axios.get("/user/12345", {
   cancelToken: new CancelToken(function executor(c) {
     // executor 函数接收一个 cancel 函数作为参数
     cancel = c;
-  })
+  }),
 });
 
 // 取消请求
-cancel('Operation canceled by the user.');
-
+cancel("Operation canceled by the user.");
 ```
 
 #### **在项目中切换路由，停止原路由中的正在请求的接口**
 
 在我参与的项目中有的页面在进入时会调用多个接口，并且这些接口可能会几秒后才请求完；在用户切换路由时这些接口就没有必要再请求了；
 
-如果需求只是要在切换路由是取消之前的全部接口，使用下面的方法就可以实现；如果还有取消具体的某一个接口的需求，那么请看业务场景2的实现方式；
+如果需求只是要在切换路由是取消之前的全部接口，使用下面的方法就可以实现；如果还有取消具体的某一个接口的需求，那么请看业务场景 2 的实现方式；
 
 ```js
 // 使用 CancelToken.source
@@ -756,119 +768,126 @@ cancel('Operation canceled by the user.');
 // token -> 构建出的 CancelToken 对象
 // cancel -> 取消请求需要调用的方法
 // 由于 CancelToken 对象是在拦截器外构建的，所有的接口中的 config.cancelToken 指向的都是同一个 CancelToken 对象，所以可以使用 source.cancel 方法取消所有的接口
-import $store from '../store/index'; // 引入 store
+import $store from "../store/index"; // 引入 store
 
 let CancelToken = axios.CancelToken;
 let source = CancelToken.source();
 
 // 添加请求拦截器
-axios.interceptors.request.use(function (config) {
-    config.cancelToken = source.token
-    
+axios.interceptors.request.use(
+  function (config) {
+    config.cancelToken = source.token;
+
     // 此处使用 store 存储取消接口的方法，便于在其他地方调用
-    let arr = $store.getters.getCancelTokenList
-    arr.push(source.cancel)
-    $store.commit('setCancelTokenList', arr)
-    
+    let arr = $store.getters.getCancelTokenList;
+    arr.push(source.cancel);
+    $store.commit("setCancelTokenList", arr);
+
     // 我见过有人在 main.js 中直接声明变量( Vue.prototype.$sourceCancel = null ) ，拦截器中进行赋值，再在需要的地方调用
     // 不知道这种方法的好处或者坏处，如果有人了解，欢迎评论
     // $sourceCancel = source.cancel
     return config;
-}, function (error) {
+  },
+  function (error) {
     // 预处理请求有异常（error）时抛出错误
     return Promise.reject(error);
-});
-
+  }
+);
 ```
-
-
 
 ```js
 // router.js
 // 在路由守卫中设置切换路由后取消接口，并将存储方法的变量清空
 router.beforeEach((to, from, next) => {
-    console.log(this.$store.getters.getCancelTokenList[0])
-    this.$store.getters.getCancelTokenList[0]('取消接口')
-    $store.commit('setCancelTokenList', [])
-    next()
-})
-
+  console.log(this.$store.getters.getCancelTokenList[0]);
+  this.$store.getters.getCancelTokenList[0]("取消接口");
+  $store.commit("setCancelTokenList", []);
+  next();
+});
 ```
 
 #### 多次调用同一个接口时，需要取最新的接口返回信息
 
-实现思路：取消接口的方法与场景1中的大致相同，但是由于需要对具体的某个接口进行取消，所以需要修改一下存储取消接口方法的变量，如下：
+实现思路：取消接口的方法与场景 1 中的大致相同，但是由于需要对具体的某个接口进行取消，所以需要修改一下存储取消接口方法的变量，如下：
 
 ```javascript
 // 使用请求的 url 地址作为变量的 key 存储取消接口的方法
 CancelTokenList = {
-    url: function() {}
-}
+  url: function () {},
+};
 
-import $store from '../store/index'; // 引入 store
+import $store from "../store/index"; // 引入 store
 let CancelToken = axios.CancelToken;
-let cancel = null
+let cancel = null;
 
 // 方法1 - 使用 CancelToken.source
 // 添加请求拦截器
-axios.interceptors.request.use(function (config) {
+axios.interceptors.request.use(
+  function (config) {
     // 将 CancelToken 对象的构建放在拦截器里面，就不会出现多个取消方法指向同一个对象
     let source = CancelToken.source();
-    let obj = $store.getters.getCancelTokenList
-    let url = config.url
-    
-    config.cancelToken = source.token
-    if (config.method === 'get') {
-        url = url.split('?')[0]
+    let obj = $store.getters.getCancelTokenList;
+    let url = config.url;
+
+    config.cancelToken = source.token;
+    if (config.method === "get") {
+      url = url.split("?")[0];
     }
-    if (obj[url]) { // 在存储的对象中有当前 url 的变量，则调用方法取消请求
-    	obj[url]('取消接口')
-    	delete obj[url]
+    if (obj[url]) {
+      // 在存储的对象中有当前 url 的变量，则调用方法取消请求
+      obj[url]("取消接口");
+      delete obj[url];
     }
-    obj[url] = source.cancel
-    $store.commit('setCancelTokenList', obj)
+    obj[url] = source.cancel;
+    $store.commit("setCancelTokenList", obj);
     return config;
-}, function (error) {
+  },
+  function (error) {
     // 预处理请求有异常（error）时抛出错误
     return Promise.reject(error);
-});
+  }
+);
 
 // 方法2 - 直接使用 CancelToken 的构造函数
 // 添加请求拦截器
-axios.interceptors.request.use(function (config) {
-    let url = config.url
-    let obj = $store.getters.getCancelTokenList
-    if (config.method === 'get') {
-        url = url.split('?')[0]
+axios.interceptors.request.use(
+  function (config) {
+    let url = config.url;
+    let obj = $store.getters.getCancelTokenList;
+    if (config.method === "get") {
+      url = url.split("?")[0];
     }
-    if (obj[url]) { // 在存储的对象中有当前 url 的变量，则调用方法取消请求
-    	obj[url]('取消接口')
-    	delete obj[url]
+    if (obj[url]) {
+      // 在存储的对象中有当前 url 的变量，则调用方法取消请求
+      obj[url]("取消接口");
+      delete obj[url];
     }
     config.cancelToken = new CancelToken(function executor(c) {
-        // executor 函数接收一个 cancel 函数作为参数
-        cancel = c;
-    })
-    obj[url] = cancel
-    $store.commit('setCancelTokenList', obj)
+      // executor 函数接收一个 cancel 函数作为参数
+      cancel = c;
+    });
+    obj[url] = cancel;
+    $store.commit("setCancelTokenList", obj);
     return config;
-}, function (error) {
+  },
+  function (error) {
     // 预处理请求有异常（error）时抛出错误
     return Promise.reject(error);
-});
+  }
+);
 // router.js
 // 使用 url 作为 key 的方式存储取消方法的话在路由守卫中就需要进行一次遍历
 router.beforeEach((to, from, next) => {
-    let obj = this.$store.getters.getCancelTokenList
-    for (let key in obj) {
-      obj[key]('取消接口')
-    }
-    $store.commit('setCancelTokenList', [])
-    next()
-})
+  let obj = this.$store.getters.getCancelTokenList;
+  for (let key in obj) {
+    obj[key]("取消接口");
+  }
+  $store.commit("setCancelTokenList", []);
+  next();
+});
 ```
 
-### axios源码分析
+### axios 源码分析
 
 [HTTP 请求库 - Axios 源码分析](https://juejin.cn/post/7002106953379872798)
 
@@ -876,24 +895,24 @@ router.beforeEach((to, from, next) => {
 
 #### axios 是什么？
 
->   axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。
+> axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。
 
--   从浏览器中创建 XMLHttpRequest
--   从 node.js 中创建 http 请求
--   支持 Promise API
--   拦截请求和响应
--   转换请求数据和响应数据
--   取消请求
--   自动转换 JSON 数据
--   客户端支持防御 XSRF
+- 从浏览器中创建 XMLHttpRequest
+- 从 node.js 中创建 http 请求
+- 支持 Promise API
+- 拦截请求和响应
+- 转换请求数据和响应数据
+- 取消请求
+- 自动转换 JSON 数据
+- 客户端支持防御 XSRF
 
->axios 为什么可以使用 axios({ }) 和 axios.get()两种方式发送请求
+> axios 为什么可以使用 axios({ }) 和 axios.get()两种方式发送请求
 >
->axios 响应拦截器是如何实现的
+> axios 响应拦截器是如何实现的
 >
->axios 如何实现
+> axios 如何实现
 >
->如何使用 axios 避免 XSRF 攻击
+> 如何使用 axios 避免 XSRF 攻击
 
 #### 创建实例
 
@@ -903,59 +922,57 @@ router.beforeEach((to, from, next) => {
 
 ```js
 /**
-* @param {Object} defaultConfig 默认配置
-* @return {Axios} 一个 axios 的实例对象
-*/
+ * @param {Object} defaultConfig 默认配置
+ * @return {Axios} 一个 axios 的实例对象
+ */
 function createInstance(defaultConfig) {
-     // 基于默认配置创建一个Axios实例上下文。
-     var context = new Axios(defaultConfig);
+  // 基于默认配置创建一个Axios实例上下文。
+  var context = new Axios(defaultConfig);
 
-     // bind方法返回一个函数，执行这个函数，相当于执行 Axios.prototype.request，方法中的 this 指向 context，
-     // 这就是我们引入 axios 后可以直接通过 axios({...}) 发送请求的原因，
-     var instance = bind(Axios.prototype.request, context);
+  // bind方法返回一个函数，执行这个函数，相当于执行 Axios.prototype.request，方法中的 this 指向 context，
+  // 这就是我们引入 axios 后可以直接通过 axios({...}) 发送请求的原因，
+  var instance = bind(Axios.prototype.request, context);
 
-     // 将 axios 的原型对象 Axios.prototype 上的属性依次赋值给这个实例对象
-     // 这样操作后我们就可以通过 axios.get()发送请求，实际上调用原型对象上的方法
-     utils.extend(instance, Axios.prototype, context);
+  // 将 axios 的原型对象 Axios.prototype 上的属性依次赋值给这个实例对象
+  // 这样操作后我们就可以通过 axios.get()发送请求，实际上调用原型对象上的方法
+  utils.extend(instance, Axios.prototype, context);
 
-     // 将 axios 实例的私有属性赋值给当前的 instance
-     // 这样我们可以获取到实例上的属性，例如 通过 axios.defaultConfig 获取默认配置
-     utils.extend(instance, context);
-     return instance;
+  // 将 axios 实例的私有属性赋值给当前的 instance
+  // 这样我们可以获取到实例上的属性，例如 通过 axios.defaultConfig 获取默认配置
+  utils.extend(instance, context);
+  return instance;
 }
 
 // 创建一个 axios 实例，实际上就是上述函数中的 instance；
 var axios = createInstance(defaults);
 
 module.exports.default = axios;
-
 ```
 
-暴露的axios上挂载了基于默认配置创建的Axios实例属性，也挂载了原型上的方法。这里就解答了一个问题，使用 axios(config) 发送请求调用的是 Axios.prototype.request 方法，使用 axios.get(url[, config] )方法发送请求，调用的是 Axios.prototype.get 方法。
+暴露的 axios 上挂载了基于默认配置创建的 Axios 实例属性，也挂载了原型上的方法。这里就解答了一个问题，使用 axios(config) 发送请求调用的是 Axios.prototype.request 方法，使用 axios.get(url[, config] )方法发送请求，调用的是 Axios.prototype.get 方法。
 
 #### Axios 构造函数
 
 ```js
 /**
-* Create a new instance of Axios
-* @param {Object} instanceConfig 默认配置
-*/
+ * Create a new instance of Axios
+ * @param {Object} instanceConfig 默认配置
+ */
 function Axios(instanceConfig) {
-   this.defaults = instanceConfig;
-   this.interceptors = {
-     request: new InterceptorManager(),
-     response: new InterceptorManager()
-   };
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager(),
+  };
 }
 
-Axios.prototype.request = function request() {}
-
+Axios.prototype.request = function request() {};
 ```
 
 #### 发送请求的 request 方法
 
-1.   获取发送 HTTP 请求的参数
-2.   编排请求的 Promise 链,并执行该 Promise链
+1.  获取发送 HTTP 请求的参数
+2.  编排请求的 Promise 链,并执行该 Promise 链
 
 #### 拦截器
 
@@ -963,63 +980,62 @@ Axios.prototype.request = function request() {}
 
 所以 axios 提供了请求拦截器和响应拦截器，分别处理请求和响应，它们的作用如下：
 
--   请求拦截器：该类拦截器的作用是在**请求发送前统一执行某些操作**，比如在请求头中添加 token 字段。
--   响应拦截器：该类拦截器的作用是在**接收到服务器响应后统一执行某些操作**，比如发现响应状态码为 401 时，自动跳转到登录页。
+- 请求拦截器：该类拦截器的作用是在**请求发送前统一执行某些操作**，比如在请求头中添加 token 字段。
+- 响应拦截器：该类拦截器的作用是在**接收到服务器响应后统一执行某些操作**，比如发现响应状态码为 401 时，自动跳转到登录页。
 
 ```js
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
-    // 在发送请求之前做些什么     
-    return config;   
-});  
-// 添加响应拦截器 
-axios.interceptors.response.use(function (response) {     
-    // 对响应数据做点什么     
-    return response;   
+  // 在发送请求之前做些什么
+  return config;
+});
+// 添加响应拦截器
+axios.interceptors.response.use(function (response) {
+  // 对响应数据做点什么
+  return response;
 });
 ```
 
-请求相应拦截器本质上都是实现特定功能的函数，类似于webpack 的 loader, 上一个函数的执行结果作为下一个函数的参数处理，执行顺序如下
+请求相应拦截器本质上都是实现特定功能的函数，类似于 webpack 的 loader, 上一个函数的执行结果作为下一个函数的参数处理，执行顺序如下
 
->   请求拦截器 -> 分发http请求 -> 响应拦截器
+> 请求拦截器 -> 分发 http 请求 -> 响应拦截器
 
-要实现这个过程，我们首先需要**注册请求拦截器**和**响应拦截器**，然后axios会按照顺序给我们**注册的函数排序**，最后会依次执行排好序的函数
+要实现这个过程，我们首先需要**注册请求拦截器**和**响应拦截器**，然后 axios 会按照顺序给我们**注册的函数排序**，最后会依次执行排好序的函数
 
 #### 注册请求拦截器和相应拦截器
 
-Axios的构造函数
+Axios 的构造函数
 
 ```js
-function Axios(instanceConfig) { 
-    this.defaults = instanceConfig;  
-    this.interceptors = {    
-        request: new InterceptorManager(),    
-        response: new InterceptorManager() 
-    }; 
+function Axios(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager(),
+  };
 }
 ```
 
-axios 上挂载了 axios 类的一个实例，这个实例有一个interceptors 属性，属性值是一个对象，包含request 和 response 两个属性，分别是用来注册和管理 请求拦截器和相应拦截器。我们来看一下是如何进行管理的
+axios 上挂载了 axios 类的一个实例，这个实例有一个 interceptors 属性，属性值是一个对象，包含 request 和 response 两个属性，分别是用来注册和管理 请求拦截器和相应拦截器。我们来看一下是如何进行管理的
 
 ```js
-// 拦截器的构造函数 
-function InterceptorManager() {  
-    this.handlers = []; 
-} 
+// 拦截器的构造函数
+function InterceptorManager() {
+  this.handlers = [];
+}
 
 // 注册拦截器函数，注意:这里拦截器可以注册多个, 按照注册的先后顺序排列
-InterceptorManager.prototype.use = function use(fulfilled, rejected) {  
-    this.handlers.push({ fulfilled: fulfilled,  rejected: rejected });  
-    return this.handlers.length - 1; 
-}; 
+InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+  this.handlers.push({ fulfilled: fulfilled, rejected: rejected });
+  return this.handlers.length - 1;
+};
 
-// 用于移除拦截器 
-InterceptorManager.prototype.eject = function eject(id) { 
-    if (this.handlers[id]) {   
-        this.handlers[id] = null; 
-    } 
-}; 
-
+// 用于移除拦截器
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
 ```
 
 可以看到当我们调用 axios.interceptors.request.use(fulfilled, rejected)，就成功注册了一个请求拦截器。注意，**后注册的请求拦截器会先执行，响应拦截器是按照注册顺序执行的**
@@ -1032,18 +1048,22 @@ InterceptorManager.prototype.eject = function eject(id) {
 var chain = [dispatchRequest, undefined];
 var promise = Promise.resolve(config);
 
-this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+this.interceptors.request.forEach(function unshiftRequestInterceptors(
+  interceptor
+) {
+  chain.unshift(interceptor.fulfilled, interceptor.rejected);
 });
 
-this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-    chain.push(interceptor.fulfilled, interceptor.rejected);
+this.interceptors.response.forEach(function pushResponseInterceptors(
+  interceptor
+) {
+  chain.push(interceptor.fulfilled, interceptor.rejected);
 });
 ```
 
-首先是声明了分发HTTP请求的数组，接下来声明了一个resolve状态的Promise，然后依次取出请求拦截器，放在数组的头部，响应拦截器放在数组的尾部。就组成了这样一个链条：
+首先是声明了分发 HTTP 请求的数组，接下来声明了一个 resolve 状态的 Promise，然后依次取出请求拦截器，放在数组的头部，响应拦截器放在数组的尾部。就组成了这样一个链条：
 
->[request.fullfilled, request.rejected, ..., dispatchRequest, null, ..., response.fullfileed, response.rejected]
+> [request.fullfilled, request.rejected, ..., dispatchRequest, null, ..., response.fullfileed, response.rejected]
 
 #### 执行请求响应拦截器
 
@@ -1051,70 +1071,68 @@ this.interceptors.response.forEach(function pushResponseInterceptors(interceptor
 
 ```js
 while (chain.length) {
-    promise = promise.then(chain.shift(), chain.shift());
+  promise = promise.then(chain.shift(), chain.shift());
 }
 
 return promise;
 ```
 
-chain是一个数组，只要 length 不为0，就会一直执行，直到最后一个响应拦截器执行完，返回的还是一个promise，这里需要注意，我们的自定义请求和响应拦截器一定要有返回值，否则请求结束后，我们无法获取最后的结果。
+chain 是一个数组，只要 length 不为 0，就会一直执行，直到最后一个响应拦截器执行完，返回的还是一个 promise，这里需要注意，我们的自定义请求和响应拦截器一定要有返回值，否则请求结束后，我们无法获取最后的结果。
 
 通过响应拦截器我们很方便在各个阶段执行自定义的行为。
 
 #### 发送请求
 
-这个阶段需要关注的点是axios会根据环境的不同调用不同的请求处理函数，
+这个阶段需要关注的点是 axios 会根据环境的不同调用不同的请求处理函数，
 
-**如果是浏览器环境，会基于XMLHttpRequest创建，**
+**如果是浏览器环境，会基于 XMLHttpRequest 创建，**
 
-**如果是node环境下，会基于HTTP模块创建。**
+**如果是 node 环境下，会基于 HTTP 模块创建。**
 
 这里涉及到一个设计模式，[适配器模式](https://juejin.cn/post/7000983516770992158)，用来解决已有接口之间不匹配的问题。 dispatchRequest 的执行流程:
 
->   config.header → transformRequestData → adapter → transformResponseData
+> config.header → transformRequestData → adapter → transformResponseData
 
 在 adapter 中，除了发送 HTTP 请求之外，还有了一些有意思的处理，接下来我们就来看两个点：
 
->   １.可以通过cancel token （abort函数）来取消请求
+> １.可以通过 cancel token （abort 函数）来取消请求
 >
->   ２.可以设置 XSRF-TOKEN 来避免 CSRF 攻击
+> ２.可以设置 XSRF-TOKEN 来避免 CSRF 攻击
 
-#### 使用 *cancel token* 取消请求
+#### 使用 _cancel token_ 取消请求
 
 如何取消请求？想象一个场景，当我们正在上传文件的时候，突然切换了页面，那么上一页面的上传请求就应该被取消掉，或者我们在进行接口轮询时，有可能上次的请求还在，在进行下一次请求之前应该取消掉上次的请求，这时候就可以用 cancel token 取消请求
 
 ```js
-import axios from 'axios' 
-const CancelToken = axios.CancelToken 
-/**  
-* 文件上传方法 
-* @param url  
-* @param file 
-* @param config  
-* @returns {AxiosPromise<any>}  
-*/
-export default function uploadFile(url, file, config = {}) {  
-   const source = CancelToken.source();   
-   const axiosConfig = Object.assign({ cancelToken: source.token }, config);   
-   
-   const formData = new FormData();   
-   formData.append('file', file);  
-   
-   const instance = axios.create();   
-   const request = instance.post(url, formData, axiosConfig);    
-   request.cancel= source.cancel;   
-   return request; 
-} 
+import axios from "axios";
+const CancelToken = axios.CancelToken;
+/**
+ * 文件上传方法
+ * @param url
+ * @param file
+ * @param config
+ * @returns {AxiosPromise<any>}
+ */
+export default function uploadFile(url, file, config = {}) {
+  const source = CancelToken.source();
+  const axiosConfig = Object.assign({ cancelToken: source.token }, config);
+  const formData = new FormData();
+  formData.append("file", file);
+  const instance = axios.create();
+  const request = instance.post(url, formData, axiosConfig);
+  request.cancel = source.cancel;
+  return request;
+}
 ```
 
-然后把 request 保存在 viewData 中，方法返回成功就把 request.cancel 置为 null，在页面销毁的时候，判断request.cancel 的值，存在就执行request.cancel 取消请求。
+然后把 request 保存在 viewData 中，方法返回成功就把 request.cancel 置为 null，在页面销毁的时候，判断 request.cancel 的值，存在就执行 request.cancel 取消请求。
 
 #### cancel token 是如何实现的
 
 我们先看下 axios.CancelToken.source 是什么
 
 ```js
-axios.CancelToken = require('./cancel/CancelToken'); 
+axios.CancelToken = require("./cancel/CancelToken");
 ```
 
 接下来就进入到 CancelToken 的文件夹中看看
@@ -1125,8 +1143,8 @@ axios.CancelToken = require('./cancel/CancelToken');
  * @param {Function} executor The executor function.
  */
 function CancelToken(executor) {
-  if (typeof executor !== 'function') {
-    throw new TypeError('executor must be a function.');
+  if (typeof executor !== "function") {
+    throw new TypeError("executor must be a function.");
   }
 
   var resolvePromise;
@@ -1140,7 +1158,7 @@ function CancelToken(executor) {
       // Cancellation has already been requested
       return;
     }
-    
+
     // 这里的 reason 是一个对象，对象有一个 message 属性，是一个字符串
     token.reason = new Cancel(message);
     resolvePromise(token.reason);
@@ -1155,30 +1173,28 @@ CancelToken.source = function source() {
   });
   return {
     token: token,
-    cancel: cancel
+    cancel: cancel,
   };
 };
 
 module.exports = CancelToken;
-
 ```
 
-axios.CancelToken.source 是一个对象，这个对象有两个属性，分别是 token 和 cancel，token的作用是提供一个Promise，cancel用于中断请求。 **token 需要传递到 config 里，当cancel函数被执行时，token的状态由 Pending 变为 Resolve**
+axios.CancelToken.source 是一个对象，这个对象有两个属性，分别是 token 和 cancel，token 的作用是提供一个 Promise，cancel 用于中断请求。 **token 需要传递到 config 里，当 cancel 函数被执行时，token 的状态由 Pending 变为 Resolve**
 
 ```js
 function cancel(message) {
-    if (token.reason) {
-      // Cancellation has already been requested
-      return;
-    }
-    
-    // 这里的 reason 是一个对象，对象有一个 message 属性，是一个字符串
-    token.reason = new Cancel(message);
-    
-    // 这里的 resolvePromise 就是用来将取消请求的Promise状态由pending置为resolve
-    resolvePromise(token.reason);
-}
+  if (token.reason) {
+    // Cancellation has already been requested
+    return;
+  }
 
+  // 这里的 reason 是一个对象，对象有一个 message 属性，是一个字符串
+  token.reason = new Cancel(message);
+
+  // 这里的 resolvePromise 就是用来将取消请求的Promise状态由pending置为resolve
+  resolvePromise(token.reason);
+}
 ```
 
 看完了 CancelToken 的实现，我们再去看一下它是如何中断请求的
@@ -1193,12 +1209,12 @@ module.exports = function xhrAdapter(config) {
       if (!request) {
         return;
       }
-      reject(createError('Request aborted', config, 'ECONNABORTED', request));
+      reject(createError("Request aborted", config, "ECONNABORTED", request));
 
       // Clean up request
       request = null;
     };
-    
+
     if (config.cancelToken) {
       // 这里的config.cancelToken.promise就是我们之前说的pending状态的promise,
       config.cancelToken.promise.then(function onCanceled(cancel) {
@@ -1214,10 +1230,9 @@ module.exports = function xhrAdapter(config) {
     }
   });
 };
-
 ```
 
-**当我们执行 axios.cancelToken.source.cancel('取消请求') 的时候，就会将pending状态的 Promise置为resolve状态，会接着执行.then后面的回调函数，即执行request.abort()终止请求**。**接着会执行request.onabort注册的函数，将 xhrAdapter 中的 request Promise 状态置为 reject，我们就可以在catch中捕获到错误。**
+**当我们执行 axios.cancelToken.source.cancel('取消请求') 的时候，就会将 pending 状态的 Promise 置为 resolve 状态，会接着执行.then 后面的回调函数，即执行 request.abort()终止请求**。**接着会执行 request.onabort 注册的函数，将 xhrAdapter 中的 request Promise 状态置为 reject，我们就可以在 catch 中捕获到错误。**
 
 #### CSRF 攻击
 
@@ -1227,60 +1242,60 @@ module.exports = function xhrAdapter(config) {
 
 发生 csrf 的条件有三个，满足这三个条件，就会发生 CSRF 攻击
 
->   第一个，目标站点一定要有 CSRF 漏洞；
+> 第一个，目标站点一定要有 CSRF 漏洞；
 >
->   第二个，用户要登录过目标站点，并且在浏览器上保持有该站点的登录状态；
+> 第二个，用户要登录过目标站点，并且在浏览器上保持有该站点的登录状态；
 >
->   第三个，需要用户打开一个第三方站点
+> 第三个，需要用户打开一个第三方站点
 
-当用户在一个网站登陆时，比如说是一个论坛，点击一张图片，src实际上是一个http请求地址(script src, 或者 img src 等都不受同源策略限制)
+当用户在一个网站登陆时，比如说是一个论坛，点击一张图片，src 实际上是一个 http 请求地址(script src, 或者 img src 等都不受同源策略限制)
 
 这样就向服务器发送了类似转账或者修改密码的请求，如果该服务器存在漏洞，就会发生 CSRF 攻击。
 
 那么如何避免让服务器避免遭受到 CSRF 攻击呢
 
->1.  充分利用好 Cookie 的 SameSite 属性,SameSite 选项通常有 Strict、Lax 和 None 三个值。
->2.  验证请求的来源站点
->3.  CSRF Token，这个也是 axios 防止 CSRF 攻击的使用方式
+> 1.  充分利用好 Cookie 的 SameSite 属性,SameSite 选项通常有 Strict、Lax 和 None 三个值。
+> 2.  验证请求的来源站点
+> 3.  CSRF Token，这个也是 axios 防止 CSRF 攻击的使用方式
 
 Axios 提供了 xsrfCookieName 和 xsrfHeaderName 两个属性来分别设置 CSRF 的 Cookie 名称和 HTTP 请求头的名称，它们的默认值如下所示
 
 ```js
-// lib/defaults.js 
-var defaults = {   
-    adapter: getDefaultAdapter(),  
-    xsrfCookieName: 'XSRF-TOKEN', 
-    xsrfHeaderName: 'X-XSRF-TOKEN',
-}; 
+// lib/defaults.js
+var defaults = {
+  adapter: getDefaultAdapter(),
+  xsrfCookieName: "XSRF-TOKEN",
+  xsrfHeaderName: "X-XSRF-TOKEN",
+};
 ```
 
 Axios 如何防御 CSRF 攻击
 
 ```js
 // lib/adapters/xhr.js
-module.exports = function xhrAdapter(config) {   
-    return new Promise(function dispatchXhrRequest(resolve, reject) {     
-    var requestHeaders = config.headers;          
-    var request = new XMLHttpRequest();         
-    // 添加xsrf头部     
-    if (utils.isStandardBrowserEnv()) {       
-        var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName 
-        ? cookies.read(config.xsrfCookieName) 
-        : undefined;       
-        if (xsrfValue) {         
-            requestHeaders[config.xsrfHeaderName] = xsrfValue;      
-        }     
-    } 
-    request.send(requestData);  
-    }); 
-}; 
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestHeaders = config.headers;
+    var request = new XMLHttpRequest();
+    // 添加xsrf头部
+    if (utils.isStandardBrowserEnv()) {
+      var xsrfValue =
+        (config.withCredentials || isURLSameOrigin(fullPath)) &&
+        config.xsrfCookieName
+          ? cookies.read(config.xsrfCookieName)
+          : undefined;
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+    request.send(requestData);
+  });
+};
 ```
 
 看完以上代码，我们知道了 Axios 是将 token 设置在 Cookie 中，在提交（POST、PUT、PATCH、DELETE）等请求时提交 Cookie，并通过请求头或请求体带上 Cookie 中已设置的 token，服务端接收到请求后，再进行对比校验
 
-
-
-### axios源码模块分析
+### axios 源码模块分析
 
 #### 前言
 
@@ -1341,33 +1356,33 @@ lib
 
 Axios 是一个基于 Promise 网络请求库，作用于 node.js 和浏览器中。在服务端它使用原生 node.js`http`模块, 而在客户端 (浏览端) 则使用 XMLHttpRequests。特性：
 
--   从浏览器创建[XMLHttpRequests](https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FXMLHttpRequest "https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest")
+- 从浏览器创建[XMLHttpRequests](https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FXMLHttpRequest "https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest")
 
--   从 node.js 创建[http](https://link.juejin.cn/?target=http%3A%2F%2Fnodejs.org%2Fapi%2Fhttp.html "http://nodejs.org/api/http.html")请求
+- 从 node.js 创建[http](https://link.juejin.cn/?target=http%3A%2F%2Fnodejs.org%2Fapi%2Fhttp.html "http://nodejs.org/api/http.html")请求
 
--   支持[Promise](https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FPromise "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise")API
+- 支持[Promise](https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FPromise "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise")API
 
--   拦截请求和响应
+- 拦截请求和响应
 
--   转换请求和响应数据
+- 转换请求和响应数据
 
--   取消请求
+- 取消请求
 
--   自动转换 JSON 数据
+- 自动转换 JSON 数据
 
--   客户端支持防御[XSRF](https://link.juejin.cn/?target=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCross-site_request_forgery "http://en.wikipedia.org/wiki/Cross-site_request_forgery")
+- 客户端支持防御[XSRF](https://link.juejin.cn/?target=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCross-site_request_forgery "http://en.wikipedia.org/wiki/Cross-site_request_forgery")
 
 #### Axios 内部运作流程
 
-![image-20220929184838443](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929184838443.png) 
+![image-20220929184838443](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929184838443.png)
 
 接下来我们结合 axios 的运作流程一起来剖析以下几个模块：
 
--   Axios 构造函数
--   请求 / 响应拦截器
--   dispatchRequest 派发请求
--   转换请求 / 响应数据
--   适配器处理 HTTP 请求
+- Axios 构造函数
+- 请求 / 响应拦截器
+- dispatchRequest 派发请求
+- 转换请求 / 响应数据
+- 适配器处理 HTTP 请求
 
 #### Axios 如何支持不同的使用方式?
 
@@ -1589,30 +1604,22 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 对于大多数 spa 的项目来说，通常会使用 token 进行用户的身份认证，这就要求每个请求都携带认证信息；接收到服务器信息之后，如果发现用户未登录，需要统一跳转登录页；遇到这种场景，就需要用到 axios 提供的拦截器，以下是拦截器的设置：
 
 ```js
- // 添加请求拦截器
+// 添加请求拦截器
 
 axios.interceptors.request.use(function (config) {
-
-  config.headers.token = 'xxx';
+  config.headers.token = "xxx";
 
   return config;
-
 });
 
-
-
- // 添加响应拦截器
+// 添加响应拦截器
 
 axios.interceptors.response.use(function (response) {
+  if (response.code === 401) {
+    login();
+  }
 
-    if(response.code === 401) {
-
-        login()
-
-    }
-
-    return response;
-
+  return response;
 });
 ```
 
@@ -1678,7 +1685,7 @@ Axios 与`InterceptorManager`的关系如图示：
 
 ![image-20220929185422634](https://femarkdownpicture.oss-cn-qingdao.aliyuncs.com/Imgs/image-20220929185422634.png) 现在我们已经有了拦截器，那么 axios 是如何保证发起请求的顺序执行呢？
 
--   请求拦截器 => http 请求 => 响应拦截器
+- 请求拦截器 => http 请求 => 响应拦截器
 
 上源码：
 
@@ -1693,23 +1700,21 @@ Axios 与`InterceptorManager`的关系如图示：
 
 var requestInterceptorChain = [];
 
-this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-
-    requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
-
+this.interceptors.request.forEach(function unshiftRequestInterceptors(
+  interceptor
+) {
+  requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
 });
 
 // 生成响应拦截队列
 
 var responseInterceptorChain = [];
 
-this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-
-    responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
-
+this.interceptors.response.forEach(function pushResponseInterceptors(
+  interceptor
+) {
+  responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
 });
-
-
 
 // 编排整个请求的任务队列
 
@@ -1719,19 +1724,13 @@ Array.prototype.unshift.apply(chain, requestInterceptorChain);
 
 chain.concat(responseInterceptorChain);
 
-
-
 promise = Promise.resolve(config);
 
 // 循环 chain ，不断从 chain 中取出设置的任务，通过 Promise 调用链执行
 
 while (chain.length) {
-
   promise = promise.then(chain.shift(), chain.shift());
-
 }
-
-
 
 return promise;
 ```
@@ -1814,33 +1813,23 @@ module.exports = function dispatchRequest(config) {
 // /lib/core/dispatchRequest.js
 
 config.data = transformData.call(
+  config,
 
-    config,
+  config.data,
 
-    config.data,
+  config.headers,
 
-    config.headers,
-
-    config.transformRequest
-
+  config.transformRequest
 );
-
-
 
 // /lib/core/transformData.js
 
 module.exports = function transformData(data, headers, fns) {
-
-    utils.forEach(fns, function transform(fn) {
-
+  utils.forEach(fns, function transform(fn) {
     data = fn(data, headers);
+  });
 
-    });
-
-
-
-    return data;
-
+  return data;
 };
 ```
 
@@ -2098,92 +2087,78 @@ module.exports = function xhrAdapter(config) {
 
 ```js
 const mockUrl = {
-
-    '/mock': {data: xxx}
-
+  "/mock": { data: xxx },
 };
 
 const instance = Axios.create({
+  adapter: (config) => {
+    if (!mockUrl[config.url]) {
+      // 调用默认的适配器处理需要删除自定义适配器，否则会死循环
 
-    adapter: (config) => {
+      delete config.adapter;
 
-        if (!mockUrl[config.url]) {
-
-            // 调用默认的适配器处理需要删除自定义适配器，否则会死循环
-
-            delete config.adapter
-
-            return Axios(config)
-
-        }
-
-        return new Promise((resolve, reject) => {
-
-            resolve({
-
-                data: mockUrl[config.url],
-
-                status: 200,
-
-            })
-
-        })
-
+      return Axios(config);
     }
 
-})
+    return new Promise((resolve, reject) => {
+      resolve({
+        data: mockUrl[config.url],
+
+        status: 200,
+      });
+    });
+  },
+});
 ```
 
+### ts 封装 axios
 
+请求拦截 可以携带 token 可以配置超时时间 可以控制 loading 效果
 
-### ts封装axios
+响应拦截 可以指定特殊的状态码 可以对数据进行预处理
 
-请求拦截  可以携带token   可以配置超时时间   可以控制loading效果
-
-响应拦截  可以指定特殊的状态码  可以对数据进行预处理
-
-对响应拦截可以输出一些提示信息  便于调试
+对响应拦截可以输出一些提示信息 便于调试
 
 ```js
 //index.ts
-import axios from 'axios'
-import type {AxiosInstance,AxiosRequestConfig} from 'axios'
-class Request{
-    //axios实例
-    instance:AxiosInstance
-    constructor(config:AxiosRequestConfig){
-        this.instance=axios.create(config)
-    }
-    request(config:AxiosRequestConfig){
-        this.instance.request(config)
+import axios from "axios";
+import type { AxiosInstance, AxiosRequestConfig } from "axios";
+class Request {
+  //axios实例
+  instance: AxiosInstance;
+  constructor(config: AxiosRequestConfig) {
+    this.instance = axios.create(config);
+  }
+  request(config: AxiosRequestConfig) {
+    this.instance.request(config);
+  }
 }
-}
-export default Request
+export default Request;
 ```
 
 其封装为一个类，而不是一个函数的原因是因为类可以创建多个实例，适用范围更广，封装性更强一些
 
 创建一个对象 然后可以指定 baseURl Timeout 拦截器{}对象方法·
 
-封装一个接口  指定拦截器   request拦截器    类型是axiosrequestconfig类型
+封装一个接口 指定拦截器 request 拦截器 类型是 axiosrequestconfig 类型
 
-catch拦截器   响应拦截  响应错误拦截
+catch 拦截器 响应拦截 响应错误拦截
 
-继承类型axiosrequestconfig  然后可以设置不同的拦截器
+继承类型 axiosrequestconfig 然后可以设置不同的拦截器
 
 别人传进来什么样的拦截 就可以应用什么样的拦截
 
 不仅可以传入基本属性还可以传入拦截器
 
-针对每个拦截器可以做自己的东西 比如输出不同的东西  进行不同的代码提示
+针对每个拦截器可以做自己的东西 比如输出不同的东西 进行不同的代码提示
 
 在开发的时候控制台输出很多，自定义拦截器之后 可以对不同接口进行不同代码提示
 
-针对不同的方法可以设置不同的拦截器   request get post delete patch等等
+针对不同的方法可以设置不同的拦截器 request get post delete patch 等等
 
-请求很多   请求之前做的东西不一样的   每个请求不一样   所有请求都有的处理  所有都共有  没有的再加 
+请求很多 请求之前做的东西不一样的 每个请求不一样 所有请求都有的处理 所有都共有 没有的再加
 
-比如返回的时候就拿到res.data  自己可以预先处理得到的数据  比如可以设置是否显示加载   也可以拿到其他的比如状态码 
+比如返回的时候就拿到 res.data 自己可以预先处理得到的数据 比如可以设置是否显示加载 也可以拿到其他的比如状态码
 
 ```js
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
@@ -2204,17 +2179,17 @@ export interface HYRequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
 导入配置
 
 ```js
-import axios from 'axios'
-import type { AxiosInstance } from 'axios'
-import type { HYRequestInterceptors, HYRequestConfig } from './type'
+import axios from "axios";
+import type { AxiosInstance } from "axios";
+import type { HYRequestInterceptors, HYRequestConfig } from "./type";
 
-import { ElLoading } from 'element-plus'
-import { ILoadingInstance } from 'element-plus/lib/el-loading/src/loading.type'
+import { ElLoading } from "element-plus";
+import { ILoadingInstance } from "element-plus/lib/el-loading/src/loading.type";
 
-const DEAFULT_LOADING = true
+const DEAFULT_LOADING = true;
 ```
 
-Request类
+Request 类
 
 ```js
 class HYRequest {
@@ -2291,10 +2266,6 @@ class HYRequest {
   }
 ```
 
-
-
-
-
 ```javascript
  request<T>(config: HYRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
@@ -2331,10 +2302,6 @@ class HYRequest {
   }
 ```
 
-
-
-
-
 ```js
  get<T>(config: HYRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'GET' })
@@ -2356,12 +2323,12 @@ class HYRequest {
 export default HYRequest
 ```
 
-index.ts做统一出口   新建一个对象  然后设置url time interceptors
+index.ts 做统一出口 新建一个对象 然后设置 url time interceptors
 
 ```js
 // service统一出口
-import HYRequest from './request'
-import { BASE_URL, TIME_OUT } from './request/config'
+import HYRequest from "./request";
+import { BASE_URL, TIME_OUT } from "./request/config";
 
 //在新建的时候传入配置 相当于config
 const hyRequest = new HYRequest({
@@ -2370,29 +2337,28 @@ const hyRequest = new HYRequest({
   interceptors: {
     requestInterceptor: (config) => {
       // 携带token的拦截
-      const token = ''
+      const token = "";
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+        config.headers.Authorization = `Bearer ${token}`;
       }
 
-      console.log('请求成功的拦截')
-      return config
+      console.log("请求成功的拦截");
+      return config;
     },
     requestInterceptorCatch: (err) => {
-      console.log('请求失败的拦截')
-      return err
+      console.log("请求失败的拦截");
+      return err;
     },
     responseInterceptor: (res) => {
-      console.log('响应成功的拦截')
-      return res
+      console.log("响应成功的拦截");
+      return res;
     },
     responseInterceptorCatch: (err) => {
-      console.log('响应失败的拦截')
-      return err
-    }
-  }
-})
+      console.log("响应失败的拦截");
+      return err;
+    },
+  },
+});
 
-export default hyRequest
+export default hyRequest;
 ```
-

@@ -9,8 +9,8 @@ const config = {
   tagline: "Front End Interview Handbook",
   url: "https://www.xxbys.space/",
   baseUrl: "/",
-  onBrokenLinks: "log",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: "ignore",
+  onBrokenMarkdownLinks: "ignore",
   favicon: "img/favicon.ico",
   organizationName: "Xxbys", // Usually your GitHub org/user name.
   projectName: "Front-end-Learning-Note", // Usually your repo name.
@@ -55,16 +55,9 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       algolia: {
-        // The application ID provided by Algolia
-        appId: "L4NYMVDYG7",
-
-        // Public API key: it is safe to commit it
-        apiKey: "2dc197c65a9a3bc16515f64933bb50b5",
-
-        indexName: "wiki-404lab-top",
-
-        // Optional: see doc section below
-        // contextualSearch: true,
+        appId: "21T5PEFGI7",
+        apiKey: "10d7777b44bc7e0495cc00e860918b03",
+        indexName: "frontendinterviewhandbook",
       },
 
       navbar: {

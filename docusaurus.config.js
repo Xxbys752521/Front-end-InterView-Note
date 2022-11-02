@@ -50,16 +50,11 @@ const config = {
       }),
     ],
   ],
+  plugins: [require.resolve("@cmfcmf/docusaurus-search-local")],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      algolia: {
-        appId: "21T5PEFGI7",
-        apiKey: "10d7777b44bc7e0495cc00e860918b03",
-        indexName: "frontendinterviewhandbook",
-      },
-
       navbar: {
         title: "Front End Interview Handbook",
         logo: {

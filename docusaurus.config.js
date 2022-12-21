@@ -50,18 +50,19 @@ const config = {
       }),
     ],
   ],
-  plugins: [
-    [
-      require.resolve("@cmfcmf/docusaurus-search-local"),
-      {
-        language: ["zh", "en"],
-      },
-    ],
-  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+        // Algolia 提供的应用 ID
+        appId: "62SJ1TJM15",
+
+        //  公开 API 密钥：提交它没有危险
+        apiKey: "c2039f19e60b0a652a73dd41297a0b4b",
+
+        indexName: "xxbys",
+      },
       navbar: {
         title: "Front End Interview Handbook",
         logo: {
